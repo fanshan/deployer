@@ -19,16 +19,23 @@ const finishedStatuses = [
 ];
 
 const DeploymentIcon = (props) => {
-  const { status } = props;
-  let className = 'bg-info';
+  const {
+    status, includeBackground,
+  } = props;
 
-  // Figure out the CSS classname to use based on the status (info by default)
-  if (status === DEPLOY_STATUS_COMPLETED || status === DEPLOY_STATUS_COMPLETED_WITH_ERRORS) {
-    className = 'bg-success';
-  } else if ([DEPLOY_STATUS_FAILED, DEPLOY_STATUS_ABORTING, DEPLOY_STATUS_ABORTED].indexOf(status) !== -1) {
-    className = 'bg-danger';
-  } else if (status === DEPLOY_STATUS_DEPLOYING) {
-    className = 'bg-warning';
+  let className = '';
+
+  if (includeBackground) {
+    className = 'bg-info';
+
+    // Figure out the CSS class name to use based on the status (info by default)
+    if (status === DEPLOY_STATUS_COMPLETED || status === DEPLOY_STATUS_COMPLETED_WITH_ERRORS) {
+      className = 'bg-success';
+    } else if ([DEPLOY_STATUS_FAILED, DEPLOY_STATUS_ABORTING, DEPLOY_STATUS_ABORTED].indexOf(status) !== -1) {
+      className = 'bg-danger';
+    } else if (status === DEPLOY_STATUS_DEPLOYING) {
+      className = 'bg-warning';
+    }
   }
 
   // Return the appropriate icon for the status
@@ -45,6 +52,11 @@ const DeploymentIcon = (props) => {
 
 DeploymentIcon.propTypes = {
   status: PropTypes.number.isRequired,
+  includeBackground: PropTypes.bool,
 };
+
+DeploymentIcon.defaultProps = {
+  includeBackground: false,
+}
 
 export default DeploymentIcon;

@@ -47,7 +47,7 @@ const Timeline = (props) => {
 
       timelineItems.push(
         <li key={index}>
-          <DeploymentIcon status={item.status} />
+          <DeploymentIcon status={item.status} includeBackground />
           <div className="timeline-item">
             <span className="time"><Icon fa="clock-o" /> {item.started_at}</span>
             <h3 className="timeline-header">

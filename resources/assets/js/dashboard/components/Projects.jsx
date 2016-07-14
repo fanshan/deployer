@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 import Box from '../../app/components/Box';
+import Label from '../../app/components/ProjectLabel';
 import Icon from '../../app/components/Icon';
 
 const Projects = (props) => {
@@ -40,9 +41,7 @@ const Projects = (props) => {
         <tr id={id} key={id}>
           <td><Link to={`/projects/${project.id}`} title={strings.view}>{project.name}</Link></td>
           <td>{project.last_run ? project.last_run : strings.never}</td>
-          <td>
-            <span className="label"><i className="fa"></i> <span>{group.readable_status}</span></span>
-          </td>
+          <td><Label status={project.status} /></td>
           <td>
             <div className="btn-group pull-right">
               {
@@ -66,9 +65,6 @@ const Projects = (props) => {
     });
 
     // {{ $group_project->last_run ? $group_project->last_run->format('jS F Y g:i:s A') : 'Never' }}
-    // <span class="label label-{{ $group_project->css_class }}"><i class="fa fa-{{ $group_project->icon }}"></i>
-    // <span>{{ $group_project->readable_status }}</span></span>
-
     groups.push(
       <Box title={group.group.name} key={index}>
         <table className="table table-responsive table-hover">

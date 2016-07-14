@@ -110,23 +110,6 @@ class DeploymentPresenter extends Presenter
         return 'info';
     }
 
-    /**
-     * Gets the CSS class for the deployment status for the timeline.
-     *
-     * @return string
-     */
-    public function presentTimelineCssClass()
-    {
-        if ($this->status === Deployment::COMPLETED || $this->status === Deployment::COMPLETED_WITH_ERRORS) {
-            return 'green';
-        } elseif (in_array($this->status, [Deployment::FAILED, Deployment::ABORTING, Deployment::ABORTED], true)) {
-            return 'red';
-        } elseif ($this->status === Deployment::DEPLOYING) {
-            return 'yellow';
-        }
-
-        return 'aqua';
-    }
 
     /**
      * Gets the name of the committer, or the "Loading" string if it has not yet been determined.

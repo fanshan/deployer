@@ -32,66 +32,6 @@ class ProjectPresenter extends CommandPresenter
     }
 
     /**
-     * Gets the translated project status string.
-     *
-     * @return string
-     */
-    public function presentReadableStatus()
-    {
-        if ($this->status === Project::FINISHED) {
-            return Lang::get('projects.finished');
-        } elseif ($this->status === Project::DEPLOYING) {
-            return Lang::get('projects.deploying');
-        } elseif ($this->status === Project::FAILED) {
-            return Lang::get('projects.failed');
-        } elseif ($this->status === Project::PENDING) {
-            return Lang::get('projects.pending');
-        }
-
-        return Lang::get('projects.not_deployed');
-    }
-
-    /**
-     * Gets the CSS icon class for the project status.
-     *
-     * @return string
-     */
-    public function presentIcon()
-    {
-        if ($this->status === Project::FINISHED) {
-            return 'check';
-        } elseif ($this->status === Project::DEPLOYING) {
-            return 'spinner fa-pulse';
-        } elseif ($this->status === Project::FAILED) {
-            return 'warning';
-        } elseif ($this->status === Project::PENDING) {
-            return 'clock-o';
-        }
-
-        return 'question-circle';
-    }
-
-    /**
-     * Gets the CSS class for the project status.
-     *
-     * @return string
-     */
-    public function presentCssClass()
-    {
-        if ($this->status === Project::FINISHED) {
-            return 'success';
-        } elseif ($this->status === Project::DEPLOYING) {
-            return 'warning';
-        } elseif ($this->status === Project::FAILED) {
-            return 'danger';
-        } elseif ($this->status === Project::PENDING) {
-            return 'info';
-        }
-
-        return 'primary';
-    }
-
-    /**
      * Show the application status.
      *
      * @return string
