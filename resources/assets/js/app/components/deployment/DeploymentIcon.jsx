@@ -61,6 +61,6 @@ DeploymentIcon.propTypes = {
 
 DeploymentIcon.defaultProps = {
   includeBackground: false,
-}
+};
 
 export default DeploymentIcon;

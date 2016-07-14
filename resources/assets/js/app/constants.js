@@ -10,7 +10,7 @@ export const DEPLOY_STATUS_ABORTING = 5;
 export const DEPLOY_STATUS_ABORTED = 6;
 
 // Possible project statuses
-export const PROJECT_STATUS_FINISHED  = 0;
+export const PROJECT_STATUS_FINISHED = 0;
 export const PROJECT_STATUS_PENDING = 1;
 export const PROJECT_STATUS_DEPLOYING = 2;
 export const PROJECT_STATUS_FAILED = 3;
