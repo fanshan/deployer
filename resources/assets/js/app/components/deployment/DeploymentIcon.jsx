@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import Icon from './Icon';
+import Icon from '../Icon';
 
 import {
   DEPLOY_STATUS_COMPLETED,
@@ -9,7 +9,7 @@ import {
   DEPLOY_STATUS_COMPLETED_WITH_ERRORS,
   DEPLOY_STATUS_ABORTING,
   DEPLOY_STATUS_ABORTED,
-} from '../constants';
+} from '../../constants';
 
 const finishedStatuses = [
   DEPLOY_STATUS_FAILED,
@@ -26,28 +26,30 @@ const DeploymentIcon = (props) => {
   let className = '';
 
   if (includeBackground) {
-    className = 'bg-info';
+    className = 'bg-aqua';
 
     // Figure out the CSS class name to use based on the status (info by default)
     if (status === DEPLOY_STATUS_COMPLETED || status === DEPLOY_STATUS_COMPLETED_WITH_ERRORS) {
-      className = 'bg-success';
+      className = 'bg-green';
     } else if ([DEPLOY_STATUS_FAILED, DEPLOY_STATUS_ABORTING, DEPLOY_STATUS_ABORTED].indexOf(status) !== -1) {
-      className = 'bg-danger';
+      className = 'bg-red';
     } else if (status === DEPLOY_STATUS_DEPLOYING) {
-      className = 'bg-warning';
+      className = 'bg-yellow';
     }
   }
 
+  let fa = 'clock-o';
+
   // Return the appropriate icon for the status
   if (status === DEPLOY_STATUS_COMPLETED) {
-    return (<Icon fa="check" className={className} />);
+    fa = 'check';
   } else if (finishedStatuses.indexOf(status) !== -1) {
-    return (<Icon fa="warning" className={className} />);
+    fa = 'warning';
   } else if (status === DEPLOY_STATUS_DEPLOYING) {
-    return (<Icon fa={['spinner', 'pulse']} className={className} />);
+    fa = ['spinner', 'pulse'];
   }
 
-  return (<Icon fa="clock-o" className={className} />);
+  return (<Icon fa={fa} className={className} />);
 };
 
 DeploymentIcon.propTypes = {

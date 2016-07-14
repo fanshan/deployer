@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 import Box from '../../app/components/Box';
-import DeploymentIcon from '../../app/components/DeploymentIcon';
-import DeploymentStatus from '../../app/components/DeploymentStatus';
+import DeploymentIcon from '../../app/components/deployment/DeploymentIcon';
+import DeploymentStatus from '../../app/components/deployment/DeploymentStatus';
 import Icon from '../../app/components/Icon';
 
 const Timeline = (props) => {
@@ -17,6 +17,9 @@ const Timeline = (props) => {
     timeline,
   } = props;
 
+  console.log(timeline);
+
+
   if (Object.keys(timeline).length === 0) {
     return (
       <Box title={strings.timeline} id="timeline">
@@ -24,6 +27,13 @@ const Timeline = (props) => {
       </Box>
     );
   }
+
+
+  // return (
+  //   <Box title={strings.timeline} id="timeline">
+  //     <p>hmm</p>
+  //   </Box>
+  // );
 
   let timelineItems = [];
 
@@ -34,7 +44,9 @@ const Timeline = (props) => {
       </li>
     );
 
-    timeline[date].forEach((item, index) => {
+    Object.keys(timeline[date]).forEach((index) => {
+      const item = timeline[date][index];
+
       let reason;
 
       if (item.reason) {
@@ -70,6 +82,9 @@ const Timeline = (props) => {
     <Box title={strings.timeline} id="timeline">
       <ul className="timeline">
         {timelineItems}
+        <li>
+          <Icon fa="clock-o" className="bg-gray" />
+        </li>
       </ul>
     </Box>
   );

@@ -7,7 +7,7 @@ import {
   DEPLOY_STATUS_COMPLETED_WITH_ERRORS,
   DEPLOY_STATUS_ABORTING,
   DEPLOY_STATUS_ABORTED,
-} from '../constants';
+} from '../../constants';
 
 const DeploymentStatus = (props) => {
   const { status } = props;

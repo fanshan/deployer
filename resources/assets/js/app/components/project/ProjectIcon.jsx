@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 
-import Icon from './Icon';
+import Icon from '../Icon';
 
 import {
   PROJECT_STATUS_FINISHED,
   PROJECT_STATUS_PENDING,
   PROJECT_STATUS_DEPLOYING,
   PROJECT_STATUS_FAILED,
-} from '../constants';
+} from '../../constants';
 
 const ProjectIcon = (props) => {
   const { status } = props;

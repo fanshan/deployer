@@ -6,7 +6,7 @@ import {
   PROJECT_STATUS_DEPLOYING,
   PROJECT_STATUS_FAILED,
   PROJECT_STATUS_NOT_DEPLOYED,
-} from '../constants';
+} from '../../constants';
 
 const ProjectStatus = (props) => {
   const { status } = props;

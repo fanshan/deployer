@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 import Box from '../../app/components/Box';
-import Label from '../../app/components/ProjectLabel';
+import Label from '../../app/components/project/ProjectLabel';
 import Icon from '../../app/components/Icon';
 
 const Projects = (props) => {
