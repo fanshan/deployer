@@ -5,6 +5,8 @@ import Box from '../../app/components/Box';
 import DeploymentIcon from '../../app/components/deployment/DeploymentIcon';
 import DeploymentStatus from '../../app/components/deployment/DeploymentStatus';
 import Icon from '../../app/components/Icon';
+import FormattedDate from '../../app/components/Date';
+import FormattedTime from '../../app/components/Time';
 
 const Timeline = (props) => {
   const strings = {
@@ -17,9 +19,6 @@ const Timeline = (props) => {
     timeline,
   } = props;
 
-  console.log(timeline);
-
-
   if (Object.keys(timeline).length === 0) {
     return (
       <Box title={strings.timeline} id="timeline">
@@ -28,19 +27,12 @@ const Timeline = (props) => {
     );
   }
 
-
-  // return (
-  //   <Box title={strings.timeline} id="timeline">
-  //     <p>hmm</p>
-  //   </Box>
-  // );
-
   let timelineItems = [];
 
   for (const date in timeline) {
     timelineItems.push(
       <li className="time-label" key={date}>
-        <span className="bg-gray">{date}</span>
+        <span className="bg-gray"><FormattedDate date={date} /></span>
       </li>
     );
 
@@ -61,7 +53,7 @@ const Timeline = (props) => {
         <li key={index}>
           <DeploymentIcon status={item.status} includeBackground />
           <div className="timeline-item">
-            <span className="time"><Icon fa="clock-o" /> {item.started_at}</span>
+            <span className="time"><Icon fa="clock-o" /> <FormattedTime date={item.started_at} /></span>
             <h3 className="timeline-header">
               <Link to={`/projects/${item.project.id}`} title={strings.view}>
                 {item.project.name}

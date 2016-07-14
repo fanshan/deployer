@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import Box from '../../app/components/Box';
 import Label from '../../app/components/project/ProjectLabel';
 import Icon from '../../app/components/Icon';
+import FormattedDateTime from '../../app/components/DateTime';
 
 const Projects = (props) => {
   const {
@@ -36,11 +37,10 @@ const Projects = (props) => {
     group.projects.forEach((project) => {
       const id = `project_${project.id}`;
 
-      // FIXME: Add button component, use https://github.com/JedWatson/classnames for className
       groupProjects.push(
         <tr id={id} key={id}>
           <td><Link to={`/projects/${project.id}`} title={strings.view}>{project.name}</Link></td>
-          <td>{project.last_run ? project.last_run : strings.never}</td>
+          <td>{project.last_run ? <FormattedDateTime date={project.last_run} /> : strings.never}</td>
           <td><Label status={project.status} /></td>
           <td>
             <div className="btn-group pull-right">
@@ -64,7 +64,6 @@ const Projects = (props) => {
       );
     });
 
-    // {{ $group_project->last_run ? $group_project->last_run->format('jS F Y g:i:s A') : 'Never' }}
     groups.push(
       <Box title={group.group.name} key={index}>
         <table className="table table-responsive table-hover">
