@@ -38,6 +38,7 @@ const DeploymentIcon = (props) => {
     }
   }
 
+  let spin = false;
   let fa = 'clock-o';
 
   // Return the appropriate icon for the status
@@ -46,10 +47,11 @@ const DeploymentIcon = (props) => {
   } else if (finishedStatuses.indexOf(status) !== -1) {
     fa = 'warning';
   } else if (status === DEPLOY_STATUS_DEPLOYING) {
-    fa = ['spinner', 'pulse'];
+    fa = 'pulse';
+    spin = true;
   }
 
-  return (<Icon fa={fa} className={className} />);
+  return (<Icon fa={fa} className={className} spin={spin} />);
 };
 
 DeploymentIcon.propTypes = {
