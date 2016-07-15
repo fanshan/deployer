@@ -12,7 +12,7 @@ import Deployments from '../project/components/Deployments';
 import Servers from '../project/containers/Servers';
 import Commands from '../project/containers/Commands';
 import Files from '../project/containers/Files';
-import Health from '../project/components/Health';
+import Health from '../project/containers/Health';
 import Notifications from '../project/components/Notifications';
 
 import * as actions from '../app/actions';
