@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 
-import * as constants from '../../constants';
+import { SERVER_STATUS_TESTING } from '../../constants';
 import Label from './ServerLabel';
 import Icon from '../../../app/components/Icon';
 
 const Servers = (props) => {
+  const { servers } = props;
+
   const strings = {
     create: Lang.get('servers.create'),
     label: Lang.get('servers.label'),
@@ -22,13 +23,11 @@ const Servers = (props) => {
     test: Lang.get('servers.test'),
   };
 
-  const { servers } = props;
-
   const serverList = [];
   servers.forEach((server) => {
     const id = `server_${server.id}`;
 
-    const testing = (server.status === constants.SERVER_STATUS_TESTING);
+    const testing = (server.status === SERVER_STATUS_TESTING);
 
     serverList.push(
       <tr key={id} id={id}>
@@ -53,7 +52,7 @@ const Servers = (props) => {
       <div className="box-header">
         <div className="pull-right">
           <button type="button" className="btn btn-default" title={strings.create}>
-            <span className="fa fa-plus"></span> {strings.create}
+            <Icon fa="plus" /> {strings.create}
           </button>
         </div>
 
@@ -91,8 +90,4 @@ Servers.propTypes = {
   servers: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  servers: state.getIn([constants.NAME, 'servers']).toJS(),
-});
-
-export default connect(mapStateToProps)(Servers);
+export default Servers;

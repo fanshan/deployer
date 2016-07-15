@@ -9,9 +9,9 @@ import ProjectAdmin from '../admin/Projects';
 import ProjectDetails from '../project/containers/Details';
 
 import Deployments from '../project/components/Deployments';
-import Servers from '../project/components/servers/ServerList';
+import Servers from '../project/containers/Servers';
 import Commands from '../project/containers/Commands';
-import Files from '../project/components/Files';
+import Files from '../project/containers/Files';
 import Health from '../project/components/Health';
 import Notifications from '../project/components/Notifications';
 
