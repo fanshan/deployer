@@ -29,7 +29,23 @@ return [
     */
 
     'messages' => [
-        'app', 'users', 'dashboard', 'deployments', 'projects', 'templates', 'groups', 'servers'
+        'app',
+        'checkUrls',
+        'commands',
+        'dashboard',
+        'deployments',
+        'emails',
+        'groups',
+        'heartbeats',
+        'notifications',
+        'notifyEmails',
+        'projectFiles',
+        'projects',
+        'servers',
+        'sharedFiles',
+        'templates',
+        'users',
+        'variables',
     ],
 
 //    'messages' => [
@@ -70,6 +86,6 @@ return [
     | Attention: Should not be used in production mode due to decreased performance.
     |--------------------------------------------------------------------------
     */
-    'disable_config_cache' => false,
+    'disable_config_cache' => env('APP_DEBUG', false),
 
 ];

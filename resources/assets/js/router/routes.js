@@ -9,8 +9,8 @@ import ProjectAdmin from '../admin/Projects';
 import ProjectDetails from '../project/containers/Details';
 
 import Deployments from '../project/components/Deployments';
-import Servers from '../project/components/Servers';
-import Commands from '../project/components/Commands';
+import Servers from '../project/components/servers/ServerList';
+import Commands from '../project/containers/Commands';
 import Files from '../project/components/Files';
 import Health from '../project/components/Health';
 import Notifications from '../project/components/Notifications';
@@ -22,6 +22,10 @@ const indexRoute = {
   component: Dashboard,
   title: 'dashboard.title',
 };
+
+import React from 'react';
+
+const CommandList = () => (<div>commandlist</div>);
 
 const childRoutes = [
   { path: 'profile', component: Profile, title: 'users.update_profile' },
@@ -37,6 +41,7 @@ const childRoutes = [
       { path: 'health', component: Health },
     ],
   },
+  { path: 'projects/:id/commands/:type', component: CommandList },
   {
     path: 'admin',
     childRoutes: [

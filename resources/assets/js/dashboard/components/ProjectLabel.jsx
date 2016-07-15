@@ -8,7 +8,7 @@ import {
   PROJECT_STATUS_PENDING,
   PROJECT_STATUS_DEPLOYING,
   PROJECT_STATUS_FAILED,
-} from '../../constants';
+} from '../constants';
 
 const ProjectLabel = (props) => {
   const { status } = props;

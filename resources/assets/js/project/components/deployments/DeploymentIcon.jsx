@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import Icon from '../Icon';
+import Icon from '../../../app/components/Icon';
 
 import {
   DEPLOY_STATUS_COMPLETED,

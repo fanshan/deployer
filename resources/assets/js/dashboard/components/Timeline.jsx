@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 import Box from '../../app/components/Box';
-import DeploymentIcon from '../../app/components/deployment/DeploymentIcon';
-import DeploymentStatus from '../../app/components/deployment/DeploymentStatus';
+import DeploymentIcon from '../../project/components/deployments/DeploymentIcon';
+import DeploymentStatus from '../../project/components/deployments/DeploymentStatus';
 import Icon from '../../app/components/Icon';
 import FormattedDate from '../../app/components/Date';
 import FormattedTime from '../../app/components/Time';
@@ -50,7 +50,7 @@ const Timeline = (props) => {
       }
 
       timelineItems.push(
-        <li key={index}>
+        <li key={`deployment_${item.id}`}>
           <DeploymentIcon status={item.status} includeBackground />
           <div className="timeline-item">
             <span className="time"><Icon fa="clock-o" /> <FormattedTime date={item.started_at} /></span>

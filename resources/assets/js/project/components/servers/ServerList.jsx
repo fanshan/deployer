@@ -1,11 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import * as constants from '../constants';
-import Label from '../../app/components/server/ServerLabel';
-import Icon from '../../app/components/Icon';
-
-import { SERVER_STATUS_TESTING } from '../../app/constants';
+import * as constants from '../../constants';
+import Label from './ServerLabel';
+import Icon from '../../../app/components/Icon';
 
 const Servers = (props) => {
   const strings = {
@@ -30,7 +28,7 @@ const Servers = (props) => {
   servers.forEach((server) => {
     const id = `server_${server.id}`;
 
-    const testing = (server.status === SERVER_STATUS_TESTING);
+    const testing = (server.status === constants.SERVER_STATUS_TESTING);
 
     serverList.push(
       <tr key={id} id={id}>

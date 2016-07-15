@@ -1,19 +1,26 @@
 import React, { PropTypes } from 'react';
 
 const Icon = (props) => {
-  let iconClasses = props.fa;
+  const {
+    fa,
+    spin,
+    className,
+    ...others,
+  } = props;
+
+  let iconClasses = fa;
 
   // Accept string class names for convenience, but we'll use an array for mapping here
-  if (typeof props.fa === 'string') {
-    iconClasses = [props.fa];
+  if (typeof fa === 'string') {
+    iconClasses = [fa];
   }
 
-  if (props.spin) {
+  if (spin) {
     iconClasses.push('spinner');
   }
 
   return (
-    <i className={`fa ${iconClasses.map((icon) => (`fa-${icon}`)).join(' ')} ${props.className}`} />
+    <i className={`fa ${iconClasses.map((icon) => (`fa-${icon}`)).join(' ')} ${className}`} {...others} />
   );
 };
 
