@@ -12,9 +12,8 @@ const Icon = (props) => {
     iconClasses.push('spinner');
   }
 
-  // FIXME: This is wrong, generates "fa fa-icon,fa-icon2"
   return (
-    <i className={`fa ${iconClasses.map((icon) => (`fa-${icon}`))} ${props.className}`} />
+    <i className={`fa ${iconClasses.map((icon) => (`fa-${icon}`)).join(' ')} ${props.className}`} />
   );
 };
 
