@@ -15,3 +15,9 @@ export const PROJECT_STATUS_PENDING = 1;
 export const PROJECT_STATUS_DEPLOYING = 2;
 export const PROJECT_STATUS_FAILED = 3;
 export const PROJECT_STATUS_NOT_DEPLOYED = 4;
+
+// Possible server statuses
+export const SERVER_STATUS_SUCCESSFUL = 0;
+export const SERVER_STATUS_UNTESTED = 1;
+export const SERVER_STATUS_FAILED = 2;
+export const SERVER_STATUS_TESTING = 3;

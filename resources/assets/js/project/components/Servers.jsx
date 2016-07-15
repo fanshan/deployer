@@ -2,6 +2,10 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import * as constants from '../constants';
+import Label from '../../app/components/server/ServerLabel';
+import Icon from '../../app/components/Icon';
+
+import { SERVER_STATUS_TESTING } from '../../app/constants';
 
 const Servers = (props) => {
   const strings = {
@@ -17,7 +21,7 @@ const Servers = (props) => {
     yes: Lang.get('app.yes'),
     no: Lang.get('app.no'),
     edit: Lang.get('servers.edit'),
-    test: Lang.get('servers.test')
+    test: Lang.get('servers.test'),
   };
 
   const { servers } = props;
@@ -26,6 +30,8 @@ const Servers = (props) => {
   servers.forEach((server) => {
     const id = `server_${server.id}`;
 
+    const testing = (server.status === SERVER_STATUS_TESTING);
+
     serverList.push(
       <tr key={id} id={id}>
         <td>{server.name}</td>
@@ -33,17 +39,15 @@ const Servers = (props) => {
         <td>{server.ip_address}</td>
         <td>{server.port}</td>
         <td>{server.deploy_code ? strings.yes : strings.no}</td>
-        <td>{server.status}</td>
+        <td><Label status={server.status} /></td>
         <td>
           <div className="btn-group pull-right">
-            <button type="button" className="btn btn-default btn-test" title={strings.test}><i className="fa fa-refresh"></i></button>
-            <button type="button" className="btn btn-default btn-edit" title={strings.edit}><i className="fa fa-edit"></i></button>
+            <button type="button" className="btn btn-default btn-test" title={strings.test} disabled={testing}><Icon fa="refresh" spin={testing} /></button>
+            <button type="button" className="btn btn-default btn-edit" title={strings.edit}><Icon fa="edit" /></button>
           </div>
         </td>
       </tr>
     );
-    // todo: first button should be disabled and have a spinning icon is status === 'testing'
-    // <span class="label label-<%- status_css %>"><i class="fa fa-<%-icon_css %>"></i> <%- status %></span>
   });
 
   return (
