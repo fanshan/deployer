@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import HealthLabel from './HealthLabel';
+import RepositoryIcon from './RepositoryIcon';
 
 // fixme: convert to use "box", maybe turn the <li> content into components as they are the same pattern
 const Header = (props) => {
@@ -19,6 +20,7 @@ const Header = (props) => {
     build_status: Lang.get('projects.build_status'),
     app_status: Lang.get('projects.app_status'),
     heartbeats_status: Lang.get('projects.heartbeats_status'),
+    na: Lang.get('app.not_applicable'),
   };
 
   return (
@@ -34,7 +36,7 @@ const Header = (props) => {
                 <a href={project.repository_url} target="_blank">
                   {strings.repository}
                   <span className="pull-right" title={strings.repository}>
-                    <i className="fa {{ $project->type_icon }}"></i>
+                    <RepositoryIcon repository={project.repository} />&nbsp;
                     {project.repository_path}
                   </span>
                 </a>
