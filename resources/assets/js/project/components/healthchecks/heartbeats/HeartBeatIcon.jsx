@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 
-import Icon from '../../../app/components/Icon';
+import Icon from '../../../../app/components/Icon';
 
 import {
   HEARTBEAT_STATUS_OK,
   HEARTBEAT_STATUS_MISSING,
-} from '../../constants';
+} from '../../../constants';
 
 const HeartBeatIcon = (props) => {
   const { status } = props;

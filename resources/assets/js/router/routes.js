@@ -8,12 +8,12 @@ import TemplateAdmin from '../admin/Templates';
 import ProjectAdmin from '../admin/Projects';
 import ProjectDetails from '../project/containers/Details';
 
-import Deployments from '../project/components/Deployments';
-import Servers from '../project/containers/Servers';
-import Commands from '../project/containers/Commands';
-import Files from '../project/containers/Files';
-import Health from '../project/containers/Health';
-import Notifications from '../project/containers/Notifications';
+import Deployments from '../project/components/deployments/DeploymentTab';
+import Servers from '../project/containers/ServersTab';
+import Commands from '../project/containers/CommandsTab';
+import Files from '../project/containers/FilesTab';
+import Health from '../project/containers/HealthchecksTab';
+import Notifications from '../project/containers/NotificationsTab';
 
 import * as actions from '../app/actions';
 import decorateRoutes from './decorator';

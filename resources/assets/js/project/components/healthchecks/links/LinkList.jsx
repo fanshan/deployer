@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import Icon from '../../../app/components/Icon';
+import Icon from '../../../../app/components/Icon';
 import Label from './LinkLabel';
 
 const LinkList = (props) => {

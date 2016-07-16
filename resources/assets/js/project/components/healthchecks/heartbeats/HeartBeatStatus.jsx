@@ -4,7 +4,7 @@ import {
   HEARTBEAT_STATUS_OK,
   HEARTBEAT_STATUS_MISSING,
   HEARTBEAT_STATUS_UNTESTED,
-} from '../../constants';
+} from '../../../constants';
 
 const HeartBeatStatus = (props) => {
   const { status } = props;

@@ -1,31 +1,29 @@
 import React, { PropTypes } from 'react';
 
-import Icon from '../../../app/components/Icon';
+import Icon from '../../../../app/components/Icon';
 
-const FileList = (props) => {
-  const { files } = props;
+const EmailList = (props) => {
+  const { emails } = props;
 
   const strings = {
-    create: Lang.get('projectFiles.create'),
-    edit: Lang.get('projectFiles.edit'),
-    view: Lang.get('projectFiles.view'),
-    label: Lang.get('projectFiles.label'),
-    none: Lang.get('projectFiles.none'),
-    name: Lang.get('projectFiles.name'),
-    path: Lang.get('projectFiles.path'),
+    create: Lang.get('notifyEmails.create'),
+    edit: Lang.get('notifyEmails.edit'),
+    label: Lang.get('notifyEmails.label'),
+    none: Lang.get('notifyEmails.none'),
+    name: Lang.get('notifyEmails.name'),
+    email: Lang.get('notifyEmails.email'),
   };
 
-  const fileList = [];
-  files.forEach((file) => {
-    const id = `config_${file.id}`;
+  const emailList = [];
+  emails.forEach((email) => {
+    const id = `email_${email.id}`;
 
-    fileList.push(
+    emailList.push(
       <tr key={id} id={id}>
-        <td>{file.name}</td>
-        <td>{file.path}</td>
+        <td>{email.name}</td>
+        <td>{email.email}</td>
         <td>
           <div className="btn-group pull-right">
-            <button type="button" className="btn btn-default btn-view" title={strings.view}><Icon fa="eye" /></button>
             <button type="button" className="btn btn-default btn-edit" title={strings.edit}><Icon fa="edit" /></button>
           </div>
         </td>
@@ -45,7 +43,7 @@ const FileList = (props) => {
       </div>
 
       {
-        files.length === 0 ?
+        emails.length === 0 ?
           <div className="box-body">
             <p>{strings.none}</p>
           </div>
@@ -55,11 +53,11 @@ const FileList = (props) => {
               <thead>
                 <tr>
                   <th>{strings.name}</th>
-                  <th>{strings.path}</th>
+                  <th>{strings.email}</th>
                   <th>&nbsp;</th>
                 </tr>
               </thead>
-              <tbody>{fileList}</tbody>
+              <tbody>{emailList}</tbody>
             </table>
           </div>
       }
@@ -67,8 +65,8 @@ const FileList = (props) => {
   );
 };
 
-FileList.propTypes = {
-  files: PropTypes.array.isRequired,
+EmailList.propTypes = {
+  emails: PropTypes.array.isRequired,
 };
 
-export default FileList;
+export default EmailList;

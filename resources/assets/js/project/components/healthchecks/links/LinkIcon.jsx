@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 
-import Icon from '../../../app/components/Icon';
+import Icon from '../../../../app/components/Icon';
 
 import {
   LINK_STATUS_SUCCESS,
   LINK_STATUS_FAILED,
-} from '../../constants';
+} from '../../../constants';
 
 const LinkIcon = (props) => {
   const { status } = props;

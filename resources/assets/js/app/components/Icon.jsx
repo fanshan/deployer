@@ -16,7 +16,7 @@ const Icon = (props) => {
   }
 
   if (spin) {
-    iconClasses.push('spinner');
+    iconClasses.push('spin');
   }
 
   return (

@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import {
   LINK_STATUS_SUCCESS,
   LINK_STATUS_FAILED,
-} from '../../constants';
+} from '../../../constants';
 
 const LinkStatus = (props) => {
   const { status } = props;

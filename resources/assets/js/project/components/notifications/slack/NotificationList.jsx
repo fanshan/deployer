@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import Icon from '../../../app/components/Icon';
+import Icon from '../../../../app/components/Icon';
 
 const NotificationList = (props) => {
   const { notifications } = props;

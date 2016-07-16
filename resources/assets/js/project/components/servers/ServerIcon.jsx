@@ -18,7 +18,7 @@ const ServerIcon = (props) => {
   if (status === SERVER_STATUS_SUCCESSFUL) {
     fa = 'check';
   } else if (status === SERVER_STATUS_TESTING) {
-    fa = 'pulse';
+    fa = ['spinner', 'pulse'];
     spin = true;
   } else if (status === SERVER_STATUS_FAILED) {
     fa = 'warning';

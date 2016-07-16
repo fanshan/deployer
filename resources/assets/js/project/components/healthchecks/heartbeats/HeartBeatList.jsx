@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 
-import Icon from '../../../app/components/Icon';
+import Icon from '../../../../app/components/Icon';
 import Label from './HeartBeatLabel';
-import FormattedDateTime from '../../../app/components/DateTime';
+import FormattedDateTime from '../../../../app/components/DateTime';
 
 import {
   HEARTBEAT_STATUS_OK,
   HEARTBEAT_STATUS_MISSING,
-} from '../../constants';
+} from '../../../constants';
 
 const HeartBeatList = (props) => {
   const { heartbeats } = props;

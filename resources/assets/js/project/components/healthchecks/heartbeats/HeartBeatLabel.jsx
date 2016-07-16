@@ -1,21 +1,21 @@
 import React, { PropTypes } from 'react';
 
-import Icon from './LinkIcon';
-import Status from './LinkStatus';
+import Icon from './HeartBeatIcon';
+import Status from './HeartBeatStatus';
 
 import {
-  LINK_STATUS_SUCCESS,
-  LINK_STATUS_FAILED,
-} from '../../constants';
+  HEARTBEAT_STATUS_OK,
+  HEARTBEAT_STATUS_MISSING,
+} from '../../../constants';
 
-const LinkLabel = (props) => {
+const HeartBeatLabel = (props) => {
   const { status } = props;
 
   let className = 'primary';
 
-  if (status === LINK_STATUS_SUCCESS) {
+  if (status === HEARTBEAT_STATUS_OK) {
     className = 'success';
-  } else if (status === LINK_STATUS_FAILED) {
+  } else if (status === HEARTBEAT_STATUS_MISSING) {
     className = 'danger';
   }
 
@@ -27,8 +27,8 @@ const LinkLabel = (props) => {
   );
 };
 
-LinkLabel.propTypes = {
+HeartBeatLabel.propTypes = {
   status: PropTypes.number.isRequired,
 };
 
-export default LinkLabel;
+export default HeartBeatLabel;

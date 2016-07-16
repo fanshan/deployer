@@ -47,7 +47,7 @@ const DeploymentIcon = (props) => {
   } else if (finishedStatuses.indexOf(status) !== -1) {
     fa = 'warning';
   } else if (status === DEPLOY_STATUS_DEPLOYING) {
-    fa = 'pulse';
+    fa = ['spinner', 'pulse'];
     spin = true;
   }
 

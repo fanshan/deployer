@@ -19,7 +19,7 @@ const ProjectIcon = (props) => {
   if (status === PROJECT_STATUS_FINISHED) {
     fa = 'check';
   } else if (status === PROJECT_STATUS_DEPLOYING) {
-    fa = 'pulse';
+    fa = ['spinner', 'pulse'];
     spin = true;
   } else if (status === PROJECT_STATUS_FAILED) {
     fa = 'warning';

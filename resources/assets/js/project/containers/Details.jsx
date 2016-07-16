@@ -75,7 +75,6 @@ ProjectDetails.propTypes = {
   projects: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
-  fetching: PropTypes.bool.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
@@ -84,7 +83,6 @@ ProjectDetails.propTypes = {
 
 const mapStateToProps = (state) => ({
   projects: state.getIn([constants.NAME, 'projects']).toJS(),
-  fetching: state.getIn([projects.NAME, 'fetching']),
 });
 
 const mapDispatchToProps = (dispatch) => ({
