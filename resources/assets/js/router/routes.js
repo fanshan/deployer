@@ -13,7 +13,7 @@ import Servers from '../project/containers/Servers';
 import Commands from '../project/containers/Commands';
 import Files from '../project/containers/Files';
 import Health from '../project/containers/Health';
-import Notifications from '../project/components/Notifications';
+import Notifications from '../project/containers/Notifications';
 
 import * as actions from '../app/actions';
 import decorateRoutes from './decorator';

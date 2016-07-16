@@ -26,7 +26,7 @@ const FileList = (props) => {
         <td>
           <div className="btn-group pull-right">
             <button type="button" className="btn btn-default btn-view" title={strings.view}><Icon fa="eye" /></button>
-            <button type="button" className="btn btn-default btn-edit" title={strings.create}><Icon fa="edit" /></button>
+            <button type="button" className="btn btn-default btn-edit" title={strings.edit}><Icon fa="edit" /></button>
           </div>
         </td>
       </tr>

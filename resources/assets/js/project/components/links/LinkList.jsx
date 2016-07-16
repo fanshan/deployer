@@ -30,7 +30,7 @@ const LinkList = (props) => {
         <td><Label status={link.last_status} /></td>
         <td>
           <div className="btn-group pull-right">
-            <button type="button" className="btn btn-default btn-edit" title={strings.create}><Icon fa="edit" /></button>
+            <button type="button" className="btn btn-default btn-edit" title={strings.edit}><Icon fa="edit" /></button>
           </div>
         </td>
       </tr>

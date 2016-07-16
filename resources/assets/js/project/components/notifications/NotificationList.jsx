@@ -2,26 +2,30 @@ import React, { PropTypes } from 'react';
 
 import Icon from '../../../app/components/Icon';
 
-const FileList = (props) => {
-  const { files } = props;
+const NotificationList = (props) => {
+  const { notifications } = props;
 
   const strings = {
-    create: Lang.get('sharedFiles.create'),
-    edit: Lang.get('sharedFiles.edit'),
-    label: Lang.get('sharedFiles.label'),
-    none: Lang.get('sharedFiles.none'),
-    name: Lang.get('sharedFiles.name'),
-    file: Lang.get('sharedFiles.file'),
+    create: Lang.get('notifications.create'),
+    edit: Lang.get('notifications.edit'),
+    label: Lang.get('notifications.slack'),
+    none: Lang.get('notifications.none'),
+    name: Lang.get('notifications.name'),
+    channel: Lang.get('notifications.channel'),
+    notify_failure_only: Lang.get('notifications.notify_failure_only'),
+    yes: Lang.get('app.yes'),
+    no: Lang.get('app.no'),
   };
 
-  const fileList = [];
-  files.forEach((file) => {
-    const id = `file_${file.id}`;
+  const notificationList = [];
+  notifications.forEach((notification) => {
+    const id = `notification_${notification.id}`;
 
-    fileList.push(
+    notificationList.push(
       <tr key={id} id={id}>
-        <td>{file.name}</td>
-        <td>{file.file}</td>
+        <td>{notification.name}</td>
+        <td>{notification.channel}</td>
+        <td>{notification.failure_only ? strings.yes : strings.no}</td>
         <td>
           <div className="btn-group pull-right">
             <button type="button" className="btn btn-default btn-edit" title={strings.edit}><Icon fa="edit" /></button>
@@ -43,7 +47,7 @@ const FileList = (props) => {
       </div>
 
       {
-        files.length === 0 ?
+        notifications.length === 0 ?
           <div className="box-body">
             <p>{strings.none}</p>
           </div>
@@ -53,20 +57,21 @@ const FileList = (props) => {
               <thead>
                 <tr>
                   <th>{strings.name}</th>
-                  <th>{strings.file}</th>
+                  <th>{strings.channel}</th>
+                  <th>{strings.notify_failure_only}</th>
                   <th>&nbsp;</th>
                 </tr>
               </thead>
-              <tbody>{fileList}</tbody>
+              <tbody>{notificationList}</tbody>
             </table>
           </div>
-        }
+      }
     </div>
   );
 };
 
-FileList.propTypes = {
-  files: PropTypes.array.isRequired,
+NotificationList.propTypes = {
+  notifications: PropTypes.array.isRequired,
 };
 
-export default FileList;
+export default NotificationList;

@@ -16,4 +16,3 @@ Route::get('heartbeat/{hash}', [
     'as'   => 'heartbeats',
     'uses' => 'Resources\HeartbeatController@ping',
 ]);
-

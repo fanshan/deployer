@@ -54,7 +54,7 @@ const HeartBeatList = (props) => {
         <td><Label status={heartbeat.status} /></td>
         <td>
           <div className="btn-group pull-right">
-            <button type="button" className="btn btn-default btn-edit" title={strings.create}><Icon fa="edit" /></button>
+            <button type="button" className="btn btn-default btn-edit" title={strings.edit}><Icon fa="edit" /></button>
           </div>
         </td>
       </tr>

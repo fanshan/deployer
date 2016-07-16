@@ -2,26 +2,26 @@ import React, { PropTypes } from 'react';
 
 import Icon from '../../../app/components/Icon';
 
-const FileList = (props) => {
-  const { files } = props;
+const EmailList = (props) => {
+  const { emails } = props;
 
   const strings = {
-    create: Lang.get('sharedFiles.create'),
-    edit: Lang.get('sharedFiles.edit'),
-    label: Lang.get('sharedFiles.label'),
-    none: Lang.get('sharedFiles.none'),
-    name: Lang.get('sharedFiles.name'),
-    file: Lang.get('sharedFiles.file'),
+    create: Lang.get('notifyEmails.create'),
+    edit: Lang.get('notifyEmails.edit'),
+    label: Lang.get('notifyEmails.label'),
+    none: Lang.get('notifyEmails.none'),
+    name: Lang.get('notifyEmails.name'),
+    email: Lang.get('notifyEmails.email'),
   };
 
-  const fileList = [];
-  files.forEach((file) => {
-    const id = `file_${file.id}`;
+  const emailList = [];
+  emails.forEach((email) => {
+    const id = `email_${email.id}`;
 
-    fileList.push(
+    emailList.push(
       <tr key={id} id={id}>
-        <td>{file.name}</td>
-        <td>{file.file}</td>
+        <td>{email.name}</td>
+        <td>{email.email}</td>
         <td>
           <div className="btn-group pull-right">
             <button type="button" className="btn btn-default btn-edit" title={strings.edit}><Icon fa="edit" /></button>
@@ -43,7 +43,7 @@ const FileList = (props) => {
       </div>
 
       {
-        files.length === 0 ?
+        emails.length === 0 ?
           <div className="box-body">
             <p>{strings.none}</p>
           </div>
@@ -53,20 +53,20 @@ const FileList = (props) => {
               <thead>
                 <tr>
                   <th>{strings.name}</th>
-                  <th>{strings.file}</th>
+                  <th>{strings.email}</th>
                   <th>&nbsp;</th>
                 </tr>
               </thead>
-              <tbody>{fileList}</tbody>
+              <tbody>{emailList}</tbody>
             </table>
           </div>
-        }
+      }
     </div>
   );
 };
 
-FileList.propTypes = {
-  files: PropTypes.array.isRequired,
+EmailList.propTypes = {
+  emails: PropTypes.array.isRequired,
 };
 
-export default FileList;
+export default EmailList;
