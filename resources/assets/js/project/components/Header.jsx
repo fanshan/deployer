@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 
+import HealthLabel from './HealthLabel';
+
 // fixme: convert to use "box", maybe turn the <li> content into components as they are the same pattern
 const Header = (props) => {
   const { project } = props;
@@ -69,19 +71,19 @@ const Header = (props) => {
               <li>
                 <a href="#">
                   {strings.today}
-                  <span className="pull-right">number_format($today)</span>
+                  <span className="pull-right">{parseInt(project.deployments_today, 10).toLocaleString()}</span>
                 </a>
               </li>
               <li>
                 <a href="#">
                   {strings.last_week}
-                  <span className="pull-right">number_format($last_week)</span>
+                  <span className="pull-right">{parseInt(project.recent_deployments, 10).toLocaleString()}</span>
                 </a>
               </li>
               <li>
                 <a href="#">
-                  {strings.duration}
-                  <span className="pull-right">(count($deployments) == 0 OR !$deployments[0]->finished_at) ? Lang::get('app.not_applicable') : $deployments[0]->readable_runtime</span>
+                  {strings.latest_duration}
+                  <span className="pull-right">{project.latest_runtime ? project.latest_runtime : strings.na}</span>
                 </a>
               </li>
             </ul>
@@ -110,17 +112,13 @@ const Header = (props) => {
               <li>
                 <a href="#">
                   {strings.app_status}
-                  <span className="pull-right label label-{{ $project->app_status_css }}">
-                    project->app_status
-                  </span>
+                  <HealthLabel {...project.application_status} />
                 </a>
               </li>
               <li>
                 <a href="#">
                   {strings.heartbeats_status}
-                  <span className="pull-right label label-{{ $project->heart_beat_status_css }}">
-                    project->heart_beat_status
-                  </span>
+                  <HealthLabel {...project.heartbeat_status} />
                 </a>
               </li>
             </ul>

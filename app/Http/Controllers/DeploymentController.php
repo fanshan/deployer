@@ -53,16 +53,8 @@ class DeploymentController extends Controller
     {
         $project = $this->projectRepository->getById($project_id);
 
-//        $optional = $project->commands->filter(function (Command $command) {
-//            return $command->optional;
-//        });
-
-        // sleep(90);
-
         return [
             'deployments'   => $this->deploymentRepository->getLatest($project_id),
-            'today'         => $this->deploymentRepository->getTodayCount($project_id),
-            'last_week'     => $this->deploymentRepository->getLastWeekCount($project_id),
             'project'       => $project,
             'servers'       => $project->servers,
             'notifications' => $project->notifications,
@@ -72,11 +64,9 @@ class DeploymentController extends Controller
             'projectFiles'  => $project->projectFiles,
             'checkUrls'     => $project->checkUrls,
             'variables'     => $project->variables,
-            //'optional'      => $optional,
             'commands'      => $project->commands,
             'tags'          => $project->tags()->reverse(),
             'branches'      => $project->branches(),
-            //'route'         => 'commands.step',
         ];
     }
 

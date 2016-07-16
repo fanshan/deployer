@@ -8,9 +8,9 @@ use REBELinBLUE\Deployer\Contracts\Repositories\GroupRepositoryInterface;
 use REBELinBLUE\Deployer\Contracts\Repositories\ProjectRepositoryInterface;
 
 /**
- * The dashboard controller.
+ * The Webapp controller.
  */
-class DashboardController extends Controller
+class WebappController extends Controller
 {
     /**
      * @var DeploymentRepositoryInterface
@@ -47,9 +47,20 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $projects = $this->projectRepository->getAll();
+
+        // Add additional fields
+        foreach ($projects as $project) {
+            $project->deployments_today = $this->deploymentRepository->getTodayCount($project->id);
+            $project->recent_deployments = $this->deploymentRepository->getLastWeekCount($project->id);
+            $project->latest_deployment_runtime = 100;
+            $project->latest_runtime = false;
+            //(count($deployments) == 0 OR !$deployments[0]->finished_at) ? false : $deployments[0]->readable_runtime
+        }
+
         return view('app', [
             'latest' => json_encode($this->buildTimelineData(), JSON_FORCE_OBJECT),
-            'projects' => json_encode($this->projectRepository->getAll()),
+            'projects' => json_encode($projects),
             'groups' => json_encode($this->groupRepository->getAll()),
         ]);
     }

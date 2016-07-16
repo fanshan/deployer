@@ -3,5 +3,5 @@
 // Webapp
 Route::get('{any?}', [
     'middleware' => ['web', 'auth', 'jwt'],
-    'uses' => 'DashboardController@index'
+    'uses' => 'WebappController@index'
 ])->where('any', '.*');
