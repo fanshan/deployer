@@ -2,6 +2,12 @@ import React, { PropTypes } from 'react';
 
 import Icon from '../../../app/components/Icon';
 import Label from './HeartBeatLabel';
+import FormattedDateTime from '../../../app/components/DateTime';
+
+import {
+  HEARTBEAT_STATUS_OK,
+  HEARTBEAT_STATUS_MISSING,
+} from '../../constants';
 
 const HeartBeatList = (props) => {
   const { heartbeats } = props;
@@ -17,18 +23,34 @@ const HeartBeatList = (props) => {
     last_check_in: Lang.get('heartbeats.last_check_in'),
     status: Lang.get('heartbeats.status'),
     never: Lang.get('app.never'),
+    interval_10: Lang.get('heartbeats.interval_10'),
+    interval_30: Lang.get('heartbeats.interval_30'),
+    interval_60: Lang.get('heartbeats.interval_60'),
+    interval_120: Lang.get('heartbeats.interval_120'),
+    interval_720: Lang.get('heartbeats.interval_720'),
+    interval_1440: Lang.get('heartbeats.interval_1440'),
+    interval_10080: Lang.get('heartbeats.interval_10080'),
   };
 
   const heartbeatList = [];
   heartbeats.forEach((heartbeat) => {
     const id = `heartbeat_${heartbeat.id}`;
 
+    const label = strings[`interval_${heartbeat.interval}`];
+
+    let hasRun = false;
+    if (heartbeat.status === HEARTBEAT_STATUS_OK) {
+      hasRun = true;
+    } else if (heartbeat.status === HEARTBEAT_STATUS_MISSING) {
+      hasRun = heartbeat.last_activity ? true : false;
+    }
+
     heartbeatList.push(
       <tr key={id} id={id}>
         <td>{heartbeat.name}</td>
         <td>{heartbeat.callback_url}</td>
-        <td>{heartbeat.interval}</td>
-        <td>{strings.never}</td>
+        <td>{label}</td>
+        <td>{hasRun ? <FormattedDateTime date={heartbeat.last_activity} /> : strings.never}</td>
         <td><Label status={heartbeat.status} /></td>
         <td>
           <div className="btn-group pull-right">
@@ -38,20 +60,6 @@ const HeartBeatList = (props) => {
       </tr>
     );
   });
-
-  /*
-
-
-   <td><%- callback_url %></td>
-   <td><%- interval_label %></td>
-   <td>
-   <% if (has_run) { %>
-   <%- formatted_date %>
-   <% } else { %>
-   {{ Lang::get('app.never') }}
-   <% } %>
-   </td>
-   */
 
   return (
     <div className="box">
