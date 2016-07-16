@@ -2,15 +2,14 @@
 
 namespace REBELinBLUE\Deployer\Presenters;
 
-use Illuminate\Support\Facades\Lang;
 use REBELinBLUE\Deployer\Project;
+use Robbo\Presenter\Presenter;
 
 /**
  * The view presenter for a project class.
  * @property integer status
- * @property string readable_status
  */
-class ProjectPresenter extends CommandPresenter
+class ProjectPresenter extends Presenter
 {
     /**
      * Returns the build status needed by CCTray

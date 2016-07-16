@@ -2,6 +2,16 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 import Icon from '../../../../app/components/Icon';
+import {
+  STEP_BEFORE_CLONE,
+  STEP_AFTER_CLONE,
+  STEP_BEFORE_INSTALL,
+  STEP_AFTER_INSTALL,
+  STEP_BEFORE_ACTIVATE,
+  STEP_AFTER_ACTIVATE,
+  STEP_BEFORE_PURGE,
+  STEP_AFTER_PURGE,
+} from '../../../constants';
 
 const Commands = (props) => {
   const {
@@ -22,6 +32,21 @@ const Commands = (props) => {
     purge: Lang.get('commands.purge'),
   };
 
+  const commandNames = (stage) => {
+    const commandList = [];
+    commands.forEach((command) => {
+      if (command.step === stage) {
+        commandList.push(command.name);
+      }
+    });
+
+    if (commandList.length > 0) {
+      return commandList.join(', ');
+    }
+
+    return strings.none;
+  };
+
   return (
     <div className="box">
       <div className="box-header">
@@ -40,8 +65,8 @@ const Commands = (props) => {
           <tbody>
             <tr>
               <td>{strings.clone}</td>
-              <td>{strings.none}</td>
-              <td>{strings.none}</td>
+              <td>{commandNames(STEP_BEFORE_CLONE)}</td>
+              <td>{commandNames(STEP_AFTER_CLONE)}</td>
               <td>
                 <div className="btn-group pull-right">
                   <Link to={`/projects/${project.id}/commands/clone`} className="btn btn-default" title={strings.configure}><Icon fa="gear" /></Link>
@@ -50,8 +75,8 @@ const Commands = (props) => {
             </tr>
             <tr>
               <td>{strings.install}</td>
-              <td>{strings.none}</td>
-              <td>{strings.none}</td>
+              <td>{commandNames(STEP_BEFORE_INSTALL)}</td>
+              <td>{commandNames(STEP_AFTER_INSTALL)}</td>
               <td>
                 <div className="btn-group pull-right">
                   <Link to={`/projects/${project.id}/commands/install`} className="btn btn-default" title={strings.configure}><Icon fa="gear" /></Link>
@@ -60,8 +85,8 @@ const Commands = (props) => {
             </tr>
             <tr>
               <td>{strings.activate}</td>
-              <td>{strings.none}</td>
-              <td>{strings.none}</td>
+              <td>{commandNames(STEP_BEFORE_ACTIVATE)}</td>
+              <td>{commandNames(STEP_AFTER_ACTIVATE)}</td>
               <td>
                 <div className="btn-group pull-right">
                   <Link to={`/projects/${project.id}/commands/activate`} className="btn btn-default" title={strings.configure}><Icon fa="gear" /></Link>
@@ -70,8 +95,8 @@ const Commands = (props) => {
             </tr>
             <tr>
               <td>{strings.purge}</td>
-              <td>{strings.none}</td>
-              <td>{strings.none}</td>
+              <td>{commandNames(STEP_BEFORE_PURGE)}</td>
+              <td>{commandNames(STEP_AFTER_PURGE)}</td>
               <td>
                 <div className="btn-group pull-right">
                   <Link to={`/projects/${project.id}/commands/purge`} className="btn btn-default" title={strings.configure}><Icon fa="gear" /></Link>

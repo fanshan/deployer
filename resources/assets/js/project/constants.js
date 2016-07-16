@@ -23,3 +23,17 @@ export const HEARTBEAT_STATUS_MISSING = 2;
 // Possible link statuses
 export const LINK_STATUS_SUCCESS = 0;
 export const LINK_STATUS_FAILED = 1;
+
+// Possible execution steps
+export const STEP_BEFORE_CLONE = 1;
+export const STEP_DO_CLONE = 2;
+export const STEP_AFTER_CLONE = 3;
+export const STEP_BEFORE_INSTALL = 4;
+export const STEP_DO_INSTALL = 5;
+export const STEP_AFTER_INSTALL = 6;
+export const STEP_BEFORE_ACTIVATE = 7;
+export const STEP_DO_ACTIVATE = 8;
+export const STEP_AFTER_ACTIVATE = 9;
+export const STEP_BEFORE_PURGE = 10;
+export const STEP_DO_PURGE = 11;
+export const STEP_AFTER_PURGE = 12;
