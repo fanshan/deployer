@@ -52,7 +52,7 @@ class DeploymentPresenter extends Presenter
      *
      * @return string
      */
-    public function presentCommitterName()
+    public function presentCommitterName() // FIXME: Implement this in the component
     {
         if ($this->committer === Deployment::LOADING) {
             if ($this->status === Deployment::FAILED) {
@@ -70,7 +70,7 @@ class DeploymentPresenter extends Presenter
      *
      * @return string
      */
-    public function presentShortCommitHash()
+    public function presentShortCommitHash()// FIXME: Implement this in the component
     {
         if ($this->short_commit === Deployment::LOADING) {
             if ($this->status === Deployment::FAILED) {

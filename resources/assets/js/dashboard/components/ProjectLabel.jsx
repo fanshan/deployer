@@ -27,8 +27,7 @@ const ProjectLabel = (props) => {
 
   return (
     <span className={`label label-${className}`}>
-      <Icon {...props} />
-      <Status {...props} />
+      <Icon {...props} />&nbsp;<Status {...props} />
     </span>
   );
 };

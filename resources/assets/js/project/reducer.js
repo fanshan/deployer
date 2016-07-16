@@ -17,6 +17,7 @@ const initialState = Immutable.fromJS({
   commands: [],
   tags: [],
   branches: [],
+  deployments: [],
 });
 
 export default function (state = initialState, action) {
@@ -58,29 +59,19 @@ export default function (state = initialState, action) {
         commands: [],
         tags: [],
         branches: [],
+        deployments: [],
       });
     case actions.SET_ACTIVE_PROJECT:
-      return state.set('active', action.project);
+      const active = action.project;
+      const deployments = active.latest_deployments;
+
+      delete active.latest_deployments;
+
+      return state.merge({
+        active,
+        deployments,
+      });
     default:
       return state;
   }
 }
-
-
-/*
- {
- "deployments": {
- "total": 0,
- "per_page": 15,
- "current_page": 1,
- "last_page": 0,
- "next_page_url": null,
- "prev_page_url": null,
- "from": null,
- "to": null,
- "data": []
- },
- "today": 0,
- "last_week": 0,
- }
- */

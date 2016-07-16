@@ -56,6 +56,7 @@ class WebappController extends Controller
             $project->deployments_today = $this->deploymentRepository->getTodayCount($project->id);
             $project->recent_deployments = $this->deploymentRepository->getLastWeekCount($project->id);
             $project->latest_deployment_runtime = $latest ? $latest->runtime() : false;
+            $project->latest_deployments = $this->deploymentRepository->getLatest($project->id);
         }
 
         return view('app', [

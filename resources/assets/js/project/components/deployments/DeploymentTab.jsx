@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-const DeploymentTab = () => (
-  <div>Deployments</div>
-);
+import DeploymentListComponent from './DeploymentList';
+
+const DeploymentTab = (props) => {
+  const {
+    fetching,
+    ...others,
+  } = props;
+
+  return (<DeploymentListComponent {...others} />);
+};
+
+DeploymentTab.propTypes = {
+  fetching: PropTypes.bool.isRequired,
+};
 
 export default DeploymentTab;

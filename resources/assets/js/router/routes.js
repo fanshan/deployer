@@ -8,7 +8,7 @@ import TemplateAdmin from '../admin/Templates';
 import ProjectAdmin from '../admin/Projects';
 import ProjectDetails from '../project/containers/Details';
 
-import Deployments from '../project/components/deployments/DeploymentTab';
+import Deployments from '../project/containers/DeploymentsTab';
 import Servers from '../project/containers/ServersTab';
 import Commands from '../project/containers/CommandsTab';
 import Files from '../project/containers/FilesTab';

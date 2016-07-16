@@ -55,8 +55,8 @@ const Timeline = (props) => {
           <div className="timeline-item">
             <span className="time"><Icon fa="clock-o" /> <FormattedTime date={item.started_at} /></span>
             <h3 className="timeline-header">
-              <Link to={`/projects/${item.project.id}`} title={strings.view}>
-                {item.project.name}
+              <Link to={`/projects/${item.project_id}`} title={strings.view}>
+                {item.project_name}
               </Link>&nbsp;-&nbsp;
               <Link to={`/deployments/${item.id}`} title={strings.view}>
                 {Lang.get('dashboard.deployment_number', { id: item.id })}
