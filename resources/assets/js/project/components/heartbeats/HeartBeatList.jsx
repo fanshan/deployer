@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import Icon from '../../../app/components/Icon';
+import Label from './HeartBeatLabel';
 
 const HeartBeatList = (props) => {
   const { heartbeats } = props;
@@ -28,7 +29,7 @@ const HeartBeatList = (props) => {
         <td>{heartbeat.callback_url}</td>
         <td>{heartbeat.interval}</td>
         <td>{strings.never}</td>
-        <td>{heartbeat.status}</td>
+        <td><Label status={heartbeat.status} /></td>
         <td>
           <div className="btn-group pull-right">
             <button type="button" className="btn btn-default btn-edit" title={strings.create}><Icon fa="edit" /></button>
@@ -40,9 +41,6 @@ const HeartBeatList = (props) => {
 
   /*
 
-
-   <td>
-   <span class="label label-<%- status_css %>"><i class="fa fa-<%-icon_css %>"></i> <%- status %></span>
 
    <td><%- callback_url %></td>
    <td><%- interval_label %></td>

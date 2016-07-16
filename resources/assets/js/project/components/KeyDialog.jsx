@@ -26,8 +26,8 @@ const Dialog = (props) => {
       </ModalHeader>
       <ModalBody>
         <div className="alert alert-warning">
-          <p>{strings.server_keys}</p>
-          <p>{strings.git_keys}</p>
+          <p dangerouslySetInnerHTML={{ __html: strings.server_keys }} />
+          <p dangerouslySetInnerHTML={{ __html: strings.git_keys }} />
         </div>
         <pre>{project.public_key}</pre>
       </ModalBody>

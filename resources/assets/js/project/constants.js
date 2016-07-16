@@ -14,3 +14,8 @@ export const DEPLOY_STATUS_FAILED = 3;
 export const DEPLOY_STATUS_COMPLETED_WITH_ERRORS = 4;
 export const DEPLOY_STATUS_ABORTING = 5;
 export const DEPLOY_STATUS_ABORTED = 6;
+
+// Possible heartbeat status
+export const HEARTBEAT_STATUS_OK = 0;
+export const HEARTBEAT_STATUS_UNTESTED = 1;
+export const HEARTBEAT_STATUS_MISSING = 2;

@@ -20,7 +20,7 @@ const Icon = (props) => {
   }
 
   return (
-    <i className={`fa ${iconClasses.map((icon) => (`fa-${icon}`)).join(' ')} ${className}`} {...others} />
+    <i className={`fa ${iconClasses.map((icon) => (`fa-${icon}`)).join(' ')} ${className || ''}`} {...others} />
   );
 };
 

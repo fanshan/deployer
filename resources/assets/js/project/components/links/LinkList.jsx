@@ -10,7 +10,7 @@ const LinkList = (props) => {
     edit: Lang.get('checkUrls.edit'),
     label: Lang.get('checkUrls.label'),
     none: Lang.get('checkUrls.none'),
-    title: Lang.get('checkUrls.name'),
+    title: Lang.get('checkUrls.title'),
     url: Lang.get('checkUrls.url'),
     frequency: Lang.get('checkUrls.frequency'),
     last_status: Lang.get('checkUrls.last_status'),
