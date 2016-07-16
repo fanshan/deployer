@@ -7,7 +7,7 @@ import CommandTab from '../components/commands/CommandTab';
 const Commands = (props) => (<CommandTab {...props} />);
 
 const mapStateToProps = (state) => ({
-  project: state.getIn([constants.NAME, 'active']),
+  project: state.getIn([constants.NAME, 'active']).toJS(),
   commands: state.getIn([constants.NAME, 'commands']).toJS(),
   variables: state.getIn([constants.NAME, 'variables']).toJS(),
   fetching: state.getIn([constants.NAME, 'fetching']),

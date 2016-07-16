@@ -37,5 +37,3 @@ HealthLabel.propTypes = {
 };
 
 export default HealthLabel;
-
-

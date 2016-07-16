@@ -11,7 +11,7 @@ import Pagination from './Pagination';
 const DeploymentList = (props) => {
   const {
     data,
-    ...others
+    ...others,
   } = props;
 
   const strings = {

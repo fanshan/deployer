@@ -69,7 +69,11 @@ const Commands = (props) => {
               <td>{commandNames(STEP_AFTER_CLONE)}</td>
               <td>
                 <div className="btn-group pull-right">
-                  <Link to={`/projects/${project.id}/commands/clone`} className="btn btn-default" title={strings.configure}><Icon fa="gear" /></Link>
+                  <Link
+                    to={`/projects/${project.id}/commands/clone`}
+                    className="btn btn-default"
+                    title={strings.configure}
+                  ><Icon fa="gear" /></Link>
                 </div>
               </td>
             </tr>
@@ -79,7 +83,11 @@ const Commands = (props) => {
               <td>{commandNames(STEP_AFTER_INSTALL)}</td>
               <td>
                 <div className="btn-group pull-right">
-                  <Link to={`/projects/${project.id}/commands/install`} className="btn btn-default" title={strings.configure}><Icon fa="gear" /></Link>
+                  <Link
+                    to={`/projects/${project.id}/commands/install`}
+                    className="btn btn-default"
+                    title={strings.configure}
+                  ><Icon fa="gear" /></Link>
                 </div>
               </td>
             </tr>
@@ -89,7 +97,11 @@ const Commands = (props) => {
               <td>{commandNames(STEP_AFTER_ACTIVATE)}</td>
               <td>
                 <div className="btn-group pull-right">
-                  <Link to={`/projects/${project.id}/commands/activate`} className="btn btn-default" title={strings.configure}><Icon fa="gear" /></Link>
+                  <Link
+                    to={`/projects/${project.id}/commands/activate`}
+                    className="btn btn-default"
+                    title={strings.configure}
+                  ><Icon fa="gear" /></Link>
                 </div>
               </td>
             </tr>
@@ -99,7 +111,11 @@ const Commands = (props) => {
               <td>{commandNames(STEP_AFTER_PURGE)}</td>
               <td>
                 <div className="btn-group pull-right">
-                  <Link to={`/projects/${project.id}/commands/purge`} className="btn btn-default" title={strings.configure}><Icon fa="gear" /></Link>
+                  <Link
+                    to={`/projects/${project.id}/commands/purge`}
+                    className="btn btn-default"
+                    title={strings.configure}
+                  ><Icon fa="gear" /></Link>
                 </div>
               </td>
             </tr>

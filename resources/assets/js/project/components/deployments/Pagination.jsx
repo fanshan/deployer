@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-const Pagination = (props) => (null);
+const Pagination = () => (null);
 
 Pagination.propTypes = {
   total: PropTypes.number.isRequired,
@@ -9,4 +9,4 @@ Pagination.propTypes = {
   last_page: PropTypes.number.isRequired,
 };
 
-export default  Pagination;
+export default Pagination;

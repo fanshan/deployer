@@ -39,7 +39,14 @@ const Servers = (props) => {
         <td><Label status={server.status} /></td>
         <td>
           <div className="btn-group pull-right">
-            <button type="button" className="btn btn-default btn-test" title={strings.test} disabled={testing}><Icon fa="refresh" spin={testing} /></button>
+            <button
+              type="button"
+              className="btn btn-default btn-test"
+              title={strings.test}
+              disabled={testing}
+            >
+              <Icon fa="refresh" spin={testing} />
+            </button>
             <button type="button" className="btn btn-default btn-edit" title={strings.edit}><Icon fa="edit" /></button>
           </div>
         </td>

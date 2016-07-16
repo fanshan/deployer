@@ -86,7 +86,14 @@ const Header = (props) => {
               <li>
                 <a href="#">
                   {strings.latest_duration}
-                  <span className="pull-right">{project.latest_deployment_runtime ? <RuntimeFormatter runtime={project.latest_deployment_runtime} /> : strings.na}</span>
+                  <span className="pull-right">
+                    {
+                      project.latest_deployment_runtime ?
+                        <RuntimeFormatter runtime={project.latest_deployment_runtime} />
+                      :
+                        strings.na
+                    }
+                  </span>
                 </a>
               </li>
             </ul>

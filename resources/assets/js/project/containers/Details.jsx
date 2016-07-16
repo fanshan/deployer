@@ -6,22 +6,14 @@ import { setPageTitle } from '../../app/actions';
 import { clearActiveProject, setProject, fetchProject, showKey } from '../actions';
 import { setButtons } from '../../navigation/actions';
 import * as constants from '../../navigation/constants';
-import * as projects from '../constants';
 import ProjectDetailsComponent from '../components/Details';
 
 class ProjectDetails extends Component {
   constructor(props) {
     super(props);
 
-    // FIXME: This seems wrong, and messy
     this.activeProject = props.projects.find((project) => (project.id === parseInt(props.params.id, 10)));
-    this.setPageTitle = props.actions.setPageTitle;
-    this.setProject = props.actions.setProject;
-    this.fetchProject = props.actions.fetchProject;
-    this.setButtons = props.actions.setButtons;
-    this.clearActiveProject = props.actions.clearActiveProject;
-    this.showKey = props.actions.showKey;
-    this.fetching = props.fetching;
+    this.actions = props.actions;
   }
 
   componentWillMount() {
@@ -33,23 +25,23 @@ class ProjectDetails extends Component {
   // }
 
   componentWillUnmount() {
-    this.setButtons([]);
-    this.clearActiveProject();
+    this.actions.setButtons([]);
+    this.actions.clearActiveProject();
   }
 
   setupProject() {
-    this.setPageTitle(this.activeProject.name);
-    this.setProject(this.activeProject);
-    this.fetchProject(this.activeProject);
+    this.actions.setPageTitle(this.activeProject.name);
+    this.actions.setProject(this.activeProject);
+    this.actions.fetchProject(this.activeProject);
 
-    this.setButtons([
+    this.actions.setButtons([
       {
         id: 'ssh',
         type: 'default',
         title: Lang.get('projects.view_ssh_key'),
         fa: 'key',
         text: Lang.get('projects.ssh_key'),
-        action: this.showKey,
+        action: this.actions.showKey,
       },
       {
         id: 'deploy_project',
@@ -63,10 +55,7 @@ class ProjectDetails extends Component {
 
   render() {
     return (
-      <ProjectDetailsComponent
-        project={this.activeProject}
-        fetching={this.props.fetching}
-      >{this.props.children}</ProjectDetailsComponent>
+      <ProjectDetailsComponent project={this.activeProject}>{this.props.children}</ProjectDetailsComponent>
     );
   }
 }

@@ -61,7 +61,7 @@ export default function (state = initialState, action) {
         branches: [],
         deployments: [],
       });
-    case actions.SET_ACTIVE_PROJECT:
+    case actions.SET_ACTIVE_PROJECT: {
       const active = action.project;
       const deployments = active.latest_deployments;
 
@@ -71,6 +71,7 @@ export default function (state = initialState, action) {
         active,
         deployments,
       });
+    }
     default:
       return state;
   }

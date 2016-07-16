@@ -20,9 +20,11 @@ const RuntimeFormatter = (props) => {
     Object.keys(units).forEach((name) => {
       const divisor = units[name];
 
-      const quotient = parseInt(remaining / divisor);
+      const quotient = parseInt(remaining / divisor, 10);
       if (quotient) {
-        output += Lang.choice(`deployments.${name}`, quotient, { time: quotient }) + ', ';
+        output += Lang.choice(`deployments.${name}`, quotient, { time: quotient });
+        output += ', ';
+
         remaining -= quotient * divisor;
       }
     });
