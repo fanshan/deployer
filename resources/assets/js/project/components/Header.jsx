@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 
 import HealthLabel from './HealthLabel';
 import RepositoryIcon from './RepositoryIcon';
+import RuntimeFormatter from '../../app/components/RuntimeFormatter';
 
 // fixme: convert to use "box", maybe turn the <li> content into components as they are the same pattern
 const Header = (props) => {
@@ -85,7 +86,7 @@ const Header = (props) => {
               <li>
                 <a href="#">
                   {strings.latest_duration}
-                  <span className="pull-right">{project.latest_runtime ? project.latest_runtime : strings.na}</span>
+                  <span className="pull-right">{project.latest_deployment_runtime ? <RuntimeFormatter runtime={project.latest_deployment_runtime} /> : strings.na}</span>
                 </a>
               </li>
             </ul>

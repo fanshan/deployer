@@ -51,11 +51,11 @@ class WebappController extends Controller
 
         // Add additional fields
         foreach ($projects as $project) {
+            $latest = $this->deploymentRepository->getLatestFinished($project->id);
+
             $project->deployments_today = $this->deploymentRepository->getTodayCount($project->id);
             $project->recent_deployments = $this->deploymentRepository->getLastWeekCount($project->id);
-            $project->latest_deployment_runtime = 100;
-            $project->latest_runtime = false;
-            //(count($deployments) == 0 OR !$deployments[0]->finished_at) ? false : $deployments[0]->readable_runtime
+            $project->latest_deployment_runtime = $latest ? $latest->runtime() : false;
         }
 
         return view('app', [
