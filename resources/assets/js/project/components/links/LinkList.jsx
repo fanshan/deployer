@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import Icon from '../../../app/components/Icon';
+import Label from './LinkLabel';
 
 const LinkList = (props) => {
   const { links } = props;
@@ -14,6 +15,7 @@ const LinkList = (props) => {
     url: Lang.get('checkUrls.url'),
     frequency: Lang.get('checkUrls.frequency'),
     last_status: Lang.get('checkUrls.last_status'),
+    minutes: Lang.get('checkUrls.minutes'),
   };
 
   const linksList = [];
@@ -24,8 +26,8 @@ const LinkList = (props) => {
       <tr key={id} id={id}>
         <td>{link.title}</td>
         <td>{link.url}</td>
-        <td>{link.interval}</td>
-        <td>{link.last_status}</td>
+        <td>{link.period} {strings.minutes}</td>
+        <td><Label status={link.last_status} /></td>
         <td>
           <div className="btn-group pull-right">
             <button type="button" className="btn btn-default btn-edit" title={strings.create}><Icon fa="edit" /></button>
@@ -37,10 +39,6 @@ const LinkList = (props) => {
 
   /*
 
-   <span class="label label-<%- status_css %>">
-   <i class="fa fa-<%-icon_css %>"></i>
-   <%- status %>
-   </span>
    <td><%- interval_label %></td>
    */
 
@@ -67,7 +65,7 @@ const LinkList = (props) => {
                 <tr>
                   <th>{strings.title}</th>
                   <th>{strings.url}</th>
-                  <th>{strings.interval}</th>
+                  <th>{strings.frequency}</th>
                   <th>{strings.last_status}</th>
                   <th>&nbsp;</th>
                 </tr>

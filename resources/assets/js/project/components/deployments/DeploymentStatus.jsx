@@ -7,6 +7,7 @@ import {
   DEPLOY_STATUS_COMPLETED_WITH_ERRORS,
   DEPLOY_STATUS_ABORTING,
   DEPLOY_STATUS_ABORTED,
+  DEPLOY_STATUS_PENDING,
 } from '../../constants';
 
 const DeploymentStatus = (props) => {
@@ -32,6 +33,7 @@ const DeploymentStatus = (props) => {
     case DEPLOY_STATUS_DEPLOYING:
       textStatus = Lang.get('deployments.deploying');
       break;
+    case DEPLOY_STATUS_PENDING:
     default:
       textStatus = Lang.get('deployments.pending');
       break;

@@ -15,7 +15,11 @@ export const DEPLOY_STATUS_COMPLETED_WITH_ERRORS = 4;
 export const DEPLOY_STATUS_ABORTING = 5;
 export const DEPLOY_STATUS_ABORTED = 6;
 
-// Possible heartbeat status
+// Possible heartbeat statuses
 export const HEARTBEAT_STATUS_OK = 0;
 export const HEARTBEAT_STATUS_UNTESTED = 1;
 export const HEARTBEAT_STATUS_MISSING = 2;
+
+// Possible link statuses
+export const LINK_STATUS_SUCCESS = 0;
+export const LINK_STATUS_FAILED = 1;
