@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import * as constants from '../../navigation/constants';
 import ProjectListComponent from '../components/Projects';
+import Project from '../../models/Project';
 
 const Projects = (props) => {
   const {
@@ -27,7 +28,7 @@ const Projects = (props) => {
 };
 
 Projects.propTypes = {
-  projects: PropTypes.array.isRequired,
+  projects: PropTypes.arrayOf(Project).isRequired,
   groups: PropTypes.array.isRequired,
 };
 

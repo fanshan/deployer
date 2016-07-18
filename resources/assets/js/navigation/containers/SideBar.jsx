@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import * as constants from '../../navigation/constants';
 import SideBarComponent from '../components/SideBar';
+import Project from '../../models/Project';
 
 const SideBar = (props) => {
   const {
@@ -27,7 +28,7 @@ const SideBar = (props) => {
 };
 
 SideBar.propTypes = {
-  projects: PropTypes.array.isRequired,
+  projects: PropTypes.arrayOf(Project).isRequired,
   groups: PropTypes.array.isRequired,
 };
 

@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link, IndexLink } from 'react-router';
 
 import Icon from '../../app/components/Icon';
+import Project from '../../models/Project';
 
 const SideBar = (props) => {
   const { projects } = props;
@@ -75,7 +76,7 @@ const SideBar = (props) => {
 };
 
 SideBar.propTypes = {
-  projects: PropTypes.array.isRequired, // FIXME: Should be a shape object?
+  projects: PropTypes.arrayOf(Project).isRequired,
 };
 
 export default SideBar;

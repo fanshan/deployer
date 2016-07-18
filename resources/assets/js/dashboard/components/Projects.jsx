@@ -5,6 +5,7 @@ import Box from '../../app/components/Box';
 import Label from './ProjectLabel';
 import Icon from '../../app/components/Icon';
 import FormattedDateTime from '../../app/components/DateTime';
+import Project from '../../models/Project';
 
 const Projects = (props) => {
   const {
@@ -85,7 +86,7 @@ const Projects = (props) => {
 };
 
 Projects.propTypes = {
-  projects: PropTypes.array.isRequired, // FIXME: Should be a shape object?
+  projects: PropTypes.arrayOf(Project).isRequired,
 };
 
 export default Projects;

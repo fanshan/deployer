@@ -5,6 +5,8 @@ import Header from './Header';
 import Dialog from '../containers/KeyDialog';
 import NavItem from '../../app/components/NavItem';
 
+import Project from '../../models/Project';
+
 const ProjectDetails = (props) => {
   const {
     project,
@@ -38,8 +40,12 @@ const ProjectDetails = (props) => {
           <div className="nav-tabs-custom">
             <Nav bsStyle="tabs">
               {
-                navItems.forEach((nav) => {
-                  const link = `/projects/${project.id}`;
+                navItems.map((nav) => {
+                  let link = `/projects/${project.id}`;
+
+                  if (!nav.primary) {
+                    link = `${link}/${nav.name}`;
+                  }
 
                   return (
                     <NavItem
@@ -66,7 +72,7 @@ const ProjectDetails = (props) => {
 };
 
 ProjectDetails.propTypes = {
-  project: PropTypes.object.isRequired,
+  project: Project.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
