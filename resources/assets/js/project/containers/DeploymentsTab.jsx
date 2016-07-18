@@ -1,10 +1,7 @@
-import React from 'react';
 import { connect } from 'react-redux';
 
 import * as constants from '../constants';
 import DeploymentTab from '../components/deployments/DeploymentTab';
-
-const Deployments = (props) => (<DeploymentTab {...props} />);
 
 const mapStateToProps = (state) => {
   const deployments = state.getIn([constants.NAME, 'deployments']).toJS();
@@ -15,7 +12,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Deployments);
+export default connect(mapStateToProps)(DeploymentTab);
 //
 // "deployments": {
 //   "total": 0,

@@ -1,10 +1,7 @@
-import React from 'react';
 import { connect } from 'react-redux';
 
 import * as constants from '../constants';
 import HealthcheckTab from '../components/healthchecks/HeathcheckTab';
-
-const Health = (props) => (<HealthcheckTab {...props} />);
 
 const mapStateToProps = (state) => ({
   heartbeats: state.getIn([constants.NAME, 'heartbeats']).toJS(),
@@ -12,4 +9,4 @@ const mapStateToProps = (state) => ({
   fetching: state.getIn([constants.NAME, 'fetching']),
 });
 
-export default connect(mapStateToProps)(Health);
+export default connect(mapStateToProps)(HealthcheckTab);
