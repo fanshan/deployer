@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Button, ButtonGroup } from 'react-bootstrap';
 
-import DateTime from '../../../app/components/DateTime';
 import Icon from '../../../app/components/Icon';
+import Box from '../../../app/components/Box';
+import DateTime from '../../../app/components/DateTime';
 import Label from './DeploymentLabel';
 import Reason from './DeploymentReason';
 import OptionalLink from './OptionalLink';
@@ -26,6 +27,14 @@ const DeploymentList = (props) => {
     status: Lang.get('app.status'),
     details: Lang.get('app.details'),
   };
+
+  if (data.length === 0) {
+    return (
+      <Box title={strings.label} create={strings.create}>
+        <p>{strings.none}</p>
+      </Box>
+    );
+  }
 
   const deploymentList = [];
   data.forEach((deployment) => {
@@ -73,39 +82,24 @@ const DeploymentList = (props) => {
    */
 
   return (
-    <div className="box">
-      <div className="box-header">
-        <h3 className="box-title">{strings.label}</h3>
-      </div>
-
-      {
-        data.length === 0 ?
-          <div className="box-body">
-            <p>{strings.none}</p>
-          </div>
-        :
-          <div className="box-body table-responsive">
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th>{strings.date}</th>
-                  <th>{strings.started}</th>
-                  <th>{strings.deployer}</th>
-                  <th>{strings.committer}</th>
-                  <th>{strings.commit}</th>
-                  <th>{strings.branch}</th>
-                  <th>{strings.status}</th>
-                  <th>&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody>{deploymentList}</tbody>
-            </table>
-            <Pagination {...others} />
-          </div>
-      }
-    </div>
-
-
+    <Box title={strings.label} create={strings.create} table>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th>{strings.date}</th>
+            <th>{strings.started}</th>
+            <th>{strings.deployer}</th>
+            <th>{strings.committer}</th>
+            <th>{strings.commit}</th>
+            <th>{strings.branch}</th>
+            <th>{strings.status}</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>{deploymentList}</tbody>
+      </table>
+      <Pagination {...others} />
+    </Box>
   );
 };
 
