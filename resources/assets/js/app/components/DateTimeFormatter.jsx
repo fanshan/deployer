@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import moment from 'moment';
 
 const DateTimeFormatter = (props) => {
-  let formattedDate = moment(props.date).format(props.format);
+  const formattedDate = moment(props.date).format(props.format);
 
   return (
     <span>{formattedDate}</span>
