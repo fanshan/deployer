@@ -9,6 +9,7 @@ const Box = (props) => {
     id,
     create,
     title,
+    header,
     children,
     table,
   } = props;
@@ -28,9 +29,10 @@ const Box = (props) => {
           :
             null
         }
-
         <h3 className="box-title">{title}</h3>
       </div>
+
+      {header}
 
       <div className={className} id={id ? `${id}_body` : ''}>
         {children}
@@ -44,6 +46,10 @@ Box.propTypes = {
   title: PropTypes.string.isRequired,
   create: PropTypes.string,
   table: PropTypes.bool,
+  header: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
@@ -52,6 +58,7 @@ Box.propTypes = {
 
 Box.defaultProps = {
   table: false,
+  header: null,
 };
 
 export default Box;

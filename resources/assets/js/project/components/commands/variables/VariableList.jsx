@@ -2,8 +2,11 @@ import React, { PropTypes } from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
 
 import Icon from '../../../../app/components/Icon';
+import Box from '../../../../app/components/Box';
 
 const Variables = (props) => {
+  const { variables } = props;
+
   const strings = {
     create: Lang.get('variables.create'),
     label: Lang.get('variables.label'),
@@ -14,7 +17,20 @@ const Variables = (props) => {
     edit: Lang.get('variables.edit'),
   };
 
-  const { variables } = props;
+  const header = (
+    <div className="box-body">
+      <p dangerouslySetInnerHTML={{ __html: strings.description }} />
+      <p dangerouslySetInnerHTML={{ __html: strings.example }} />
+    </div>
+  );
+
+  if (variables.length === 0) {
+    return (
+      <Box title={strings.label} create={strings.create} header={header}>
+        <p>{strings.none}</p>
+      </Box>
+    );
+  }
 
   const variableList = [];
   variables.forEach((variable) => {
@@ -34,33 +50,18 @@ const Variables = (props) => {
   });
 
   return (
-    <div className="box">
-      <div className="box-header">
-        <ButtonGroup className="pull-right">
-          <Button title={strings.create}><Icon fa="plus" /> {strings.create}</Button>
-        </ButtonGroup>
-
-        <h3 className="box-title">{strings.label}</h3>
-      </div>
-
-      <div className="box-body">
-        <p dangerouslySetInnerHTML={{ __html: strings.description }} />
-        <p dangerouslySetInnerHTML={{ __html: strings.example }} />
-      </div>
-
-      <div className="box-body table-responsive">
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>{strings.name}</th>
-              <th>{strings.value}</th>
-              <th>&nbsp;</th>
-            </tr>
-          </thead>
-          <tbody>{variableList}</tbody>
-        </table>
-      </div>
-    </div>
+    <Box title={strings.label} create={strings.create} header={header} table>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th>{strings.name}</th>
+            <th>{strings.value}</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>{variableList}</tbody>
+      </table>
+    </Box>
   );
 };
 

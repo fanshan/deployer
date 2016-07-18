@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
+import { Link } from 'react-router';
 
 import Icon from '../../../app/components/Icon';
 import Box from '../../../app/components/Box';
@@ -54,7 +55,7 @@ const DeploymentList = (props) => {
         </td>
         <td><Label status={deployment.status} /></td>
         <td>
-          <div className="btn-group pull-right">
+          <ButtonGroup className="pull-right">
             <Link
               to={`/projects/${deployment.project_id}/deployments/${deployment.id}`}
               type="button"
@@ -63,7 +64,7 @@ const DeploymentList = (props) => {
             >
               <Icon fa="info-circle" />
             </Link>
-          </div>
+          </ButtonGroup>
         </td>
       </tr>
     );

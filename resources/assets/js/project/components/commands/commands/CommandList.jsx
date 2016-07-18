@@ -1,7 +1,10 @@
 import React, { PropTypes } from 'react';
+import { ButtonGroup } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 import Icon from '../../../../app/components/Icon';
+import Box from '../../../../app/components/Box';
+
 import {
   STEP_BEFORE_CLONE,
   STEP_AFTER_CLONE,
@@ -48,81 +51,76 @@ const Commands = (props) => {
   };
 
   return (
-    <div className="box">
-      <div className="box-header">
-        <h3 className="box-title">{strings.label}</h3>
-      </div>
-      <div className="box-body table-responsive">
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>{strings.step}</th>
-              <th>{strings.before}</th>
-              <th>{strings.after}</th>
-              <th>&nbsp;</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{strings.clone}</td>
-              <td>{commandNames(STEP_BEFORE_CLONE)}</td>
-              <td>{commandNames(STEP_AFTER_CLONE)}</td>
-              <td>
-                <div className="btn-group pull-right">
-                  <Link
-                    to={`/projects/${project.id}/commands/clone`}
-                    className="btn btn-default"
-                    title={strings.configure}
-                  ><Icon fa="gear" /></Link>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>{strings.install}</td>
-              <td>{commandNames(STEP_BEFORE_INSTALL)}</td>
-              <td>{commandNames(STEP_AFTER_INSTALL)}</td>
-              <td>
-                <div className="btn-group pull-right">
-                  <Link
-                    to={`/projects/${project.id}/commands/install`}
-                    className="btn btn-default"
-                    title={strings.configure}
-                  ><Icon fa="gear" /></Link>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>{strings.activate}</td>
-              <td>{commandNames(STEP_BEFORE_ACTIVATE)}</td>
-              <td>{commandNames(STEP_AFTER_ACTIVATE)}</td>
-              <td>
-                <div className="btn-group pull-right">
-                  <Link
-                    to={`/projects/${project.id}/commands/activate`}
-                    className="btn btn-default"
-                    title={strings.configure}
-                  ><Icon fa="gear" /></Link>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>{strings.purge}</td>
-              <td>{commandNames(STEP_BEFORE_PURGE)}</td>
-              <td>{commandNames(STEP_AFTER_PURGE)}</td>
-              <td>
-                <div className="btn-group pull-right">
-                  <Link
-                    to={`/projects/${project.id}/commands/purge`}
-                    className="btn btn-default"
-                    title={strings.configure}
-                  ><Icon fa="gear" /></Link>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <Box title={strings.label} table>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th>{strings.step}</th>
+            <th>{strings.before}</th>
+            <th>{strings.after}</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{strings.clone}</td>
+            <td>{commandNames(STEP_BEFORE_CLONE)}</td>
+            <td>{commandNames(STEP_AFTER_CLONE)}</td>
+            <td>
+              <ButtonGroup className="pull-right">
+                <Link
+                  to={`/projects/${project.id}/commands/clone`}
+                  className="btn btn-default"
+                  title={strings.configure}
+                ><Icon fa="gear" /></Link>
+              </ButtonGroup>
+            </td>
+          </tr>
+          <tr>
+            <td>{strings.install}</td>
+            <td>{commandNames(STEP_BEFORE_INSTALL)}</td>
+            <td>{commandNames(STEP_AFTER_INSTALL)}</td>
+            <td>
+              <ButtonGroup className="pull-right">
+                <Link
+                  to={`/projects/${project.id}/commands/install`}
+                  className="btn btn-default"
+                  title={strings.configure}
+                ><Icon fa="gear" /></Link>
+              </ButtonGroup>
+            </td>
+          </tr>
+          <tr>
+            <td>{strings.activate}</td>
+            <td>{commandNames(STEP_BEFORE_ACTIVATE)}</td>
+            <td>{commandNames(STEP_AFTER_ACTIVATE)}</td>
+            <td>
+              <ButtonGroup className="pull-right">
+                <Link
+                  to={`/projects/${project.id}/commands/activate`}
+                  className="btn btn-default"
+                  title={strings.configure}
+                ><Icon fa="gear" /></Link>
+              </ButtonGroup>
+            </td>
+          </tr>
+          <tr>
+            <td>{strings.purge}</td>
+            <td>{commandNames(STEP_BEFORE_PURGE)}</td>
+            <td>{commandNames(STEP_AFTER_PURGE)}</td>
+            <td>
+              <ButtonGroup className="pull-right">
+                <Link
+                  to={`/projects/${project.id}/commands/purge`}
+                  className="btn btn-default"
+                  title={strings.configure}
+                ><Icon fa="gear" /></Link>
+              </ButtonGroup>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </Box>
   );
 };
 
