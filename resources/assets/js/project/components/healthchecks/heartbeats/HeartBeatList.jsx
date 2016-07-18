@@ -17,7 +17,7 @@ const HeartBeatList = (props) => {
   const strings = {
     create: Lang.get('heartbeats.create'),
     edit: Lang.get('heartbeats.edit'),
-    label: Lang.get('heartbeats.label'),
+    label: Lang.get('heartbeats.title'),
     none: Lang.get('heartbeats.none'),
     name: Lang.get('heartbeats.name'),
     url: Lang.get('heartbeats.url'),

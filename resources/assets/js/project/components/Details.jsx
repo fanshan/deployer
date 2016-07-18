@@ -11,6 +11,24 @@ const ProjectDetails = (props) => {
     children,
   } = props;
 
+  const strings = {
+    deployments: Lang.get('deployments.label'),
+    servers: Lang.get('servers.label'),
+    commands: Lang.get('commands.label'),
+    files: Lang.get('sharedFiles.label'),
+    notifications: Lang.get('notifications.label'),
+    health: Lang.get('heartbeats.label'),
+  };
+
+  const navItems = [
+    { name: 'deployments', fa: 'hdd-o', primary: true },
+    { name: 'servers', fa: 'tasks' },
+    { name: 'commands', fa: 'terminal' },
+    { name: 'files', fa: 'file-code-o' },
+    { name: 'notifications', fa: 'bullhorn' },
+    { name: 'health', fa: 'heartbeat' },
+  ];
+
   return (
     <div>
       <Header project={project} />
@@ -19,12 +37,21 @@ const ProjectDetails = (props) => {
         <div className="col-md-12">
           <div className="nav-tabs-custom">
             <Nav bsStyle="tabs">
-              <NavItem to={`/projects/${project.id}`} id="deployments" fa="hdd-o" primary>Deployments</NavItem>
-              <NavItem to={`/projects/${project.id}/servers`} id="servers" fa="tasks">Servers</NavItem>
-              <NavItem to={`/projects/${project.id}/commands`} id="commands" fa="terminal">Commands</NavItem>
-              <NavItem to={`/projects/${project.id}/files`} id="files" fa="file-code-o">Files</NavItem>
-              <NavItem to={`/projects/${project.id}/notifications`} id="notifications" fa="bullhorn">Notifications</NavItem>
-              <NavItem to={`/projects/${project.id}/health`} id="health" fa="heartbeat">Health Checks</NavItem>
+              {
+                navItems.forEach((nav) => {
+                  const link = `/projects/${project.id}`;
+
+                  return (
+                    <NavItem
+                      key={nav.name}
+                      to={link}
+                      id={nav.name}
+                      fa={nav.fa}
+                      primary={nav.primary || false}
+                    >{strings[nav.name]}</NavItem>
+                  );
+                })
+              }
             </Nav>
             <div className="tab-content">
               <div className="tab-pane active">{children}</div>
