@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react';
+import { Button, ButtonGroup } from 'react-bootstrap';
 
 import Icon from '../../../../app/components/Icon';
-import Label from './HeartBeatLabel';
+import Box from '../../../../app/components/Box';
 import FormattedDateTime from '../../../../app/components/DateTime';
+import Label from './HeartBeatLabel';
 
 import {
   HEARTBEAT_STATUS_OK,
@@ -32,6 +34,14 @@ const HeartBeatList = (props) => {
     interval_10080: Lang.get('heartbeats.interval_10080'),
   };
 
+  if (heartbeats.length === 0) {
+    return (
+      <Box title={strings.label} create={strings.create}>
+        <p>{strings.none}</p>
+      </Box>
+    );
+  }
+
   const heartbeatList = [];
   heartbeats.forEach((heartbeat) => {
     const id = `heartbeat_${heartbeat.id}`;
@@ -53,48 +63,30 @@ const HeartBeatList = (props) => {
         <td>{hasRun ? <FormattedDateTime date={heartbeat.last_activity} /> : strings.never}</td>
         <td><Label status={heartbeat.status} /></td>
         <td>
-          <div className="btn-group pull-right">
-            <button type="button" className="btn btn-default btn-edit" title={strings.edit}><Icon fa="edit" /></button>
-          </div>
+          <ButtonGroup className="pull-right">
+            <Button className="btn-edit" title={strings.edit}><Icon fa="edit" /></Button>
+          </ButtonGroup>
         </td>
       </tr>
     );
   });
 
   return (
-    <div className="box">
-      <div className="box-header">
-        <div className="pull-right">
-          <button type="button" className="btn btn-default" title={strings.create}>
-            <Icon fa="plus" /> {strings.create}
-          </button>
-        </div>
-        <h3 className="box-title">{strings.label}</h3>
-      </div>
-
-      {
-        heartbeats.length === 0 ?
-          <div className="box-body">
-            <p>{strings.none}</p>
-          </div>
-        :
-          <div className="box-body table-responsive">
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th>{strings.name}</th>
-                  <th>{strings.url}</th>
-                  <th>{strings.interval}</th>
-                  <th>{strings.last_check_in}</th>
-                  <th>{strings.status}</th>
-                  <th>&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody>{heartbeatList}</tbody>
-            </table>
-          </div>
-      }
-    </div>
+    <Box title={strings.label} create={strings.create} table>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th>{strings.name}</th>
+            <th>{strings.url}</th>
+            <th>{strings.interval}</th>
+            <th>{strings.last_check_in}</th>
+            <th>{strings.status}</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>{heartbeatList}</tbody>
+      </table>
+    </Box>
   );
 };
 

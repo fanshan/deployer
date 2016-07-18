@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react';
+import { Button, ButtonGroup } from 'react-bootstrap';
 
 import { SERVER_STATUS_TESTING } from '../../constants';
 import Label from './ServerLabel';
 import Icon from '../../../app/components/Icon';
+import Box from '../../../app/components/Box';
 
 const Servers = (props) => {
   const { servers } = props;
@@ -23,6 +25,14 @@ const Servers = (props) => {
     test: Lang.get('servers.test'),
   };
 
+  if (servers.length === 0) {
+    return (
+      <Box title={strings.label} create={strings.create}>
+        <p>{strings.none}</p>
+      </Box>
+    );
+  }
+
   const serverList = [];
   servers.forEach((server) => {
     const id = `server_${server.id}`;
@@ -38,58 +48,34 @@ const Servers = (props) => {
         <td>{server.deploy_code ? strings.yes : strings.no}</td>
         <td><Label status={server.status} /></td>
         <td>
-          <div className="btn-group pull-right">
-            <button
-              type="button"
-              className="btn btn-default btn-test"
-              title={strings.test}
-              disabled={testing}
-            >
+          <ButtonGroup className="pull-right">
+            <Button className="btn-test" title={strings.test} disabled={testing}>
               <Icon fa="refresh" spin={testing} />
-            </button>
-            <button type="button" className="btn btn-default btn-edit" title={strings.edit}><Icon fa="edit" /></button>
-          </div>
+            </Button>
+            <Button type="button" className="btn-edit" title={strings.edit}><Icon fa="edit" /></Button>
+          </ButtonGroup>
         </td>
       </tr>
     );
   });
 
   return (
-    <div className="box">
-      <div className="box-header">
-        <div className="pull-right">
-          <button type="button" className="btn btn-default" title={strings.create}>
-            <Icon fa="plus" /> {strings.create}
-          </button>
-        </div>
-
-        <h3 className="box-title">{strings.label}</h3>
-      </div>
-
-      {
-        servers.length === 0 ?
-          <div className="box-body">
-            <p>{strings.none}</p>
-          </div>
-        :
-          <div className="box-body table-responsive">
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th>{strings.name}</th>
-                  <th>{strings.connect_as}</th>
-                  <th>{strings.ip_address}</th>
-                  <th>{strings.port}</th>
-                  <th>{strings.runs_code}</th>
-                  <th>{strings.status}</th>
-                  <th>&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody>{serverList}</tbody>
-            </table>
-          </div>
-      }
-    </div>
+    <Box title={strings.label} create={strings.create} table>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th>{strings.name}</th>
+            <th>{strings.connect_as}</th>
+            <th>{strings.ip_address}</th>
+            <th>{strings.port}</th>
+            <th>{strings.runs_code}</th>
+            <th>{strings.status}</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>{serverList}</tbody>
+      </table>
+    </Box>
   );
 };
 

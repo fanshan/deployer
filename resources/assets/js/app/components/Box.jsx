@@ -1,24 +1,57 @@
 import React, { PropTypes } from 'react';
+import { Button } from 'react-bootstrap';
+import classNames from 'classnames';
 
-const Box = (props) => (
-  <div className="box">
-    <div className="box-header">
-      <h3 className="box-title">{props.title}</h3>
-    </div>
+import Icon from './Icon';
 
-    <div className="box-body" id={props.id ? `${props.id}_body` : ''}>
-      {props.children}
+const Box = (props) => {
+  const {
+    id,
+    create,
+    title,
+    children,
+    table,
+  } = props;
+
+  const className = classNames('box-body', {
+    'table-responsive': table,
+  });
+
+  return (
+    <div className="box">
+      <div className="box-header">
+        {
+          create ?
+            <div className="pull-right">
+              <Button title={create}><Icon fa="plus" /> {create}</Button>
+            </div>
+          :
+            null
+        }
+
+        <h3 className="box-title">{title}</h3>
+      </div>
+
+      <div className={className} id={id ? `${id}_body` : ''}>
+        {children}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 Box.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string.isRequired,
+  create: PropTypes.string,
+  table: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+};
+
+Box.defaultProps = {
+  table: false,
 };
 
 export default Box;

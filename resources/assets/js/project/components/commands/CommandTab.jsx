@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Button } from 'react-bootstrap';
 
 import CommandListComponent from './commands/CommandList';
 import VariableList from './variables/VariableList';
@@ -27,7 +28,7 @@ const CommandTab = (props) => {
       <div className="callout">
         <h4>{strings.webhook} <Icon fa="question-circle" id="show_help" /></h4>
         <code id="webhook">{project.webhook_url}</code>
-        <button className="btn btn-xs btn-link" id="new_webhook" title={strings.generate}><Icon fa="refresh" /></button>
+        <Button bsSize="xsmall" bsStyle="link" id="new_webhook" title={strings.generate}><Icon fa="refresh" /></Button>
       </div>
 
       <CommandListComponent commands={commands} project={project} />

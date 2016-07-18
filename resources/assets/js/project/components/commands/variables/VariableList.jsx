@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Button, ButtonGroup } from 'react-bootstrap';
 
 import Icon from '../../../../app/components/Icon';
 
@@ -24,9 +25,9 @@ const Variables = (props) => {
         <td>{variable.name}</td>
         <td>{variable.value}</td>
         <td>
-          <div className="btn-group pull-right">
-            <button type="button" className="btn btn-default btn-edit" title={strings.edit}><Icon fa="edit" /></button>
-          </div>
+          <ButtonGroup className="pull-right">
+            <Button className="btn-edit" title={strings.edit}><Icon fa="edit" /></Button>
+          </ButtonGroup>
         </td>
       </tr>
     );
@@ -35,11 +36,9 @@ const Variables = (props) => {
   return (
     <div className="box">
       <div className="box-header">
-        <div className="pull-right">
-          <button type="button" className="btn btn-default" title={strings.create}>
-            <span className="fa fa-plus"></span> {strings.create}
-          </button>
-        </div>
+        <ButtonGroup className="pull-right">
+          <Button title={strings.create}><Icon fa="plus" /> {strings.create}</Button>
+        </ButtonGroup>
 
         <h3 className="box-title">{strings.label}</h3>
       </div>

@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
+import { Button, ButtonGroup } from 'react-bootstrap';
 
 import Icon from '../../../../app/components/Icon';
+import Box from '../../../../app/components/Box';
 
 const NotificationList = (props) => {
   const { notifications } = props;
@@ -17,6 +19,14 @@ const NotificationList = (props) => {
     no: Lang.get('app.no'),
   };
 
+  if (notifications.length === 0) {
+    return (
+      <Box title={strings.label} create={strings.create}>
+        <p>{strings.none}</p>
+      </Box>
+    );
+  }
+
   const notificationList = [];
   notifications.forEach((notification) => {
     const id = `notification_${notification.id}`;
@@ -27,46 +37,28 @@ const NotificationList = (props) => {
         <td>{notification.channel}</td>
         <td>{notification.failure_only ? strings.yes : strings.no}</td>
         <td>
-          <div className="btn-group pull-right">
-            <button type="button" className="btn btn-default btn-edit" title={strings.edit}><Icon fa="edit" /></button>
-          </div>
+          <ButtonGroup className="pull-right">
+            <Button className="btn-edit" title={strings.edit}><Icon fa="edit" /></Button>
+          </ButtonGroup>
         </td>
       </tr>
     );
   });
 
   return (
-    <div className="box">
-      <div className="box-header">
-        <div className="pull-right">
-          <button type="button" className="btn btn-default" title={strings.create}>
-            <Icon fa="plus" /> {strings.create}
-          </button>
-        </div>
-        <h3 className="box-title">{strings.label}</h3>
-      </div>
-
-      {
-        notifications.length === 0 ?
-          <div className="box-body">
-            <p>{strings.none}</p>
-          </div>
-        :
-          <div className="box-body table-responsive">
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th>{strings.name}</th>
-                  <th>{strings.channel}</th>
-                  <th>{strings.notify_failure_only}</th>
-                  <th>&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody>{notificationList}</tbody>
-            </table>
-          </div>
-      }
-    </div>
+    <Box title={strings.label} create={strings.create} table>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th>{strings.name}</th>
+            <th>{strings.channel}</th>
+            <th>{strings.notify_failure_only}</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>{notificationList}</tbody>
+      </table>
+    </Box>
   );
 };
 
