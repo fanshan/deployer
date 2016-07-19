@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 
 import CommandListComponent from './commands/CommandList';
+import WebhookDialog from '../../containers/WebhookDialog';
 import VariableList from './variables/VariableList';
 import Loading from '../../../app/components/Loading';
 import Icon from '../../../app/components/Icon';
@@ -33,6 +34,7 @@ const CommandTab = (props) => {
 
       <CommandListComponent commands={commands} project={project} />
       <VariableList variables={variables} />
+      <WebhookDialog />
     </div>
   );
 };

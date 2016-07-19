@@ -3,36 +3,38 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as constants from '../constants';
-import Dialog from '../components/KeyDialog';
-import { hideKey } from '../actions';
+import Dialog from '../components/commands/commands/WebhookDialog';
+//import { hideKey } from '../actions';
 
-const KeyDialog = (props) => {
+const WebhookDialog = (props) => {
   const {
     actions,
     ...others,
   } = props;
 
   return (
-    <Dialog onHide={actions.hideKey} {...others} />
+    <Dialog onHide={actions.hideDialog} {...others} />
   );
 };
 
-KeyDialog.propTypes = {
+WebhookDialog.propTypes = {
   ...Dialog.propTypes,
   actions: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  visible: state.getIn([constants.NAME, 'showKey']),
+  project: state.getIn([constants.NAME, 'active']).toJS(),
+  commands: state.getIn([constants.NAME, 'commands']).toJS(),
+  visible: true,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
-    hideKey,
+    hideDialog: () => {},
   }, dispatch),
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(KeyDialog);
+)(WebhookDialog);

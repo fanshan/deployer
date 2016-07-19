@@ -11,7 +11,7 @@ const Dialog = (props) => {
   } = props;
 
   const strings = {
-    public_key: Lang.get('projects.public_ssh_key'),
+    title: Lang.get('projects.public_ssh_key'),
     server_keys: Lang.get('projects.server_keys'),
     git_keys: Lang.get('projects.git_keys'),
     close: Lang.get('app.close'),
@@ -21,7 +21,7 @@ const Dialog = (props) => {
     <Modal show={visible} onHide={onHide} id="key">
       <ModalHeader closeButton>
         <ModalTitle>
-          <Icon fa="key" /> {strings.public_key}
+          <Icon fa="key" /> {strings.title}
         </ModalTitle>
       </ModalHeader>
       <ModalBody>
