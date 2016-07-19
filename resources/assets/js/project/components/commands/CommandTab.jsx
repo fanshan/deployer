@@ -13,6 +13,7 @@ const CommandTab = (props) => {
     commands,
     variables,
     fetching,
+    showHelp,
   } = props;
 
   const strings = {
@@ -27,7 +28,7 @@ const CommandTab = (props) => {
   return (
     <div>
       <div className="callout">
-        <h4>{strings.webhook} <Icon fa="question-circle" id="show_help" /></h4>
+        <h4>{strings.webhook} <Icon fa="question-circle" id="show_help" onClick={showHelp} /></h4>
         <code id="webhook">{project.webhook_url}</code>
         <Button bsSize="xsmall" bsStyle="link" id="new_webhook" title={strings.generate}><Icon fa="refresh" /></Button>
       </div>
@@ -44,6 +45,7 @@ CommandTab.propTypes = {
   commands: PropTypes.array.isRequired,
   variables: PropTypes.array.isRequired,
   fetching: PropTypes.bool.isRequired,
+  showHelp: PropTypes.func.isRequired,
 };
 
 export default CommandTab;

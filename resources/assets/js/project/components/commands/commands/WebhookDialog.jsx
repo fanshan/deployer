@@ -15,8 +15,6 @@ const WebhookDialog = (props) => {
     return command.optional;
   });
 
-  console.log(optional);
-
   const strings = {
     title: Lang.get('commands.webhook_help'),
     close: Lang.get('app.close'),
@@ -29,6 +27,7 @@ const WebhookDialog = (props) => {
     source: Lang.get('commands.webhook_source'),
     url: Lang.get('commands.webhook_url'),
     curl: Lang.get('commands.webhook_curl'),
+    commands: Lang.get('commands.webhook_commands'),
     reason_example: Lang.get('commands.reason_example'),
     services: Lang.get('commands.services'),
     services_description: Lang.get('commands.services_description'),
@@ -57,6 +56,8 @@ const WebhookDialog = (props) => {
           <dd>{strings.source}</dd>
           <dt><em>url</em></dt>
           <dd>{strings.url}</dd>
+          {optional.length > 0 ? <dt><em>commands</em></dt> : null}
+          {optional.length > 0 ? <dd>{strings.commands}</dd> : null}
         </dl>
         <h5><strong>{strings.curl}</strong></h5>
         <pre>curl -X POST {project.webhook_url} -d 'reason={strings.reason_example}&amp;branch=master&amp;update_only=true'</pre>

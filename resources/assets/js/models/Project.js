@@ -11,7 +11,10 @@ export default PropTypes.shape({
   deployments_today: PropTypes.number.isRequired,
   group_id: PropTypes.number.isRequired,
   include_dev: PropTypes.bool.isRequired,
-  latest_deployment_runtime: PropTypes.number.isRequired,
+  latest_deployment_runtime: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
+  ]).isRequired,
   last_run: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   public_key: PropTypes.string.isRequired,

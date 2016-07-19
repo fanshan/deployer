@@ -3,10 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { setPageTitle } from '../../app/actions';
-import { clearActiveProject, setProject, fetchProject, showKey } from '../actions';
+import { clearActiveProject, setProject, fetchProject, showDialog } from '../actions';
 import { setButtons } from '../../navigation/actions';
 import * as constants from '../../navigation/constants';
 import ProjectDetailsComponent from '../components/Details';
+import { SSH_KEY_DIALOG } from '../constants';
 
 class ProjectDetails extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class ProjectDetails extends Component {
         title: Lang.get('projects.view_ssh_key'),
         fa: 'key',
         text: Lang.get('projects.ssh_key'),
-        action: this.actions.showKey,
+        action: () => { this.actions.showDialog(SSH_KEY_DIALOG); },
       },
       {
         id: 'deploy_project',
@@ -80,7 +81,7 @@ const mapDispatchToProps = (dispatch) => ({
     setProject,
     fetchProject,
     setButtons,
-    showKey,
+    showDialog,
     clearActiveProject,
   }, dispatch),
 });

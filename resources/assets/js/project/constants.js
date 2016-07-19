@@ -37,3 +37,7 @@ export const STEP_AFTER_ACTIVATE = 9;
 export const STEP_BEFORE_PURGE = 10;
 export const STEP_DO_PURGE = 11;
 export const STEP_AFTER_PURGE = 12;
+
+// Possible dialog keys
+export const SSH_KEY_DIALOG = 'key';
+export const WEBHOOK_DIALOG = 'webhook';

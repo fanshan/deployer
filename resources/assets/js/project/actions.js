@@ -41,15 +41,15 @@ export function fetchProject(project) {
   };
 }
 
-// FIXME: Change this to hide/show dialogs
-export function showKey() {
+export function showDialog(dialog) {
   return {
-    type: actions.SHOW_SSH_KEY,
+    type: actions.SHOW_DIALOG,
+    dialog,
   };
 }
 
-export function hideKey() {
+export function hideDialog() {
   return {
-    type: actions.HIDE_SSH_KEY,
+    type: actions.HIDE_DIALOG,
   };
 }

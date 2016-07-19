@@ -4,7 +4,7 @@ import * as actions from './actionTypes';
 
 const initialState = Immutable.fromJS({
   active: null,
-  showKey: false,
+  showDialog: false,
   fetching: false,
   servers: [],
   notifications: [],
@@ -39,14 +39,14 @@ export default function (state = initialState, action) {
         tags: action.tags,
         branches: action.branches,
       });
-    case actions.HIDE_SSH_KEY:
-      return state.set('showKey', false);
-    case actions.SHOW_SSH_KEY:
-      return state.set('showKey', true);
+    case actions.HIDE_DIALOG:
+      return state.set('showDialog', false);
+    case actions.SHOW_DIALOG:
+      return state.set('showDialog', action.dialog);
     case actions.CLEAR_ACTIVE_PROJECT:
       return state.merge({ // FIXME: There has to be a cleaner way to do this?
         active: null,
-        showKey: false,
+        showDialog: false,
         fetching: false,
         servers: [],
         notifications: [],
