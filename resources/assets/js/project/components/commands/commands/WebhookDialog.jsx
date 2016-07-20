@@ -25,6 +25,7 @@ const WebhookDialog = (props) => {
     update: Lang.get('commands.webhook_update'),
     reason: Lang.get('commands.webhook_reason'),
     source: Lang.get('commands.webhook_source'),
+    optional: Lang.get('commands.webhook_optional'),
     url: Lang.get('commands.webhook_url'),
     curl: Lang.get('commands.webhook_curl'),
     commands: Lang.get('commands.webhook_commands'),
@@ -32,6 +33,26 @@ const WebhookDialog = (props) => {
     services: Lang.get('commands.services'),
     services_description: Lang.get('commands.services_description'),
   };
+
+  const optionalList = (
+    <div>
+      <h5><strong>{strings.optional}</strong></h5>
+      <dl className="dl-horizontal" id="hook_command_ids">
+
+      </dl>
+    </div>
+  );
+
+  // @if (count($optional))
+//
+// <dl class="dl-horizontal" id="hook_command_ids">
+//   @foreach($optional as $command)
+//   <dt><em>{{ $command->id }}</em></dt>
+// <dd>{{ $command->name }}</dd>
+// @endforeach
+// </dl>
+// @endif
+//
 
   return (
     <Modal show={visible} onHide={onHide} id="help">
@@ -59,6 +80,7 @@ const WebhookDialog = (props) => {
           {optional.length > 0 ? <dt><em>commands</em></dt> : null}
           {optional.length > 0 ? <dd>{strings.commands}</dd> : null}
         </dl>
+        { optional.length > 0 ? optionalList : null}
         <h5><strong>{strings.curl}</strong></h5>
         <pre>curl -X POST {project.webhook_url} -d 'reason={strings.reason_example}&amp;branch=master&amp;update_only=true'</pre>
         <hr />
@@ -84,22 +106,5 @@ WebhookDialog.defaultProps = {
 };
 
 export default WebhookDialog;
-
-
-// @if(count($optional))
-// <dt><em>commands</em></dt>
-// <dd>{{ Lang::get('commands.webhook_commands') }}</dd>
-// @endif
-//
-// @if (count($optional))
-// <h5><strong>{{ Lang::get('commands.webhook_optional') }}</strong></h5>
-// <dl class="dl-horizontal" id="hook_command_ids">
-//   @foreach($optional as $command)
-//   <dt><em>{{ $command->id }}</em></dt>
-// <dd>{{ $command->name }}</dd>
-// @endforeach
-// </dl>
-// @endif
-//
 
 

@@ -14,14 +14,13 @@ const KeyDialog = (props) => {
 
   return (
     <Dialog
-      onHide={() => actions.hideDialog(constants.SSH_KEY_DIALOG)}
+      onHide={actions.hideDialog}
       {...others}
     />
   );
 };
 
 KeyDialog.propTypes = {
-  //...Dialog.propTypes,
   actions: PropTypes.object.isRequired,
 };
 
@@ -31,7 +30,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
-    hideDialog,
+    hideDialog: () => (hideDialog(constants.SSH_KEY_DIALOG)),
   }, dispatch),
 });
 

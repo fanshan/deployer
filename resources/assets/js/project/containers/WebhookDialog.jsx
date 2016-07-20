@@ -14,14 +14,13 @@ const WebhookDialog = (props) => {
 
   return (
     <Dialog
-      onHide={() => actions.hideDialog(constants.WEBHOOK_DIALOG)}
+      onHide={actions.hideDialog}
       {...others}
     />
   );
 };
 
 WebhookDialog.propTypes = {
-  //...Dialog.propTypes,
   actions: PropTypes.object.isRequired,
 };
 
@@ -33,7 +32,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
-    hideDialog,
+    hideDialog: () => (hideDialog(constants.WEBHOOK_DIALOG)),
   }, dispatch),
 });
 
