@@ -34,25 +34,23 @@ const WebhookDialog = (props) => {
     services_description: Lang.get('commands.services_description'),
   };
 
-  const optionalList = (
-    <div>
-      <h5><strong>{strings.optional}</strong></h5>
-      <dl className="dl-horizontal" id="hook_command_ids">
+  let optionalList = null;
+  if (optional.length > 0) {
+    const optionalCommands = [];
+    optional.forEach((command) => {
+      optionalCommands.push(<dt key={`command_${command.id}`}><em>{command.id}</em></dt>);
+      optionalCommands.push(<dd key={`command_name_${command.id}`}>{command.name}</dd>);
+    });
 
-      </dl>
-    </div>
-  );
-
-  // @if (count($optional))
-//
-// <dl class="dl-horizontal" id="hook_command_ids">
-//   @foreach($optional as $command)
-//   <dt><em>{{ $command->id }}</em></dt>
-// <dd>{{ $command->name }}</dd>
-// @endforeach
-// </dl>
-// @endif
-//
+    optionalList = (
+      <div>
+        <h5><strong>{strings.optional}</strong></h5>
+        <dl className="dl-horizontal" id="hook_command_ids">
+          {optionalCommands}
+        </dl>
+      </div>
+    );
+  }
 
   return (
     <Modal show={visible} onHide={onHide} id="help">
@@ -80,7 +78,7 @@ const WebhookDialog = (props) => {
           {optional.length > 0 ? <dt><em>commands</em></dt> : null}
           {optional.length > 0 ? <dd>{strings.commands}</dd> : null}
         </dl>
-        { optional.length > 0 ? optionalList : null}
+        {optionalList}
         <h5><strong>{strings.curl}</strong></h5>
         <pre>curl -X POST {project.webhook_url} -d 'reason={strings.reason_example}&amp;branch=master&amp;update_only=true'</pre>
         <hr />
