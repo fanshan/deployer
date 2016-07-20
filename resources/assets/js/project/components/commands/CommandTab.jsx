@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 
 import CommandListComponent from './commands/CommandList';
-import WebhookDialog from '../../containers/WebhookDialog';
+import WebhookDialog from '../../containers/dialogs/WebhookDialog';
 import VariableList from './variables/VariableList';
 import Loading from '../../../app/components/Loading';
 import Icon from '../../../app/components/Icon';

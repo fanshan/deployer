@@ -1,45 +1,42 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import * as constants from '../constants';
-import CommandTabComponent from '../components/commands/CommandTab';
-import { showDialog } from '../actions';
+import * as constants from '../../constants';
+import Dialog from '../../components/commands/commands/WebhookDialog';
+import { hideDialog } from '../../actions';
 
-const CommandTab = (props) => {
+const WebhookDialog = (props) => {
   const {
     actions,
     ...others,
   } = props;
 
   return (
-    <CommandTabComponent
-      showHelp={() => actions.showDialog(constants.WEBHOOK_DIALOG)}
+    <Dialog
+      onHide={actions.hideDialog}
       {...others}
     />
   );
 };
 
-CommandTab.propTypes = {
-  //...Dialog.propTypes,
+WebhookDialog.propTypes = {
   actions: PropTypes.object.isRequired,
 };
-
 
 const mapStateToProps = (state) => ({
   project: state.getIn([constants.NAME, 'active']).toJS(),
   commands: state.getIn([constants.NAME, 'commands']).toJS(),
-  variables: state.getIn([constants.NAME, 'variables']).toJS(),
-  fetching: state.getIn([constants.NAME, 'fetching']),
+  visible: (state.getIn([constants.NAME, 'showDialog']) === constants.WEBHOOK_DIALOG),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
-    showDialog,
+    hideDialog: () => (hideDialog(constants.WEBHOOK_DIALOG)),
   }, dispatch),
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CommandTab);
+)(WebhookDialog);

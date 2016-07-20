@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
-import * as constants from '../constants';
-import HealthcheckTab from '../components/healthchecks/HeathcheckTab';
+import * as constants from '../../constants';
+import HealthcheckTab from '../../components/healthchecks/HeathcheckTab';
 
 const mapStateToProps = (state) => ({
   heartbeats: state.getIn([constants.NAME, 'heartbeats']).toJS(),

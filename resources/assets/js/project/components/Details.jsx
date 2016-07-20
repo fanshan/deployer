@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Nav } from 'react-bootstrap';
 
 import Header from './Header';
-import Dialog from '../containers/KeyDialog';
+import Dialog from '../containers/dialogs/KeyDialog';
 import NavItem from '../../app/components/NavItem';
 
 import Project from '../../models/Project';

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
-import * as constants from '../constants';
-import FileTab from '../components/files/FileTab';
+import * as constants from '../../constants';
+import FileTab from '../../components/files/FileTab';
 
 const mapStateToProps = (state) => ({
   sharedFiles: state.getIn([constants.NAME, 'sharedFiles']).toJS(),

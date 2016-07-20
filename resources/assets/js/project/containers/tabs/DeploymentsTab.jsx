@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
-import * as constants from '../constants';
-import DeploymentTab from '../components/deployments/DeploymentTab';
+import * as constants from '../../constants';
+import DeploymentTab from '../../components/deployments/DeploymentTab';
 
 const mapStateToProps = (state) => {
   const deployments = state.getIn([constants.NAME, 'deployments']).toJS();
