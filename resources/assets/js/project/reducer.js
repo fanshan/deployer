@@ -6,6 +6,7 @@ const initialState = Immutable.fromJS({
   active: null,
   showDialog: false,
   fetching: false,
+  editing: {},
   servers: [],
   notifications: [],
   emails: [],
@@ -22,6 +23,10 @@ const initialState = Immutable.fromJS({
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case actions.ADD_OBJECT:
+      return state.set('editing', {});
+    case actions.EDIT_OBJECT:
+      return state.set('editing', action.instance);
     case actions.FETCH_PROJECT:
       return state.set('fetching', true);
     case actions.LOADED_PROJECT:
@@ -48,6 +53,7 @@ export default function (state = initialState, action) {
         active: null,
         showDialog: false,
         fetching: false,
+        editing: {},
         servers: [],
         notifications: [],
         emails: [],

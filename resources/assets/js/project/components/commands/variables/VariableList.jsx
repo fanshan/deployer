@@ -5,7 +5,7 @@ import Icon from '../../../../app/components/Icon';
 import Box from '../../../../app/components/Box';
 
 const Variables = (props) => {
-  const { variables } = props;
+  const { variables, actions } = props;
 
   const strings = {
     create: Lang.get('variables.create'),
@@ -42,7 +42,7 @@ const Variables = (props) => {
         <td>{variable.value}</td>
         <td>
           <ButtonGroup className="pull-right">
-            <Button className="btn-edit" title={strings.edit}><Icon fa="edit" /></Button>
+            <Button className="btn-edit" title={strings.edit} onClick={() => actions.editVariable(variable)}><Icon fa="edit" /></Button>
           </ButtonGroup>
         </td>
       </tr>
@@ -66,7 +66,7 @@ const Variables = (props) => {
 };
 
 Variables.propTypes = {
-  variables: PropTypes.array.isRequired,
+  variables: PropTypes.array.isRequired,actions: PropTypes.object,
 };
 
 export default Variables;

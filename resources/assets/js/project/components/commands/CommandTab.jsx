@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 
 import CommandListComponent from './commands/CommandList';
 import WebhookDialog from '../../containers/dialogs/WebhookDialog';
+import VariableDialog from '../../containers/dialogs/VariableDialog';
 import VariableList from './variables/VariableList';
 import Loading from '../../../app/components/Loading';
 import Icon from '../../../app/components/Icon';
@@ -14,7 +15,10 @@ const CommandTab = (props) => {
     variables,
     fetching,
     showHelp,
+    actions,
   } = props;
+
+  console.log(actions);
 
   const strings = {
     webhook: Lang.get('commands.deploy_webhook'),
@@ -34,14 +38,16 @@ const CommandTab = (props) => {
       </div>
 
       <CommandListComponent commands={commands} project={project} />
-      <VariableList variables={variables} />
+      <VariableList variables={variables} actions={actions} />
       <WebhookDialog />
+      <VariableDialog />
     </div>
   );
 };
 
 CommandTab.propTypes = {
   project: PropTypes.object.isRequired,
+  actions: PropTypes.object,
   commands: PropTypes.array.isRequired,
   variables: PropTypes.array.isRequired,
   fetching: PropTypes.bool.isRequired,

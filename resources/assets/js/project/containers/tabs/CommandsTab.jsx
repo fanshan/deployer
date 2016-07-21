@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as constants from '../../constants';
+import * as actions from '../../actions';
 import CommandTabComponent from '../../components/commands/CommandTab';
 import { showDialog } from '../../actions';
 
@@ -15,6 +16,7 @@ const CommandTab = (props) => {
   return (
     <CommandTabComponent
       showHelp={() => actions.showDialog(constants.WEBHOOK_DIALOG)}
+      actions={actions}
       {...others}
     />
   );
@@ -24,7 +26,6 @@ CommandTab.propTypes = {
   //...Dialog.propTypes,
   actions: PropTypes.object.isRequired,
 };
-
 
 const mapStateToProps = (state) => ({
   project: state.getIn([constants.NAME, 'active']).toJS(),
@@ -36,6 +37,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
     showDialog,
+    addVariable: () => (actions.addObject(constants.VARIABLE_DIALOG)),
+    editVariable: (object) => (actions.editObject(constants.VARIABLE_DIALOG, object)),
   }, dispatch),
 });
 
