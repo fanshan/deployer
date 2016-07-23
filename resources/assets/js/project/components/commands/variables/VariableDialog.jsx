@@ -26,10 +26,10 @@ const VariableDialog = (props) => {
 
   // Set the default object state, then merge with the passed in object
   const object = {
-    id: null,
+    id: undefined,
     project_id: project.id,
-    name: null,
-    value: null,
+    name: undefined,
+    value: undefined,
     ...variable,
   };
 
@@ -44,19 +44,19 @@ const VariableDialog = (props) => {
         </ModalTitle>
       </ModalHeader>
       <form>
-        <input type="hidden" name="id" value={object.id} />
-        <input type="hidden" name="project_id" value={object.project_id} />
+        <input type="hidden" name="id" value={object.id} readOnly />
+        <input type="hidden" name="project_id" value={object.project_id} readOnly />
         <ModalBody>
           <Alert bsStyle="danger">
             <Icon className="icon" fa="warning" /> {strings.warning}
           </Alert>
           <FormGroup controlId="variableName">
             <ControlLabel>{strings.name}</ControlLabel>
-            <FormControl name="name" value={object.name} placeholder="COMPOSER_PROCESS_TIMEOUT" />
+            <FormControl name="name" defaultValue={object.name} placeholder="COMPOSER_PROCESS_TIMEOUT" />
           </FormGroup>
           <FormGroup controlId="variableValue">
             <ControlLabel>{strings.value}</ControlLabel>
-            <FormControl name="value" value={object.value} placeholder="300" />
+            <FormControl name="value" defaultValue={object.value} placeholder="300" />
           </FormGroup>
         </ModalBody>
         <ModalFooter>

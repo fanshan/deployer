@@ -6,7 +6,7 @@ import Project from '../../models/Project';
 
 const SideBar = (props) => {
   const { projects } = props;
-  
+
   const strings = {
     title: Lang.get('app.dashboard'),
     admin: Lang.get('app.admin'),

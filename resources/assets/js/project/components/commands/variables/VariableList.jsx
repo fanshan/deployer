@@ -5,7 +5,11 @@ import Icon from '../../../../app/components/Icon';
 import Box from '../../../../app/components/Box';
 
 const Variables = (props) => {
-  const { variables, actions } = props;
+  const {
+    variables,
+    onAdd,
+    onEdit,
+  } = props;
 
   const strings = {
     create: Lang.get('variables.create'),
@@ -26,7 +30,7 @@ const Variables = (props) => {
 
   if (variables.length === 0) {
     return (
-      <Box title={strings.label} create={strings.create} header={header}>
+      <Box title={strings.label} onAdd={onAdd} create={strings.create} header={header}>
         <p>{strings.none}</p>
       </Box>
     );
@@ -42,7 +46,9 @@ const Variables = (props) => {
         <td>{variable.value}</td>
         <td>
           <ButtonGroup className="pull-right">
-            <Button className="btn-edit" title={strings.edit} onClick={() => actions.editVariable(variable)}><Icon fa="edit" /></Button>
+            <Button className="btn-edit" title={strings.edit} onClick={() => onEdit(variable)}>
+              <Icon fa="edit" />
+            </Button>
           </ButtonGroup>
         </td>
       </tr>
@@ -50,7 +56,7 @@ const Variables = (props) => {
   });
 
   return (
-    <Box title={strings.label} create={strings.create} header={header} table>
+    <Box title={strings.label} onAdd={onAdd} create={strings.create} header={header} table>
       <table className="table table-striped">
         <thead>
           <tr>
@@ -66,7 +72,9 @@ const Variables = (props) => {
 };
 
 Variables.propTypes = {
-  variables: PropTypes.array.isRequired,actions: PropTypes.object,
+  variables: PropTypes.array.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
 };
 
 export default Variables;

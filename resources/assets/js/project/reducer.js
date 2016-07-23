@@ -6,7 +6,11 @@ const initialState = Immutable.fromJS({
   active: null,
   showDialog: false,
   fetching: false,
-  editing: {},
+  editing: {
+    instance: {},
+    hasErrors: false,
+    errors: [],
+  },
   servers: [],
   notifications: [],
   emails: [],
@@ -24,9 +28,21 @@ const initialState = Immutable.fromJS({
 export default function (state = initialState, action) {
   switch (action.type) {
     case actions.ADD_OBJECT:
-      return state.set('editing', {});
+      return state.mergeDeep({
+        editing: {
+          instance: {},
+          hasErrors: false,
+          errors: [],
+        },
+      });
     case actions.EDIT_OBJECT:
-      return state.set('editing', action.instance);
+      return state.mergeDeep({
+        editing: {
+          instance: action.instance,
+          hasErrors: false,
+          errors: [],
+        },
+      });
     case actions.FETCH_PROJECT:
       return state.set('fetching', true);
     case actions.LOADED_PROJECT:
@@ -44,16 +60,20 @@ export default function (state = initialState, action) {
         tags: action.tags,
         branches: action.branches,
       });
-    case actions.HIDE_DIALOG:
+    case actions.HIDE_DIALOG: // FIXME: This should set the editing object to cleared?
       return state.set('showDialog', false);
     case actions.SHOW_DIALOG:
       return state.set('showDialog', action.dialog);
     case actions.CLEAR_ACTIVE_PROJECT:
       return state.merge({ // FIXME: There has to be a cleaner way to do this?
         active: null,
-        showDialog: false,
         fetching: false,
-        editing: {},
+        showDialog: false,
+        editing: { // FIXME: Move this and the showDialog to a sepearete reducer!
+          instance: {},
+          hasErrors: false,
+          errors: [],
+        },
         servers: [],
         notifications: [],
         emails: [],

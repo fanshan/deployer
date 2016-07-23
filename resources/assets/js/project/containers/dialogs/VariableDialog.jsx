@@ -24,11 +24,15 @@ VariableDialog.propTypes = {
   actions: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  project: state.getIn([constants.NAME, 'active']).toJS(),
-  variable: state.getIn([constants.NAME, 'editing']),
-  visible: (state.getIn([constants.NAME, 'showDialog']) === constants.VARIABLE_DIALOG),
-});
+const mapStateToProps = (state) => {
+  const editing = state.getIn([constants.NAME, 'editing']).toJS();
+
+  return {
+    project: state.getIn([constants.NAME, 'active']).toJS(),
+    variable: editing.instance,
+    visible: (state.getIn([constants.NAME, 'showDialog']) === constants.VARIABLE_DIALOG),
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({

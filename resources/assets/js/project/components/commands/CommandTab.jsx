@@ -15,10 +15,9 @@ const CommandTab = (props) => {
     variables,
     fetching,
     showHelp,
-    actions,
+    addVariable,
+    editVariable,
   } = props;
-
-  console.log(actions);
 
   const strings = {
     webhook: Lang.get('commands.deploy_webhook'),
@@ -34,11 +33,15 @@ const CommandTab = (props) => {
       <div className="callout">
         <h4>{strings.webhook} <Icon fa="question-circle" id="show_help" onClick={showHelp} /></h4>
         <code id="webhook">{project.webhook_url}</code>
-        <Button bsSize="xsmall" bsStyle="link" id="new_webhook" title={strings.generate}><Icon fa="refresh" /></Button>
+        <Button bsSize="xsmall" bsStyle="link" id="new_webhook" title={strings.generate}>
+          <Icon fa="refresh" />
+        </Button>
       </div>
 
       <CommandListComponent commands={commands} project={project} />
-      <VariableList variables={variables} actions={actions} />
+
+      <VariableList variables={variables} onAdd={addVariable} onEdit={editVariable} />
+
       <WebhookDialog />
       <VariableDialog />
     </div>
@@ -47,11 +50,12 @@ const CommandTab = (props) => {
 
 CommandTab.propTypes = {
   project: PropTypes.object.isRequired,
-  actions: PropTypes.object,
   commands: PropTypes.array.isRequired,
   variables: PropTypes.array.isRequired,
   fetching: PropTypes.bool.isRequired,
   showHelp: PropTypes.func.isRequired,
+  addVariable: PropTypes.func.isRequired,
+  editVariable: PropTypes.func.isRequired,
 };
 
 export default CommandTab;

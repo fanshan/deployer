@@ -12,6 +12,7 @@ const Box = (props) => {
     header,
     children,
     table,
+    onAdd,
   } = props;
 
   const className = classNames('box-body', {
@@ -24,7 +25,7 @@ const Box = (props) => {
         {
           create ?
             <div className="pull-right">
-              <Button title={create}><Icon fa="plus" /> {create}</Button>
+              <Button title={create} onClick={onAdd}><Icon fa="plus" /> {create}</Button>
             </div>
           :
             null
@@ -54,11 +55,13 @@ Box.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  onAdd: PropTypes.func,
 };
 
 Box.defaultProps = {
   table: false,
   header: null,
+  onAdd: () => {},
 };
 
 export default Box;
