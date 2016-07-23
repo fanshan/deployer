@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as constants from '../../constants';
+import * as dialog from '../../../dialogs/constants';
 import Dialog from '../../components/KeyDialog';
-import { hideDialog } from '../../actions';
+import { hideDialog } from '../../../dialogs/actions';
 
 const KeyDialog = (props) => {
   const {
@@ -25,12 +25,12 @@ KeyDialog.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  visible: (state.getIn([constants.NAME, 'showDialog']) === constants.SSH_KEY_DIALOG),
+  visible: (state.getIn([dialog.NAME, 'visible']) === dialog.SSH_KEY_DIALOG),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
-    hideDialog: () => (hideDialog(constants.SSH_KEY_DIALOG)),
+    hideDialog: () => (hideDialog(dialog.SSH_KEY_DIALOG)),
   }, dispatch),
 });
 

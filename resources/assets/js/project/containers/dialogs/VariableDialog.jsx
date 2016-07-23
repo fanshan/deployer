@@ -3,8 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as constants from '../../constants';
+import * as dialog from '../../../dialogs/constants';
 import Dialog from '../../components/commands/variables/VariableDialog';
-import { hideDialog } from '../../actions';
+import { hideDialog } from '../../../dialogs/actions';
 
 const VariableDialog = (props) => {
   const {
@@ -24,19 +25,15 @@ VariableDialog.propTypes = {
   actions: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  const editing = state.getIn([constants.NAME, 'editing']).toJS();
-
-  return {
-    project: state.getIn([constants.NAME, 'active']).toJS(),
-    variable: editing.instance,
-    visible: (state.getIn([constants.NAME, 'showDialog']) === constants.VARIABLE_DIALOG),
-  };
-};
+const mapStateToProps = (state) => ({
+  project: state.getIn([constants.NAME, 'active']).toJS(),
+  variable: state.getIn([dialog.NAME, 'instance']).toJS(),
+  visible: (state.getIn([dialog.NAME, 'visible']) === dialog.VARIABLE_DIALOG),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
-    hideDialog: () => (hideDialog(constants.VARIABLE_DIALOG)),
+    hideDialog: () => (hideDialog(dialog.VARIABLE_DIALOG)),
   }, dispatch),
 });
 

@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as constants from '../../constants';
+import * as dialog from '../../../dialogs/constants';
 import CommandTabComponent from '../../components/commands/CommandTab';
-import { showDialog, addObject, editObject } from '../../actions';
+import { showDialog, addObject, editObject } from '../../../dialogs/actions';
 
 const CommandTab = (props) => {
   const {
@@ -14,7 +15,7 @@ const CommandTab = (props) => {
 
   return (
     <CommandTabComponent
-      showHelp={() => actions.showDialog(constants.WEBHOOK_DIALOG)}
+      showHelp={() => actions.showDialog(dialog.WEBHOOK_DIALOG)} // TODO: Should this constant be moved?
       addVariable={actions.addVariable}
       editVariable={actions.editVariable}
       {...others}
@@ -37,8 +38,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
     showDialog,
-    addVariable: () => (addObject(constants.VARIABLE_DIALOG)),
-    editVariable: (object) => (editObject(constants.VARIABLE_DIALOG, object)),
+    addVariable: () => (addObject(dialog.VARIABLE_DIALOG)),
+    editVariable: (object) => (editObject(dialog.VARIABLE_DIALOG, object)),
   }, dispatch),
 });
 

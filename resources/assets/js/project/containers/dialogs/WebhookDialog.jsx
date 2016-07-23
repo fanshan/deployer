@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as constants from '../../constants';
+import * as dialog from '../../../dialogs/constants';
 import Dialog from '../../components/commands/commands/WebhookDialog';
 import { hideDialog } from '../../actions';
 
@@ -27,7 +28,7 @@ WebhookDialog.propTypes = {
 const mapStateToProps = (state) => ({
   project: state.getIn([constants.NAME, 'active']).toJS(),
   commands: state.getIn([constants.NAME, 'commands']).toJS(),
-  visible: (state.getIn([constants.NAME, 'showDialog']) === constants.WEBHOOK_DIALOG),
+  visible: (state.getIn([dialog.NAME, 'visible']) === constants.WEBHOOK_DIALOG),
 });
 
 const mapDispatchToProps = (dispatch) => ({
