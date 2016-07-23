@@ -15,7 +15,7 @@ export default PropTypes.shape({
     PropTypes.number,
     PropTypes.bool,
   ]).isRequired,
-  last_run: PropTypes.string.isRequired,
+  last_run: PropTypes.string,
   name: PropTypes.string.isRequired,
   public_key: PropTypes.string.isRequired,
   recent_deployments: PropTypes.number.isRequired,

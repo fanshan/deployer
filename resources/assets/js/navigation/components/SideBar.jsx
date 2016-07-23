@@ -6,7 +6,7 @@ import Project from '../../models/Project';
 
 const SideBar = (props) => {
   const { projects } = props;
-
+  
   const strings = {
     title: Lang.get('app.dashboard'),
     admin: Lang.get('app.admin'),
@@ -76,7 +76,10 @@ const SideBar = (props) => {
 };
 
 SideBar.propTypes = {
-  projects: PropTypes.arrayOf(Project).isRequired,
+  projects: PropTypes.arrayOf(PropTypes.shape({
+    group: PropTypes.object.isRequired, // FIXME: Should be a group shape
+    projects: PropTypes.arrayOf(Project).isRequired
+  })).isRequired,
 };
 
 export default SideBar;
