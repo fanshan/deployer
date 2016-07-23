@@ -3,11 +3,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { setPageTitle } from '../../app/actions';
-import { clearActiveProject, setProject, fetchProject, showDialog } from '../actions';
+import { clearActiveProject, setProject, fetchProject } from '../actions';
+import { showDialog } from '../../dialogs/actions';
 import { setButtons } from '../../navigation/actions';
 import * as constants from '../../navigation/constants';
 import ProjectDetailsComponent from '../components/Details';
-import { SSH_KEY_DIALOG } from '../constants';
+import { SSH_KEY_DIALOG } from '../../dialogs/constants';
 
 class ProjectDetails extends Component {
   constructor(props) {

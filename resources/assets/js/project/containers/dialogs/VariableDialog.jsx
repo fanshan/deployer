@@ -29,6 +29,8 @@ const mapStateToProps = (state) => ({
   project: state.getIn([constants.NAME, 'active']).toJS(),
   variable: state.getIn([dialog.NAME, 'instance']).toJS(),
   visible: (state.getIn([dialog.NAME, 'visible']) === dialog.VARIABLE_DIALOG),
+  hasError: state.getIn([dialog.NAME, 'hasError']),
+  errors: state.getIn([dialog.NAME, 'errors']).toJS(),
 });
 
 const mapDispatchToProps = (dispatch) => ({

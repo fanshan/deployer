@@ -6,12 +6,15 @@ import {
 
 import Icon from '../../../../app/components/Icon';
 
+// FIXME: Make editor dialog
 const VariableDialog = (props) => {
   const {
     visible,
     project,
     variable,
     onHide,
+    hasError,
+    errors,
   } = props;
 
   const strings = {
@@ -26,14 +29,13 @@ const VariableDialog = (props) => {
 
   // Set the default object state, then merge with the passed in object
   const object = {
-    id: undefined,
     project_id: project.id,
     name: undefined,
     value: undefined,
     ...variable,
   };
 
-  const isNew = (object.id === null);
+  const isNew = (!object.id);
   const title = isNew ? strings.create : strings.edit;
 
   return (
@@ -44,12 +46,17 @@ const VariableDialog = (props) => {
         </ModalTitle>
       </ModalHeader>
       <form>
-        <input type="hidden" name="id" value={object.id} readOnly />
+        {isNew ? null : <input type="hidden" name="id" value={object.id} readOnly />}
         <input type="hidden" name="project_id" value={object.project_id} readOnly />
         <ModalBody>
-          <Alert bsStyle="danger">
-            <Icon className="icon" fa="warning" /> {strings.warning}
-          </Alert>
+          {
+            hasError ?
+              <Alert bsStyle="danger">
+                <Icon className="icon" fa="warning" /> {strings.warning}
+              </Alert>
+            :
+              null
+          }
           <FormGroup controlId="variableName">
             <ControlLabel>{strings.name}</ControlLabel>
             <FormControl name="name" defaultValue={object.name} placeholder="COMPOSER_PROCESS_TIMEOUT" />
@@ -80,11 +87,15 @@ VariableDialog.propTypes = {
   project: PropTypes.object.isRequired,
   variable: PropTypes.object.isRequired,
   onHide: PropTypes.func.isRequired,
+  errors: PropTypes.array,
+  hasError: PropTypes.bool,
   visible: PropTypes.bool,
 };
 
 VariableDialog.defaultProps = {
+  errors: [],
   visible: true,
+  hasError: false,
 };
 
 export default VariableDialog;

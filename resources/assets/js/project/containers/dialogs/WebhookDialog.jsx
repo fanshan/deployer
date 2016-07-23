@@ -28,12 +28,12 @@ WebhookDialog.propTypes = {
 const mapStateToProps = (state) => ({
   project: state.getIn([constants.NAME, 'active']).toJS(),
   commands: state.getIn([constants.NAME, 'commands']).toJS(),
-  visible: (state.getIn([dialog.NAME, 'visible']) === constants.WEBHOOK_DIALOG),
+  visible: (state.getIn([dialog.NAME, 'visible']) === dialog.WEBHOOK_DIALOG),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
-    hideDialog: () => (hideDialog(constants.WEBHOOK_DIALOG)),
+    hideDialog: () => (hideDialog(dialog.WEBHOOK_DIALOG)),
   }, dispatch),
 });
 
