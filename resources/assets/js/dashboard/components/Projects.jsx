@@ -86,7 +86,10 @@ const Projects = (props) => {
 };
 
 Projects.propTypes = {
-  projects: PropTypes.arrayOf(Project).isRequired,
+  projects: PropTypes.arrayOf(PropTypes.shape({
+    group: PropTypes.object.isRequired, // FIXME: Should be a group shape
+    projects: PropTypes.arrayOf(Project).isRequired,
+  })).isRequired,
 };
 
 export default Projects;

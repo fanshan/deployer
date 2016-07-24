@@ -11,9 +11,7 @@ const WebhookDialog = (props) => {
     onHide,
   } = props;
 
-  const optional = commands.filter((command) => {
-    return command.optional;
-  });
+  const optional = commands.filter(command => command.optional);
 
   const strings = {
     title: Lang.get('commands.webhook_help'),
@@ -104,5 +102,3 @@ WebhookDialog.defaultProps = {
 };
 
 export default WebhookDialog;
-
-

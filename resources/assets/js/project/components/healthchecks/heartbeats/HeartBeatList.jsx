@@ -52,7 +52,7 @@ const HeartBeatList = (props) => {
     if (heartbeat.status === HEARTBEAT_STATUS_OK) {
       hasRun = true;
     } else if (heartbeat.status === HEARTBEAT_STATUS_MISSING) {
-      hasRun = heartbeat.last_activity ? true : false;
+      hasRun = (heartbeat.last_activity !== null);
     }
 
     heartbeatList.push(

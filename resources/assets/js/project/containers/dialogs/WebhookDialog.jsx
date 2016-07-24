@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as constants from '../../constants';
 import * as dialog from '../../../dialogs/constants';
 import Dialog from '../../components/commands/commands/WebhookDialog';
-import { hideDialog } from '../../actions';
+import { hideDialog } from '../../../dialogs/actions';
 
 const WebhookDialog = (props) => {
   const {

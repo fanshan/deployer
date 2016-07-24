@@ -8,6 +8,7 @@ import Icon from '../../app/components/Icon';
 import FormattedDate from '../../app/components/Date';
 import FormattedTime from '../../app/components/Time';
 
+// FIXME: Seems to be being called twice?
 const Timeline = (props) => {
   const strings = {
     none: Lang.get('dashboard.no_timeline'),
@@ -29,7 +30,7 @@ const Timeline = (props) => {
 
   let timelineItems = [];
 
-  for (const date in timeline) {
+  Object.keys(timeline).forEach((date) => {
     timelineItems.push(
       <li className="time-label" key={date}>
         <span className="bg-gray"><FormattedDate date={date} /></span>
@@ -44,7 +45,7 @@ const Timeline = (props) => {
       if (item.reason) {
         reason = (
           <div className="timeline-body">
-             item.reason
+            item.reason
           </div>
         );
       }
@@ -68,7 +69,7 @@ const Timeline = (props) => {
         </li>
       );
     });
-  }
+  });
 
   return (
     <Box title={strings.timeline} id="timeline">

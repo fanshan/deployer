@@ -7,7 +7,7 @@ const VariableDialog = (props) => {
   const {
     project,
     variable,
-    //errors,
+    // errors,
     ...others,
   } = props;
 

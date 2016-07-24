@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Button, ButtonGroup } from 'react-bootstrap';
+import { ButtonGroup } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 import Icon from '../../../app/components/Icon';
@@ -47,7 +47,7 @@ const DeploymentList = (props) => {
         <td><Reason isWebhook={deployment.is_webhook} reason={deployment.reason} /></td>
         <td><OptionalLink to={deployment.build_url}>{deployment.deployer_name}</OptionalLink></td>
         <td>{deployment.committer}</td>
-        <td><OptionalLink to={deployment.commit_url}>{deployment.short_commit}</OptionalLink> </td>
+        <td><OptionalLink to={deployment.commit_url}>{deployment.short_commit}</OptionalLink></td>
         <td>
           <OptionalLink to={deployment.branch_url}>
             <span className="label label-default">{deployment.branch}</span>

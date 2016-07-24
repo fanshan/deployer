@@ -24,7 +24,7 @@ const CommandTab = (props) => {
 };
 
 CommandTab.propTypes = {
-  //...Dialog.propTypes,
+  // ...Dialog.propTypes,
   actions: PropTypes.object.isRequired,
 };
 

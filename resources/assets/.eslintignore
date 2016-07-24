@@ -1,1 +1,3 @@
-localization.js
+js/localization.js
+js/actions.js
+!js/*/actions.js
