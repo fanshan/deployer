@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { reduxForm } from 'redux-form';
 
-import * as constants from '../../constants';
 import * as dialog from '../../../dialogs/constants';
 import Dialog from '../../components/servers/ServerDialog';
 import { hideDialog } from '../../../dialogs/actions';
@@ -26,11 +25,9 @@ ServerDialog.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  project: state.getIn([constants.NAME, 'active']).toJS(),
-  server: state.getIn([dialog.NAME, 'instance']).toJS(),
+  initialValues: state.getIn([dialog.NAME, 'instance']).toJS(),
   visible: (state.getIn([dialog.NAME, 'visible']) === dialog.SERVER_DIALOG),
   hasError: state.getIn([dialog.NAME, 'hasError']),
-  errors: state.getIn([dialog.NAME, 'errors']).toJS(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -39,7 +36,10 @@ const mapDispatchToProps = (dispatch) => ({
   }, dispatch),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ServerDialog);
+export default reduxForm({
+  form: dialog.SERVER_DIALOG,
+  fields: ['id', 'project_id', 'name'],
+  onSubmit: () => { alert('here'); },
+  getFormState: (state, reduxMountPoint) => state.get(reduxMountPoint).toJS(),
+}, mapStateToProps, mapDispatchToProps)(ServerDialog);
+

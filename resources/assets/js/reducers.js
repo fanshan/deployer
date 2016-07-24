@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux-immutable';
-import { reducer as formReducer } from 'redux-form';
 
 import app from './app';
 import dashboard from './dashboard';
+import formReducer from './form';
 import dialogs from './dialogs';
 import project from './project';
 import navigation from './navigation';

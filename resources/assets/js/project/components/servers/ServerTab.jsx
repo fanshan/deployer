@@ -19,10 +19,12 @@ const ServerTab = (props) => {
   return (
     <div>
       <ServerListComponent servers={servers} onAdd={onAdd} onEdit={onEdit} />
-      <ServerDialog />
+
     </div>
   );
 };
+
+// <ServerDialog />
 
 ServerTab.propTypes = {
   servers: PropTypes.array.isRequired,

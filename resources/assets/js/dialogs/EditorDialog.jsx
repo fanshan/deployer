@@ -9,13 +9,14 @@ import Icon from '../app/components/Icon';
 const EditorDialog = (props) => {
   const {
     translations,
-    item,
     visible,
     onHide,
     id,
     fa,
-    hasError,
     children,
+    hasError,
+    handleSubmit,
+    fields,
   } = props;
 
   const strings = {
@@ -24,7 +25,7 @@ const EditorDialog = (props) => {
     ...translations,
   };
 
-  const isNew = (!item.id);
+  const isNew = fields.id.value === '';
   const title = isNew ? strings.create : strings.edit;
 
   return (
@@ -34,9 +35,9 @@ const EditorDialog = (props) => {
           <Icon fa={fa} /> {title}
         </ModalTitle>
       </ModalHeader>
-      <form>
-        {isNew ? null : <input type="hidden" name="id" value={item.id} readOnly />}
-        <input type="hidden" name="project_id" value={item.project_id} readOnly />
+      <form method="post" onSubmit={handleSubmit}>
+        {isNew ? null : <input type="hidden" name="id" {...fields.id} />}
+        <input type="hidden" name="project_id" {...fields.project_id} />
         <ModalBody>
           {
             hasError ?
@@ -58,7 +59,9 @@ const EditorDialog = (props) => {
                 className="pull-left btn-delete"
               ><Icon fa="trash" /> {strings.delete}</Button>
           }
-          <Button bsStyle="primary" className="pull-right btn-save"><Icon fa="save" /> {strings.save}</Button>
+          <Button bsStyle="primary" type="submit" className="pull-right btn-save">
+            <Icon fa="save" /> {strings.save}
+          </Button>
         </ModalFooter>
       </form>
     </Modal>
@@ -71,7 +74,6 @@ EditorDialog.propTypes = {
     create: PropTypes.string.isRequired,
     warning: PropTypes.string.isRequired,
   }).isRequired,
-  item: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
   fa: PropTypes.string.isRequired,
   onHide: PropTypes.func.isRequired,
@@ -81,6 +83,9 @@ EditorDialog.propTypes = {
   ]).isRequired,
   visible: PropTypes.bool,
   hasError: PropTypes.bool,
+  handleSubmit: PropTypes.func.isRequired,
+  fields: PropTypes.object.isRequired,
+  submitting: PropTypes.bool.isRequired,
 };
 
 EditorDialog.defaultProps = {
