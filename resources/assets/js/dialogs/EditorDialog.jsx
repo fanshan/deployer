@@ -82,7 +82,7 @@ EditorDialog.propTypes = {
     PropTypes.node,
   ]).isRequired,
   visible: PropTypes.bool,
-  hasError: PropTypes.bool,
+  hasError: PropTypes.bool, // FIXME: Maybe remove this?
   handleSubmit: PropTypes.func.isRequired,
   fields: PropTypes.object.isRequired,
   submitting: PropTypes.bool.isRequired,
