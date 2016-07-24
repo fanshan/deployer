@@ -17,9 +17,9 @@ export function hideDialog() {
 
 export function addObject(dialog) {
   return (dispatch) => {
-    dispatch({
-      type: actions.ADD_OBJECT,
-    });
+    // dispatch({
+    //   type: actions.ADD_OBJECT,
+    // });
 
     dispatch(showDialog(dialog));
   };
@@ -27,7 +27,6 @@ export function addObject(dialog) {
 
 export function editObject(dialog, instance) {
   return (dispatch) => {
-
     dispatch({
       type: actions.EDIT_OBJECT,
       instance,

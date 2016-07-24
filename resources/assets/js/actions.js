@@ -1,16 +1,7 @@
 // This is only used by DevTools to populate a list of actions
 
-//export * // TODO: Install the babel stage-2 plugin
-import * as App from './app/actions';
-import * as Dialogs from './dialogs/actions';
-import * as Navigation from './navigation/actions';
-import * as Project from './project/actions';
-import * as Socket from './socket/actions';
-
-export {
-  App,
-  Dialogs,
-  Navigation,
-  Project,
-  Socket,
-};
+export * as App from './app/actions';
+export * as Dialogs from './dialogs/actions';
+export * as Navigation from './navigation/actions';
+export * as Project from './project/actions';
+export * as Socket from './socket/actions';

@@ -51,10 +51,6 @@ const webpackConfig = {
         loader: 'babel',
         exclude: /node_modules/,
         include: __dirname,
-        query: {
-          presets: ['es2015', 'react', 'stage-2'],
-          comments: false,
-        },
       },
     ],
   },
