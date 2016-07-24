@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 
 import * as dialog from '../../../dialogs/constants';
 import Dialog from '../../components/servers/ServerDialog';
-import { hideDialog } from '../../../dialogs/actions';
+import { hideDialog, saveObject } from '../../../dialogs/actions';
 
 const ServerDialog = (props) => {
   const {
@@ -27,7 +27,6 @@ ServerDialog.propTypes = {
 const mapStateToProps = (state) => ({
   initialValues: state.getIn([dialog.NAME, 'instance']).toJS(),
   visible: (state.getIn([dialog.NAME, 'visible']) === dialog.SERVER_DIALOG),
-  hasError: state.getIn([dialog.NAME, 'hasError']),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -39,7 +38,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default reduxForm({
   form: dialog.SERVER_DIALOG,
   fields: ['id', 'project_id', 'name'],
-  onSubmit: () => { alert('here'); },
-  getFormState: (state, reduxMountPoint) => state.get(reduxMountPoint).toJS(),
+  onSubmit: saveObject,
+  getFormState: (state) => state.get('form').toJS(),
 }, mapStateToProps, mapDispatchToProps)(ServerDialog);
 

@@ -13,8 +13,6 @@ export function hideDialog() {
   };
 }
 
-// FIXME: Or should we use redux-multi for this instead?
-
 export function addObject(dialog) {
   return (dispatch) => {
     // dispatch({
@@ -34,4 +32,13 @@ export function editObject(dialog, instance) {
 
     dispatch(showDialog(dialog));
   };
+}
+
+export function saveObject(data, dispatch) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      dispatch(hideDialog());
+      resolve();
+    }, 10000);
+  });
 }

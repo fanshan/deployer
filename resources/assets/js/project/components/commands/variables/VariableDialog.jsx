@@ -9,6 +9,8 @@ const VariableDialog = (props) => {
     ...others,
   } = props;
 
+  const submitting = props.submitting;
+
   const strings = {
     name: Lang.get('variables.name'),
     value: Lang.get('variables.value'),
@@ -21,11 +23,11 @@ const VariableDialog = (props) => {
     <EditorDialog id="variable" fa="dollar" fields={fields} translations={strings} {...others}>
       <FormGroup controlId="variableName">
         <ControlLabel>{strings.name}</ControlLabel>
-        <FormControl name="name" placeholder="COMPOSER_PROCESS_TIMEOUT" {...fields.name} />
+        <FormControl name="name" placeholder="COMPOSER_PROCESS_TIMEOUT" disabled={submitting} {...fields.name} />
       </FormGroup>
       <FormGroup controlId="variableValue">
         <ControlLabel>{strings.value}</ControlLabel>
-        <FormControl name="value" placeholder="300" {...fields.value} />
+        <FormControl name="value" placeholder="300" disabled={submitting} {...fields.value} />
       </FormGroup>
     </EditorDialog>
   );
@@ -33,6 +35,7 @@ const VariableDialog = (props) => {
 
 VariableDialog.propTypes = {
   fields: PropTypes.object.isRequired,
+  submitting: PropTypes.bool.isRequired,
 };
 
 export default VariableDialog;

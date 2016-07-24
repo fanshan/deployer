@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 
 import * as dialog from '../../../dialogs/constants';
 import Dialog from '../../components/commands/variables/VariableDialog';
-import { hideDialog } from '../../../dialogs/actions';
+import { hideDialog, saveObject } from '../../../dialogs/actions';
 
 const VariableDialog = (props) => {
   const {
@@ -27,7 +27,6 @@ VariableDialog.propTypes = {
 const mapStateToProps = (state) => ({
   initialValues: state.getIn([dialog.NAME, 'instance']).toJS(),
   visible: (state.getIn([dialog.NAME, 'visible']) === dialog.VARIABLE_DIALOG),
-  hasError: state.getIn([dialog.NAME, 'hasError']),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -39,6 +38,6 @@ const mapDispatchToProps = (dispatch) => ({
 export default reduxForm({
   form: dialog.VARIABLE_DIALOG,
   fields: ['id', 'project_id', 'name', 'value'],
-  onSubmit: () => { alert('here'); },
-  getFormState: (state, reduxMountPoint) => state.get(reduxMountPoint).toJS(),
+  onSubmit: saveObject,
+  getFormState: (state) => state.get('form').toJS(),
 }, mapStateToProps, mapDispatchToProps)(VariableDialog);

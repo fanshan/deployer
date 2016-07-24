@@ -14,8 +14,9 @@ const EditorDialog = (props) => {
     id,
     fa,
     children,
-    hasError,
+    error,
     handleSubmit,
+    submitting,
     fields,
   } = props;
 
@@ -40,7 +41,7 @@ const EditorDialog = (props) => {
         <input type="hidden" name="project_id" {...fields.project_id} />
         <ModalBody>
           {
-            hasError ?
+            error ?
               <Alert bsStyle="danger">
                 <Icon className="icon" fa="warning" /> {strings.warning}
               </Alert>
@@ -57,10 +58,11 @@ const EditorDialog = (props) => {
               <Button
                 bsStyle="danger"
                 className="pull-left btn-delete"
+                disabled={submitting}
               ><Icon fa="trash" /> {strings.delete}</Button>
           }
-          <Button bsStyle="primary" type="submit" className="pull-right btn-save">
-            <Icon fa="save" /> {strings.save}
+          <Button bsStyle="primary" type="submit" className="pull-right btn-save" disabled={submitting}>
+            <Icon fa={submitting ? 'refresh' : 'save'} spin={submitting} /> {strings.save}
           </Button>
         </ModalFooter>
       </form>
@@ -82,7 +84,7 @@ EditorDialog.propTypes = {
     PropTypes.node,
   ]).isRequired,
   visible: PropTypes.bool,
-  hasError: PropTypes.bool, // FIXME: Maybe remove this?
+  error: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   fields: PropTypes.object.isRequired,
   submitting: PropTypes.bool.isRequired,
@@ -90,7 +92,6 @@ EditorDialog.propTypes = {
 
 EditorDialog.defaultProps = {
   visible: true,
-  hasError: false,
 };
 
 export default EditorDialog;
