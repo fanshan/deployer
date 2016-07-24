@@ -3,6 +3,7 @@ import { Link, IndexLink } from 'react-router';
 
 import Icon from '../../app/components/Icon';
 import Project from '../../models/Project';
+import Group from '../../models/Group';
 
 const SideBar = (props) => {
   const { projects } = props;
@@ -77,7 +78,7 @@ const SideBar = (props) => {
 
 SideBar.propTypes = {
   projects: PropTypes.arrayOf(PropTypes.shape({
-    group: PropTypes.object.isRequired, // FIXME: Should be a group shape
+    group: Group.isRequired,
     projects: PropTypes.arrayOf(Project).isRequired,
   })).isRequired,
 };

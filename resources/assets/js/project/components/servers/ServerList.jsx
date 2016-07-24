@@ -7,7 +7,11 @@ import Icon from '../../../app/components/Icon';
 import Box from '../../../app/components/Box';
 
 const Servers = (props) => {
-  const { servers } = props;
+  const {
+    servers,
+    onAdd,
+    onEdit,
+  } = props;
 
   const strings = {
     create: Lang.get('servers.create'),
@@ -27,7 +31,7 @@ const Servers = (props) => {
 
   if (servers.length === 0) {
     return (
-      <Box title={strings.label} create={strings.create}>
+      <Box title={strings.label} onAdd={onAdd} create={strings.create}>
         <p>{strings.none}</p>
       </Box>
     );
@@ -52,7 +56,9 @@ const Servers = (props) => {
             <Button className="btn-test" title={strings.test} disabled={testing}>
               <Icon fa="refresh" spin={testing} />
             </Button>
-            <Button type="button" className="btn-edit" title={strings.edit}><Icon fa="edit" /></Button>
+            <Button type="button" className="btn-edit" title={strings.edit} onClick={() => onEdit(server)}>
+              <Icon fa="edit" />
+            </Button>
           </ButtonGroup>
         </td>
       </tr>
@@ -60,7 +66,7 @@ const Servers = (props) => {
   });
 
   return (
-    <Box title={strings.label} create={strings.create} table>
+    <Box title={strings.label} onAdd={onAdd} create={strings.create} table>
       <table className="table table-striped">
         <thead>
           <tr>
@@ -81,6 +87,8 @@ const Servers = (props) => {
 
 Servers.propTypes = {
   servers: PropTypes.array.isRequired,
+  onAdd: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
 };
 
 export default Servers;

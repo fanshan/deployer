@@ -6,6 +6,7 @@ import Label from './ProjectLabel';
 import Icon from '../../app/components/Icon';
 import FormattedDateTime from '../../app/components/DateTime';
 import Project from '../../models/Project';
+import Group from '../../models/Group';
 
 const Projects = (props) => {
   const {
@@ -87,7 +88,7 @@ const Projects = (props) => {
 
 Projects.propTypes = {
   projects: PropTypes.arrayOf(PropTypes.shape({
-    group: PropTypes.object.isRequired, // FIXME: Should be a group shape
+    group: Group.isRequired,
     projects: PropTypes.arrayOf(Project).isRequired,
   })).isRequired,
 };

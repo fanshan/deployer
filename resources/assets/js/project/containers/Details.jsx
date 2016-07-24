@@ -9,6 +9,7 @@ import { setButtons } from '../../navigation/actions';
 import * as constants from '../../navigation/constants';
 import ProjectDetailsComponent from '../components/Details';
 import { SSH_KEY_DIALOG } from '../../dialogs/constants';
+import Project from '../../models/Project';
 
 class ProjectDetails extends Component {
   constructor(props) {
@@ -51,6 +52,7 @@ class ProjectDetails extends Component {
         title: Lang.get('projects.deploy_project'),
         fa: 'cloud-upload',
         text: Lang.get('projects.deploy'),
+        action: () => {},
       },
     ]);
   }
@@ -63,7 +65,7 @@ class ProjectDetails extends Component {
 }
 
 ProjectDetails.propTypes = {
-  projects: PropTypes.array.isRequired,
+  projects: PropTypes.arrayOf(Project).isRequired,
   actions: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
   children: PropTypes.oneOfType([

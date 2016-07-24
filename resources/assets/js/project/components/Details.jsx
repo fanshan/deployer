@@ -4,7 +4,6 @@ import { Nav } from 'react-bootstrap';
 import Header from './Header';
 import Dialog from '../containers/dialogs/KeyDialog';
 import NavItem from '../../app/components/NavItem';
-
 import Project from '../../models/Project';
 
 const ProjectDetails = (props) => {

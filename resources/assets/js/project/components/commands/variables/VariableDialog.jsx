@@ -28,7 +28,7 @@ const VariableDialog = (props) => {
   };
 
   return (
-    <EditorDialog id="variable" fa="tasks" translations={strings} item={object} {...others}>
+    <EditorDialog id="variable" fa="dollar" translations={strings} item={object} {...others}>
       <FormGroup controlId="variableName">
         <ControlLabel>{strings.name}</ControlLabel>
         <FormControl name="name" defaultValue={object.name} placeholder="COMPOSER_PROCESS_TIMEOUT" />

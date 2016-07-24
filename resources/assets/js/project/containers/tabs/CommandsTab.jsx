@@ -15,7 +15,7 @@ const CommandTab = (props) => {
 
   return (
     <CommandTabComponent
-      showHelp={() => actions.showDialog(dialog.WEBHOOK_DIALOG)} // TODO: Should this constant be moved?
+      showHelp={() => actions.showDialog(dialog.WEBHOOK_DIALOG)}
       addVariable={actions.addVariable}
       editVariable={actions.editVariable}
       {...others}

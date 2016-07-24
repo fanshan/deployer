@@ -4,3 +4,4 @@ export const NAME = 'dialogs';
 export const SSH_KEY_DIALOG = 'key';
 export const WEBHOOK_DIALOG = 'webhook';
 export const VARIABLE_DIALOG = 'variable';
+export const SERVER_DIALOG = 'server';

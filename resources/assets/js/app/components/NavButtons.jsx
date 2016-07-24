@@ -31,7 +31,14 @@ const NavButtons = (props) => {
 };
 
 NavButtons.propTypes = {
-  buttons: PropTypes.array.isRequired, // FIXME array of shape
+  buttons: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    fa: PropTypes.string.isRequired,
+    action: PropTypes.func.isRequired,
+  })).isRequired,
 };
 
 export default NavButtons;
