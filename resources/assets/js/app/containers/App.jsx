@@ -28,6 +28,7 @@ class App extends Component {
 
     this.socket = client.connect(server, {
       query: `jwt=${jwt}`,
+      transports: ['websocket', 'polling'],
     });
 
     this.socket.on('connect_error', (error) => actions.offline(error));
