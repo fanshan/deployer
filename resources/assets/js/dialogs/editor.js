@@ -5,7 +5,10 @@ import { reduxForm } from 'redux-form';
 import * as constants from './constants';
 import { hideDialog, saveObject } from './actions';
 
-export default (config) => ( // FIXME: How do we validate that both dialog and fields is set?
+// FIXME: How do we validate that both are set?
+// Maybe do the same as redux form and wrap in yet another component with 2 isRequired props?
+// https://github.com/erikras/redux-form/blob/master/src/createReduxFormConnector.js
+export default ({ dialog, fields }) => (
   (WrappedDialogComponent) => {
     const DialogContainer = (props) => {
       const {
@@ -27,18 +30,18 @@ export default (config) => ( // FIXME: How do we validate that both dialog and f
 
     const mapStateToProps = (state) => ({
       initialValues: state.getIn([constants.NAME, 'instance']).toJS(),
-      visible: (state.getIn([constants.NAME, 'visible']) === config.dialog),
+      visible: (state.getIn([constants.NAME, 'visible']) === dialog),
     });
 
     const mapDispatchToProps = (dispatch) => ({
       actions: bindActionCreators({
-        hideDialog: () => (hideDialog(config.dialog)),
+        hideDialog: () => (hideDialog(dialog)),
       }, dispatch),
     });
 
     return reduxForm({
-      form: config.dialog,
-      fields: config.fields,
+      form: dialog,
+      fields,
       onSubmit: saveObject,
       getFormState: (state) => state.get('form').toJS(),
     }, mapStateToProps, mapDispatchToProps)(DialogContainer);
