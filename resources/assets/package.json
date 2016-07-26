@@ -54,6 +54,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "font-loader": "^0.1.2",
+    "manifest-revision-webpack-plugin": "^0.3.0",
     "mocha": "^2.5.3",
     "redux-devtools": "^3.3.1",
     "redux-devtools-chart-monitor": "^1.4.1",
@@ -69,14 +70,15 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1",
-    "webpack-manifest-plugin": "^1.0.1",
     "webpack-merge": "^0.14.1",
+    "webpack-shell-plugin": "^0.4.2",
     "webpack-validator": "^2.2.3"
   },
   "scripts": {
     "postinstall": "cp ../../vendor/andywer/js-localization/resources/js/localization.js js/localization.js",
     "start": "webpack-dev-server",
     "build": "webpack",
-    "lint": "eslint --ext .js --ext .jsx --cache js/"
+    "stats": "webpack --profile --json > stats.json",
+    "lint": "eslint --ext .js --ext .jsx --cache js/ || true"
   }
 }

@@ -19,5 +19,5 @@ vendor
 npm-debug.log
 
 # Build assets
-resources/assets/public/
+resources/assets/stats.json
 resources/assets/js/localization.js

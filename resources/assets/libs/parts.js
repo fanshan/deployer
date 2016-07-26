@@ -3,6 +3,20 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+exports.debug = function (isBuild, production) {
+  if (isBuild) {
+    return {
+      debug: !production,
+      devtool: production ? false : 'eval-source-map',
+    };
+  }
+
+  return {
+    debug: true,
+    devtool: 'eval-source-map',
+  };
+};
+
 exports.devServer = function (options) {
   return {
     watchOptions: {
@@ -53,30 +67,13 @@ exports.minify = function () {
   };
 };
 
-exports.setFreeVariable = function(key, value) {
+exports.setFreeVariable = function (key, value) {
   const env = {};
   env[key] = JSON.stringify(value);
 
   return {
     plugins: [
       new webpack.DefinePlugin(env),
-    ],
-  };
-};
-
-exports.extractBundle = function(options) {
-  const entry = {};
-  entry[options.name] = options.entries;
-
-  return {
-    // Define an entry point needed for splitting.
-    entry,
-    plugins: [
-      // Extract bundle and manifest files. Manifest is
-      // needed for reliable caching.
-      new webpack.optimize.CommonsChunkPlugin({
-        names: [options.name, 'manifest'],
-      }),
     ],
   };
 };
@@ -95,10 +92,9 @@ exports.extractCSS = function (paths) {
   return {
     module: {
       loaders: [
-        // Extract CSS during build
         {
           test: /\.css$/,
-          loader: ExtractTextPlugin.extract('style', 'css'),
+          loader: ExtractTextPlugin.extract('style', 'css?sourceMap'),
           include: paths,
         },
       ],

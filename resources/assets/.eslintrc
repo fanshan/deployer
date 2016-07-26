@@ -9,7 +9,6 @@
     }
   },
   "globals": {
-    "Lang": true,
-    "appConfig": true
+    "Lang": true
   }
 }

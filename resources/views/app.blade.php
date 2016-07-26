@@ -1,3 +1,4 @@
+@include('js-localization::head')
 <!DOCTYPE html>
 <html>
     <head>
@@ -45,7 +46,9 @@
         <div id="content"></div>
 
         <script src="{{ elixir('js/vendor.js') }}"></script>
-        <script src="/js-localization/messages"></script>
+        {{-- <script src="/js-localization/messages"></script> --}}
+
+        @yield('js-localization.head')
         <script src="{{ elixir('js/app.js') }}"></script>
     </body>
 </html>

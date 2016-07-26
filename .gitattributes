@@ -62,8 +62,8 @@ VERSION text
 ## Remove development files from git archive
 #
 
-resources/assets/package.json export-ignore
-resources/assets/gulpfile.js export-ignore
+#resources/assets/package.json export-ignore
+#resources/assets/webpack.config.js export-ignore
 tests/ export-ignore
 examples/dev/ export-ignore
 .github/ export-ignore
