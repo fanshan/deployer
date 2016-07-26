@@ -91,7 +91,7 @@ exports.clean = function (path) {
   };
 };
 
-exports.extractCSS = function(paths) {
+exports.extractCSS = function (paths) {
   return {
     module: {
       loaders: [

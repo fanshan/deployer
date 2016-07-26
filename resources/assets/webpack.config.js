@@ -3,6 +3,7 @@ const merge = require('webpack-merge');
 const validate = require('webpack-validator');
 const pkg = require('./package.json');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const webpack = require('webpack');
 const tools = require('./libs/parts');
 
 const PATHS = {
@@ -14,26 +15,29 @@ const PATHS = {
 
 // FIXME: Clean this up, horrible!
 const dependencies = Object.keys(pkg.dependencies).filter((value) => {
-  return value !== 'respond.js' && value !== 'html5shiv' && value !== 'font-awesome' && value !== 'ionicons';
+  return value !== 'respond.js' && value !== 'html5shiv' && value !== 'font-awesome';
 });
+
+//dependencies.push('js/localization.js');
+
 
 const common = {
   entry: {
-    app_js: PATHS.app,
-    app_css: PATHS.styles + '/main.css',
-    vendor_css: PATHS.styles + '/vendor.css',
-    vendor_js: dependencies,
-    ie_js: [
+    'js/app': PATHS.app,
+    'js/vendor': dependencies,
+    'js/ie': [
       'html5shiv',
       'respond.js/dest/respond.src.js',
     ],
+    'css/app': PATHS.styles + '/main.css',
+    'css/vendor': PATHS.styles + '/vendor.css',
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['', '.js', '.jsx', '.css'],
     fallback: [PATHS.node],
   },
   externals: {
-    jquery: 'jQuery',
+    'lang': 'Lang',
   },
   output: {
     path: PATHS.build,
@@ -51,14 +55,55 @@ const common = {
     // ],
     loaders: [
       {
+        test: /\.(jpg|png)$/,
+        //loader: 'url?limit=25000',
+        loader: 'file',
+        query: {
+          name: 'images/[name].[hash].[ext]',
+        },
+        include: PATHS.node,
+      },
+      {
+        test: /\.svg(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file',
+        query: {
+          name: 'images/[name].[hash].svg',
+        },
+        include: PATHS.node,
+      },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        //loader: 'url',
+        loader: 'file',
+        query: {
+          name: 'fonts/[name].[hash].[ext]',
+          limit: 5000,
+          mimetype: 'application/font-woff'
+        },
+        include: PATHS.node,
+      },
+      {
+        test: /\.(ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file',
+        query: {
+          name: 'fonts/[name].[hash].[ext]'
+        },
+        include: PATHS.node,
+      },
+      {
         test: /\.jsx?$/,
         loader: 'babel?cacheDirectory',
         include: PATHS.app,
-        exclude: /node_modules/,
+        exclude: PATHS.node,
       },
     ],
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      '$': 'jquery',
+      'jQuery': 'jquery',
+      'window.jQuery': 'jquery'
+    }),
     new ManifestPlugin({
       fileName: 'rev-manifest.json',
     }),
@@ -79,10 +124,10 @@ switch (process.env.npm_lifecycle_event) {
         'production'
       ),
       tools.clean(PATHS.build),
-      tools.extractBundle({
-        name: 'vendor',
-        entries: ['react'],
-      }),
+      // tools.extractBundle({
+      //   name: 'vendor',
+      //   entries: ['react'],
+      // }),
       tools.minify(),
       tools.extractCSS(PATHS.style)
     );
