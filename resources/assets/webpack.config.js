@@ -21,6 +21,7 @@ const common = {
   entry: {
     app_js: PATHS.app,
     app_css: PATHS.styles + '/main.css',
+    vendor_css: PATHS.styles + '/vendor.css',
     vendor_js: dependencies,
     ie_js: [
       'html5shiv',
@@ -41,13 +42,13 @@ const common = {
     chunkFilename: '[chunkhash].js',
   },
   module: {
-    preLoaders: [
-      {
-        test: /\.jsx?$/,
-        loaders: ['eslint'],
-        include: PATHS.app
-      }
-    ],
+    // preLoaders: [
+    //   {
+    //     test: /\.jsx?$/,
+    //     loaders: ['eslint'],
+    //     include: PATHS.app,
+    //   },
+    // ],
     loaders: [
       {
         test: /\.jsx?$/,
