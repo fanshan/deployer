@@ -20,12 +20,16 @@ const elixirFormatter = function (data, parsedAssets) {
   const format = new Formatter(data, parsedAssets);
   const outputData = format.general();
 
+  // Webpack left over junk
+  delete outputData.assets['css/app.js'];
+  delete outputData.assets['css/vendor.js'];
+
   return JSON.stringify(outputData.assets, null, 2);
 };
 
 const common = {
   entry: {
-    'js/app': PATHS.app,
+    'js/app': [PATHS.app],
     'js/vendor': tools.dependencies(),
     'js/ie': [
       'html5shiv',
@@ -82,7 +86,7 @@ const common = {
       'window.$': 'jquery',
     }),
     new ManifestPlugin(join(PATHS.build, 'rev-manifest.json'), {
-      rootAssetPath: PATHS.build,
+      rootAssetPath: '/build/',
       extensionsRegex: /\.(css|js)$/i,
       format: elixirFormatter,
     }),
@@ -98,13 +102,16 @@ switch (process.env.npm_lifecycle_event) {
     config = merge(common,
       tools.debug(true, production),
       // tools.lint(PATHS.app),
-      tools.setFreeVariable('process.env.NODE_ENV', process.env.NODE_ENV),
+      tools.setFreeVariable('process.env.NODE_ENV', JSON.stringify(process.env.NODE_ENV)),
       tools.clean(PATHS.build, PATHS.root),
       production ? tools.minify() : {},
       tools.extractCSS(PATHS.style)
     );
     break;
   default:
+
+    common.entry['js/app'].unshift("webpack-dev-server/client?http://deployer.app:8080/");
+
     config = merge(common,
       tools.debug(false),
       tools.extractCSS(PATHS.style),

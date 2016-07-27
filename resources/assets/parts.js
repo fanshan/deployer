@@ -51,18 +51,28 @@ exports.devServer = function (options) {
     //   // The script refreshing the browser on none hot updates
     //   'webpack-dev-server/client?http://localhost:8080',
     // ],
+    output: {
+        publicPath: 'http://deployer.app/build/',
+    },
     watchOptions: {
       aggregateTimeout: 300,
       poll: 1000,
     },
     devServer: {
-      historyApiFallback: true,
+      historyApiFallback: false,
       hot: true,
       inline: true,
       stats: 'errors-only',
-      contentBase: 'http://deployer.app',
       host: options.host || '0.0.0.0',
       port: options.port || 8080,
+      proxy: {
+        '*': {
+            target: 'http://deployer.app',
+            changeOrigin: true,
+            autoRewrite: true,
+            xfwd: true,
+        },
+      },
     },
     plugins: [
       // Enable multi-pass compilation for enhanced performance in larger projects. Good default.

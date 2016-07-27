@@ -75,7 +75,7 @@
     "webpack-validator": "^2.2.3"
   },
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server  --display-error-details",
     "build": "webpack",
     "stats": "webpack --profile --json > stats.json",
     "lint": "eslint --ext .js --ext .jsx --cache js/ || true"
