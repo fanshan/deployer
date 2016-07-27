@@ -1,7 +1,17 @@
-const join = require('path').join;
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const WebpackShellPlugin = require('webpack-shell-plugin');
+const pkg = require('./package.json');
+
+exports.dependencies = function () {
+  // FIXME: Clean this up, horrible!
+  const dependencies = Object.keys(pkg.dependencies).filter((value) => {
+    return value !== 'respond.js' && value !== 'html5shiv' && value !== 'font-awesome';
+  });
+
+  return dependencies;
+};
 
 exports.debug = function (isBuild, production) {
   if (isBuild) {
@@ -17,8 +27,30 @@ exports.debug = function (isBuild, production) {
   };
 };
 
+exports.lint = function (path) {
+  return {
+    module: {
+      preLoaders: [
+        {
+          test: /\.jsx?$/,
+          loader: 'eslint',
+          include: path,
+        },
+      ],
+    },
+  };
+};
+
 exports.devServer = function (options) {
   return {
+    // entry: [
+    //
+    //   // For hot style updates
+    //   'webpack/hot/dev-server',
+    //
+    //   // The script refreshing the browser on none hot updates
+    //   'webpack-dev-server/client?http://localhost:8080',
+    // ],
     watchOptions: {
       aggregateTimeout: 300,
       poll: 1000,
@@ -78,11 +110,15 @@ exports.setFreeVariable = function (key, value) {
   };
 };
 
-exports.clean = function (path) {
+exports.clean = function (build, root) {
   return {
     plugins: [
-      new CleanWebpackPlugin([path], {
-        root: join(__dirname, '../../../'),
+      new CleanWebpackPlugin([build], {
+        root,
+      }),
+      new WebpackShellPlugin({
+        onBuildEnd: [`php ${root}/artisan js-localization:refresh --quiet`],
+        onBuildExit: [`rm -f ${build}/css/*.js*`],
       }),
     ],
   };

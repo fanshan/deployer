@@ -1,10 +1,8 @@
 const join = require('path').join;
 const merge = require('webpack-merge');
 const validate = require('webpack-validator');
-const pkg = require('./package.json');
 const ManifestPlugin = require('manifest-revision-webpack-plugin');
 const Formatter = require('manifest-revision-webpack-plugin/format');
-const WebpackShellPlugin = require('webpack-shell-plugin');
 const webpack = require('webpack');
 const tools = require('./parts');
 
@@ -18,11 +16,6 @@ const PATHS = {
 
 const production = (process.env.NODE_ENV === 'production');
 
-// FIXME: Clean this up, horrible!
-const dependencies = Object.keys(pkg.dependencies).filter((value) => {
-  return value !== 'respond.js' && value !== 'html5shiv' && value !== 'font-awesome';
-});
-
 const elixirFormatter = function (data, parsedAssets) {
   const format = new Formatter(data, parsedAssets);
   const outputData = format.general();
@@ -33,7 +26,7 @@ const elixirFormatter = function (data, parsedAssets) {
 const common = {
   entry: {
     'js/app': PATHS.app,
-    'js/vendor': dependencies,
+    'js/vendor': tools.dependencies(),
     'js/ie': [
       'html5shiv',
       'respond.js/dest/respond.src.js',
@@ -56,13 +49,6 @@ const common = {
     chunkFilename: '[chunkhash].js',
   },
   module: {
-    // preLoaders: [
-    //   {
-    //     test: /\.jsx?$/,
-    //     loader: 'eslint',
-    //     include: PATHS.app,
-    //   },
-    // ],
     loaders: [
       {
         test: /\.(jpe?g|png|gif|svg)(\?\S*)?$/,
@@ -100,10 +86,6 @@ const common = {
       extensionsRegex: /\.(css|js)$/i,
       format: elixirFormatter,
     }),
-    new WebpackShellPlugin({
-      onBuildEnd: [`php ${PATHS.root}/artisan js-localization:refresh --quiet`],
-      onBuildExit: [`rm -f ${PATHS.build}/css/*.js*`],
-    }),
   ],
 };
 
@@ -115,8 +97,9 @@ switch (process.env.npm_lifecycle_event) {
   case 'stats':
     config = merge(common,
       tools.debug(true, production),
-      tools.setFreeVariable('process.env.NODE_ENV', 'production'), // FIXME: Shouldn't this be changed?
-      tools.clean(PATHS.build),
+      // tools.lint(PATHS.app),
+      tools.setFreeVariable('process.env.NODE_ENV', process.env.NODE_ENV),
+      tools.clean(PATHS.build, PATHS.root),
       production ? tools.minify() : {},
       tools.extractCSS(PATHS.style)
     );
