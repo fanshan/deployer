@@ -46,8 +46,6 @@
         <div id="content"></div>
 
         <script src="{{ elixir('js/vendor.js') }}"></script>
-        {{-- <script src="/js-localization/messages"></script> --}}
-
         @yield('js-localization.head')
         <script src="{{ elixir('js/app.js') }}"></script>
     </body>

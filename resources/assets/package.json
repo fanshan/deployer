@@ -75,7 +75,6 @@
     "webpack-validator": "^2.2.3"
   },
   "scripts": {
-    "postinstall": "cp ../../vendor/andywer/js-localization/resources/js/localization.js js/localization.js",
     "start": "webpack-dev-server",
     "build": "webpack",
     "stats": "webpack --profile --json > stats.json",

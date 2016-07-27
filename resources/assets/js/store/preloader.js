@@ -4,9 +4,6 @@ import * as navigation from '../navigation/constants';
 import * as socket from '../socket/constants';
 
 export default function (state) {
-  // FIXME: Should this be somewhere else?
-  Lang.setLocale(state[app.NAME].locale);
-
   const preloadedState = {};
 
   [

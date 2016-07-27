@@ -6,7 +6,7 @@ const ManifestPlugin = require('manifest-revision-webpack-plugin');
 const Formatter = require('manifest-revision-webpack-plugin/format');
 const WebpackShellPlugin = require('webpack-shell-plugin');
 const webpack = require('webpack');
-const tools = require('./libs/parts');
+const tools = require('./parts');
 
 const PATHS = {
   app: join(__dirname, 'js'),
@@ -22,9 +22,6 @@ const production = (process.env.NODE_ENV === 'production');
 const dependencies = Object.keys(pkg.dependencies).filter((value) => {
   return value !== 'respond.js' && value !== 'html5shiv' && value !== 'font-awesome';
 });
-
-// FIXME: Include the JS/localization file
-//dependencies.push('js/localization.js');
 
 const elixirFormatter = function (data, parsedAssets) {
   const format = new Formatter(data, parsedAssets);
@@ -54,7 +51,7 @@ const common = {
   output: {
     path: PATHS.build,
     publicPath: '/build/',
-    filename: '[name].[chunkhash].js',
+    filename: '[name].[hash].js',
     sourceMapFilename: '[file].map',
     chunkFilename: '[chunkhash].js',
   },
