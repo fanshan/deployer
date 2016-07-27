@@ -23,12 +23,12 @@ exports.devServer = function (options) {
       aggregateTimeout: 300,
       poll: 1000,
     },
-
     devServer: {
       historyApiFallback: true,
       hot: true,
       inline: true,
       stats: 'errors-only',
+      contentBase: 'http://deployer.app',
       host: options.host || '0.0.0.0',
       port: options.port || 8080,
     },
@@ -41,19 +41,19 @@ exports.devServer = function (options) {
   };
 };
 
-exports.setupCSS = function (paths) {
-  return {
-    module: {
-      loaders: [
-        {
-          test: /\.css$/,
-          loaders: ['style', 'css'],
-          include: paths,
-        },
-      ],
-    },
-  };
-};
+// exports.setupCSS = function (paths) {
+//   return {
+//     module: {
+//       loaders: [
+//         {
+//           test: /\.css$/,
+//           loaders: ['style', 'css'],
+//           include: paths,
+//         },
+//       ],
+//     },
+//   };
+// };
 
 exports.minify = function () {
   return {

@@ -56,13 +56,13 @@ const common = {
     chunkFilename: '[chunkhash].js',
   },
   module: {
-    preLoaders: [
-      {
-        test: /\.jsx?$/,
-        loader: 'eslint',
-        include: PATHS.app,
-      },
-    ],
+    // preLoaders: [
+    //   {
+    //     test: /\.jsx?$/,
+    //     loader: 'eslint',
+    //     include: PATHS.app,
+    //   },
+    // ],
     loaders: [
       {
         test: /\.(jpe?g|png|gif|svg)(\?\S*)?$/,
@@ -124,7 +124,7 @@ switch (process.env.npm_lifecycle_event) {
   default:
     config = merge(common,
       tools.debug(false),
-      tools.setupCSS(PATHS.style),
+      tools.extractCSS(PATHS.style),
       tools.devServer({
         host: process.env.HOST,
         port: process.env.PORT,
