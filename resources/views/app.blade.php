@@ -10,12 +10,12 @@
         <link rel="author" href="humans.txt" />
 
         <!-- Style -->
-        <link href="{{ elixir('css/vendor.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ elixir('css/app.css') }}" rel="stylesheet" type="text/css" />
+        <link href="http://deployer.app:8080{{ elixir('css/vendor.css') }}" rel="stylesheet" type="text/css" />
+        <link href="http://deployer.app:8080{{ elixir('css/app.css') }}" rel="stylesheet" type="text/css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
-        <script src="{{ elixir('js/ie.js') }}"></script>
+        <script src="http://deployer.app:8080{{ elixir('js/ie.js') }}"></script>
         <![endif]-->
     </head>
     <body class="skin-{{ $theme }}">
@@ -47,8 +47,8 @@
 
         <div id="content"></div>
 
-        <script src="{{ elixir('js/vendor.js') }}"></script>
+        <script src="http://deployer.app:8080{{ elixir('js/vendor.js') }}"></script>
         @yield('js-localization.head')
-        <script src="{{ elixir('js/app.js') }}"></script>
+        <script src="http://deployer.app:8080{{ elixir('js/app.js') }}"></script>
     </body>
 </html>

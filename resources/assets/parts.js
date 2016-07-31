@@ -52,7 +52,7 @@ exports.devServer = function (options) {
     //   'webpack-dev-server/client?http://localhost:8080',
     // ],
     output: {
-        publicPath: 'http://deployer.app/build/',
+        publicPath: 'http://deployer.app:8080/build/',
     },
     watchOptions: {
       aggregateTimeout: 300,
@@ -60,17 +60,17 @@ exports.devServer = function (options) {
     },
     devServer: {
       historyApiFallback: false,
-      hot: true,
+      // hot: true,
       inline: true,
       stats: 'errors-only',
       host: options.host || '0.0.0.0',
       port: options.port || 8080,
       proxy: {
         '*': {
-            target: 'http://deployer.app',
-            changeOrigin: true,
-            autoRewrite: true,
-            xfwd: true,
+          target: 'http://deployer.app',
+          changeOrigin: true,
+          autoRewrite: true,
+          xfwd: true,
         },
       },
     },
@@ -82,20 +82,6 @@ exports.devServer = function (options) {
     ],
   };
 };
-
-// exports.setupCSS = function (paths) {
-//   return {
-//     module: {
-//       loaders: [
-//         {
-//           test: /\.css$/,
-//           loaders: ['style', 'css'],
-//           include: paths,
-//         },
-//       ],
-//     },
-//   };
-// };
 
 exports.minify = function () {
   return {

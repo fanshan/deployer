@@ -72,7 +72,7 @@ const common = {
       },
       {
         test: /\.jsx?$/,
-        loader: 'babel?cacheDirectory',
+        loaders: ['react-hot', 'babel?cacheDirectory'],
         include: PATHS.app,
       },
     ],
@@ -110,7 +110,8 @@ switch (process.env.npm_lifecycle_event) {
     break;
   default:
 
-    common.entry['js/app'].unshift("webpack-dev-server/client?http://deployer.app:8080/");
+    common.entry['js/app'].unshift('webpack-dev-server/client?http://deployer.app:8080/');
+    common.entry['js/app'].unshift('webpack/hot/only-dev-server');
 
     config = merge(common,
       tools.debug(false),
