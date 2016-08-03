@@ -2,10 +2,11 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const WebpackShellPlugin = require('webpack-shell-plugin');
+const Formatter = require('manifest-revision-webpack-plugin/format');
 const pkg = require('./package.json');
 
 exports.dependencies = function () {
-  return Object.keys(pkg.dependencies).filter((value) => (['respond.js', 'html5shiv', 'font-awesome', 'admin-lte'].indexOf(value) === -1));
+  return Object.keys(pkg.dependencies).filter((value) => (['respond.js', 'html5shiv', 'font-awesome'].indexOf(value) === -1));
 };
 
 exports.debug = function (isBuild, production) {
@@ -47,7 +48,7 @@ exports.devServer = function (options) {
     },
     devServer: {
       historyApiFallback: false,
-      // hot: true,
+      hot: true,
       inline: true,
       stats: 'errors-only',
       host: options.host || '0.0.0.0',
@@ -124,3 +125,15 @@ exports.extractCSS = function (paths) {
     ],
   };
 };
+
+exports.elixirFormatter = function (data, parsedAssets) {
+  const format = new Formatter(data, parsedAssets);
+  const outputData = format.general();
+
+  // Webpack left over junk
+  delete outputData.assets['css/app.js'];
+  delete outputData.assets['css/vendor.js'];
+
+  return JSON.stringify(outputData.assets, null, 2);
+};
+

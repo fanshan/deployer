@@ -19,9 +19,6 @@ if (!function_exists('webpack')) {
             return $path;
         }
 
-        $host = env('APP_URL');
-        $port = env('WEBPACK_PORT', 8080);
-
-        return $host . ':' . $port . $path;
+        return env('APP_URL') . ':8080' . $path;
     }
 }

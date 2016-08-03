@@ -2,7 +2,6 @@ const join = require('path').join;
 const merge = require('webpack-merge');
 const validate = require('webpack-validator');
 const ManifestPlugin = require('manifest-revision-webpack-plugin');
-const Formatter = require('manifest-revision-webpack-plugin/format');
 const webpack = require('webpack');
 const tools = require('./parts');
 
@@ -15,17 +14,6 @@ const PATHS = {
 };
 
 const production = (process.env.NODE_ENV === 'production');
-
-const elixirFormatter = function (data, parsedAssets) {
-  const format = new Formatter(data, parsedAssets);
-  const outputData = format.general();
-
-  // Webpack left over junk
-  delete outputData.assets['css/app.js'];
-  delete outputData.assets['css/vendor.js'];
-
-  return JSON.stringify(outputData.assets, null, 2);
-};
 
 const common = {
   entry: {
@@ -91,7 +79,7 @@ const common = {
     new ManifestPlugin(join(PATHS.build, 'rev-manifest.json'), {
       rootAssetPath: '/build/',
       extensionsRegex: /\.(css|js)$/i,
-      format: elixirFormatter,
+      format: tools.elixirFormatter,
     }),
   ],
 };
@@ -103,11 +91,11 @@ switch (process.env.npm_lifecycle_event) {
   case 'build':
   case 'stats':
     config = merge(common,
-      tools.debug(true, production),
-      tools.lint(PATHS.app),
-      tools.setFreeVariable('process.env.NODE_ENV', JSON.stringify(process.env.NODE_ENV)),
-      tools.clean(PATHS.build, PATHS.root),
+      process.env.npm_lifecycle_event === 'build' ? tools.lint(PATHS.app) : {},
+      process.env.npm_lifecycle_event === 'build' ? tools.clean(PATHS.build, PATHS.root) : {},
       production ? tools.minify() : {},
+      tools.debug(true, production),
+      tools.setFreeVariable('process.env.NODE_ENV', JSON.stringify(process.env.NODE_ENV)),
       tools.extractCSS(PATHS.style)
     );
     break;
