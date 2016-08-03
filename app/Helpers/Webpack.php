@@ -1,7 +1,6 @@
 <?php
 
-if (!function_exists('webpack'))
-{
+if (!function_exists('webpack')) {
     /**
      * If running in the webpack environment prefixes all assets with the webpack server host
      * otherwise just returns the elixir path

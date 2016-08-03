@@ -5,12 +5,7 @@ const WebpackShellPlugin = require('webpack-shell-plugin');
 const pkg = require('./package.json');
 
 exports.dependencies = function () {
-  // FIXME: Clean this up, horrible!
-  const dependencies = Object.keys(pkg.dependencies).filter((value) => {
-    return value !== 'respond.js' && value !== 'html5shiv' && value !== 'font-awesome';
-  });
-
-  return dependencies;
+  return Object.keys(pkg.dependencies).filter((value) => (['respond.js', 'html5shiv', 'font-awesome', 'admin-lte'].indexOf(value) === -1));
 };
 
 exports.debug = function (isBuild, production) {
@@ -43,16 +38,8 @@ exports.lint = function (path) {
 
 exports.devServer = function (options) {
   return {
-    // entry: [
-    //
-    //   // For hot style updates
-    //   'webpack/hot/dev-server',
-    //
-    //   // The script refreshing the browser on none hot updates
-    //   'webpack-dev-server/client?http://localhost:8080',
-    // ],
     output: {
-        publicPath: 'http://deployer.app:8080/build/',
+      publicPath: 'http://deployer.app:8080/build/',
     },
     watchOptions: {
       aggregateTimeout: 300,

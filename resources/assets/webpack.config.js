@@ -40,6 +40,9 @@ const common = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.css'],
+    alias: {
+      'jquery-ui': 'jquery-ui/ui/widget.js',
+    },
     fallback: [PATHS.node],
   },
   externals: {
@@ -79,7 +82,7 @@ const common = {
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.ProvidePlugin({ // FIXME: Still missing jqueryui
+    new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
@@ -101,7 +104,7 @@ switch (process.env.npm_lifecycle_event) {
   case 'stats':
     config = merge(common,
       tools.debug(true, production),
-      // tools.lint(PATHS.app),
+      tools.lint(PATHS.app),
       tools.setFreeVariable('process.env.NODE_ENV', JSON.stringify(process.env.NODE_ENV)),
       tools.clean(PATHS.build, PATHS.root),
       production ? tools.minify() : {},
@@ -109,9 +112,8 @@ switch (process.env.npm_lifecycle_event) {
     );
     break;
   default:
-
-    common.entry['js/app'].unshift('webpack-dev-server/client?http://deployer.app:8080/');
     common.entry['js/app'].unshift('webpack/hot/only-dev-server');
+    common.entry['js/app'].unshift('webpack-dev-server/client?http://deployer.app:8080/');
 
     config = merge(common,
       tools.debug(false),
