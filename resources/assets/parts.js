@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const WebpackShellPlugin = require('webpack-shell-plugin');
 const Formatter = require('manifest-revision-webpack-plugin/format');
@@ -108,21 +107,17 @@ exports.clean = function (build, root) {
   };
 };
 
-exports.extractCSS = function (paths) {
+exports.vendor = function (options) {
+  const alias = {};
+  alias[options.name] = options.path;
+
   return {
     module: {
-      loaders: [
-        {
-          test: /\.css$/,
-          loader: ExtractTextPlugin.extract('style', 'css?sourceMap'),
-          include: paths,
-        },
-      ],
+      noParse: [options.path],
     },
-    plugins: [
-      // Output extracted CSS to a file
-      new ExtractTextPlugin('[name].[chunkhash].css'),
-    ],
+    resolve: {
+      alias,
+    },
   };
 };
 

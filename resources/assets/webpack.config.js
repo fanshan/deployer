@@ -2,9 +2,16 @@ const join = require('path').join;
 const merge = require('webpack-merge');
 const validate = require('webpack-validator');
 const ManifestPlugin = require('manifest-revision-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 const tools = require('./parts');
 
+const TARGET = process.env.npm_lifecycle_event;
+const IS_PRODUCTION = (process.env.NODE_ENV === 'production');
+
+process.env.BABEL_ENV = TARGET;
+
+// Paths to the various folders
 const PATHS = {
   app: join(__dirname, 'js'),
   styles: join(__dirname, 'css'),
@@ -13,15 +20,14 @@ const PATHS = {
   root: join(__dirname, '../../'),
 };
 
-const production = (process.env.NODE_ENV === 'production');
-
-const common = {
+// The common config for all builds
+let config = {
   entry: {
     'js/app': [PATHS.app],
     'js/vendor': tools.dependencies(),
-    'js/ie': [
+    'js/ie': [ // FIXME: See if this is needed anymore, since react doesn't work prior to IE 9 anyway
       'html5shiv',
-      'respond.js/dest/respond.src.js',
+      join(PATHS.node, 'respond.js/dest/respond.src.js'),
     ],
     'css/app': `${PATHS.styles}/main.css`,
     'css/vendor': `${PATHS.styles}/vendor.css`,
@@ -29,7 +35,7 @@ const common = {
   resolve: {
     extensions: ['', '.js', '.jsx', '.css'],
     alias: {
-      'jquery-ui': 'jquery-ui/ui/widget.js',
+      'jquery-ui': join(PATHS.node, 'jquery-ui/ui/widget.js'),
     },
     fallback: [PATHS.node],
   },
@@ -66,6 +72,11 @@ const common = {
         loaders: ['react-hot', 'babel?cacheDirectory'],
         include: PATHS.app,
       },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style', 'css?sourceMap'),
+        include: PATHS.styles,
+      },
     ],
   },
   plugins: [
@@ -81,38 +92,52 @@ const common = {
       extensionsRegex: /\.(css|js)$/i,
       format: tools.elixirFormatter,
     }),
+    new ExtractTextPlugin('[name].[chunkhash].css'),
   ],
 };
 
-let config;
+// Set up prebuilt assets - this is failing as HMR doesn't like it
+// config = merge(common,
+//   tools.vendor({
+//     name: 'react',
+//     path: join(PATHS.node, 'react/dist/react.js'),
+//   }),
+//   tools.vendor({
+//     name: 'react-dom',
+//     path: join(PATHS.node, 'react-dom/dist/react-dom.js'),
+//   })
+// );
 
-// Detect how npm is run and branch based on that
-switch (process.env.npm_lifecycle_event) {
-  case 'build':
-  case 'stats':
-    config = merge(common,
-      process.env.npm_lifecycle_event === 'build' ? tools.lint(PATHS.app) : {},
-      process.env.npm_lifecycle_event === 'build' ? tools.clean(PATHS.build, PATHS.root) : {},
-      production ? tools.minify() : {},
-      tools.debug(true, production),
-      tools.setFreeVariable('process.env.NODE_ENV', JSON.stringify(process.env.NODE_ENV)),
-      tools.extractCSS(PATHS.style)
-    );
-    break;
-  default:
-    common.entry['js/app'].unshift('webpack/hot/only-dev-server');
-    common.entry['js/app'].unshift('webpack-dev-server/client?http://deployer.app:8080/');
-
-    config = merge(common,
-      tools.debug(false),
-      tools.extractCSS(PATHS.style),
-      tools.devServer({
-        host: process.env.HOST,
-        port: process.env.PORT,
-      })
-    );
+if (TARGET === 'build') { // npm run build
+  // Set up linting and clean up commands
+  config = merge(config,
+    tools.lint(PATHS.app),
+    tools.clean(PATHS.build, PATHS.root)
+  );
 }
 
+if (TARGET === 'build' || TARGET === 'stats') { // npm run build or npm run stats
+  // Set up minfication and debugging
+  config = merge(config,
+    IS_PRODUCTION ? tools.minify() : {},
+    tools.debug(true, IS_PRODUCTION),
+    tools.setFreeVariable('process.env.NODE_ENV', JSON.stringify(process.env.NODE_ENV))
+  );
+} else { // npm start
+  // Set up the dev server
+  config.entry['js/app'].unshift('webpack/hot/only-dev-server');
+  config.entry['js/app'].unshift('webpack-dev-server/client?http://deployer.app:8080/');
+
+  config = merge(config,
+    tools.debug(false),
+    tools.devServer({
+      host: process.env.HOST,
+      port: process.env.PORT,
+    })
+  );
+}
+
+// Validate the config
 module.exports = validate(config, {
   returnValidation: false,
   quiet: true,

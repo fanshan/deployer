@@ -32,4 +32,13 @@ const enhancer = compose(
   persistState(getDebugSessionKey())
 );
 
-export default (initialState) => createStore(rootReducers, Immutable.fromJS(initialState), enhancer);
+export default (initialState) => {
+  const store = createStore(rootReducers, Immutable.fromJS(initialState), enhancer);
+
+  // Hot reload reducers
+  if (module.hot) {
+    module.hot.accept('../reducers', () => store.replaceReducer(require('../reducers').default));
+  }
+
+  return store;
+};
