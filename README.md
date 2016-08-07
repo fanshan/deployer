@@ -42,6 +42,33 @@ Check out the [releases](https://github.com/REBELinBLUE/deployer/releases), [lic
 
 The `master` branch of this repository is a development branch and **should not** be used in production. Changes are merged into the `release` branch when they are considered stable and may then be tagged for release at any time. It is recommended that you use the latest tag [release](https://github.com/REBELinBLUE/deployer/releases) for production. For information on contributing see [contribution guidelines](/.github/CONTRIBUTING.md).
 
+### Common Error
+
+If you see an error like the following in the logs
+
+```
+'ErrorException' with message 'file_get_contents(/var/www/deployer/public/build/rev-manifest.json): failed to open stream: No such file or directory' in /var/www/deployer/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:343
+```
+
+or the following on the page
+
+```
+ErrorException (E_ERROR) file_get_contents(/var/www/deployer/public/build/rev-manifest.json): failed to open stream: No such file or directory
+```
+
+it means you are not using a production build. You either need to checkout the `release` branch or a specific release, or install the additional development dependencies
+
+```shell
+$ composer install
+$ npm install
+```
+
+and then build the assets
+
+```shell
+$ gulp
+```
+
 ## Requirements
 
 - [PHP](http://www.php.net) 5.5.9+ or newer
@@ -67,7 +94,7 @@ $ git clone https://github.com/REBELinBLUE/deployer.git
 2. Checkout the latest release
 
 ```shell
-$ git checkout 0.0.36
+$ git checkout 0.0.37
 ```
 
 3. Install dependencies
@@ -108,7 +135,7 @@ $ editor .env
 
 ```shell
 $ git fetch --all
-$ git checkout 0.0.36
+$ git checkout 0.0.37
  ```
 
 2. Update the dependencies
